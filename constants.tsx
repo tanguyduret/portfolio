@@ -279,7 +279,6 @@ export const translations = {
       copyright: "© 2026 Tanguy Duret",
       location: "Bordeaux, France"
     },
-    }
   },
   en: {
     nav: { experience: 'Experience', education: 'Education', projects: 'Projects', skills: 'Skills', contact: 'Contact' },
