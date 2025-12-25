@@ -1,0 +1,64 @@
+/* === HERO BACKGROUND ANIMATIONS === */
+
+@keyframes slow-orbit {
+  0% {
+    transform: rotate(0deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(180deg) translateY(18px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(0px);
+  }
+}
+
+@keyframes subtle-pulse-glow {
+  0%, 100% {
+    opacity: 0.28;
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-12px) scale(1.06);
+  }
+}
+
+/* --- HERO BACKGROUND: noir dominant + halos subtils animés --- */
+.hero-bg-layer {
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(215, 195, 137, 0.10) 0, transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(140, 150, 170, 0.16) 0, transparent 60%),
+    radial-gradient(circle at 50% 110%, rgba(215, 195, 137, 0.08) 0, transparent 60%);
+  background-size: 140% 140%;
+  filter: blur(55px);
+  opacity: 0.38;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: heroBreath 26s ease-in-out infinite alternate;
+  will-change: transform, background-position, opacity;
+}
+
+@keyframes heroBreath {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    background-position: 0% 0%;
+    opacity: 0.32;
+  }
+  30% {
+    transform: translate3d(-18px, -10px, 0) scale(1.03);
+    background-position: 30% 15%;
+    opacity: 0.4;
+  }
+  60% {
+    transform: translate3d(16px, 14px, 0) scale(1.05);
+    background-position: 80% 55%;
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate3d(4px, -6px, 0) scale(1.02);
+    background-position: 50% 30%;
+    opacity: 0.36;
+  }
+}
