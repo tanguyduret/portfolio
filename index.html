@@ -1,137 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tanguy Duret - Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- GSAP & Plugins -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
-    
-    <!-- Lenis (Smooth Scroll) -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              black: '#0A0A0A',
-              ivory: '#F5F5F5',
-              steel: '#C7C7C7',
-              charcoal: '#2A2A2A',
-              accent: '#D7C389',
-              
-              page: {
-                dark: '#0A0A0A',
-                light: '#F5F5F5',
-                alt: '#ECECEC'
-              }
-            },
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
-              display: ['Space Grotesk', 'system-ui', 'sans-serif'],
-            },
-            animation: {
-              'shimmer': 'shimmer 3s linear infinite',
-              'float-1': 'float-1 9s ease-in-out infinite',
-              'float-2': 'float-2 11s ease-in-out infinite',
-              'float-3': 'float-3 10s ease-in-out infinite',
-              'float-4': 'float-4 12s ease-in-out infinite',
-              'pulse-slow': 'pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
-              shimmer: {
-                '0%': { backgroundPosition: '200% 0' },
-                '100%': { backgroundPosition: '-200% 0' },
-              },
-              'float-1': {
-                '0%, 100%': { transform: 'translateY(0px)' },
-                '50%': { transform: 'translateY(-6px)' },
-              },
-              'float-2': {
-                '0%, 100%': { transform: 'translateY(0px)' },
-                '50%': { transform: 'translateY(-10px)' },
-              },
-              'float-3': {
-                '0%, 100%': { transform: 'translateY(0px)' },
-                '50%': { transform: 'translateY(-4px)' },
-              },
-              'float-4': {
-                '0%, 100%': { transform: 'translateY(0px)' },
-                '50%': { transform: 'translateY(-8px)' },
-              },
-              'pulse-slow': {
-                '0%, 100%': { opacity: 1 },
-                '50%': { opacity: .5 },
-              }
+  <title>Tanguy Duret — Portfolio</title>
+
+  <!-- SEO basique -->
+  <meta
+    name="description"
+    content="Portfolio de Tanguy Duret — étudiant en Master 1 spécialisé en achats et supply chain. Découvrez mes projets, expériences et compétences."
+  />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://tanguyduret.com" />
+
+  <!-- Couleur de thème (onglet mobile, etc.) -->
+  <meta name="theme-color" content="#0A0A0A" />
+
+  <!-- Favicons / App icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+
+  <!-- Lenis -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind custom config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            black: '#0A0A0A',
+            ivory: '#F5F5F5',
+            steel: '#C7C7C7',
+            charcoal: '#2A2A2A',
+            accent: '#D7C389',
+            page: {
+              dark: '#0A0A0A',
+              light: '#F5F5F5',
+              alt: '#ECECEC'
             }
           },
-        },
-      };
-    </script>
-    <style>
-      /* Lenis Recommended CSS */
-      html.lenis {
-        height: auto;
-      }
-      .lenis.lenis-smooth {
-        scroll-behavior: auto;
-      }
-      .lenis.lenis-smooth [data-lenis-prevent] {
-        overscroll-behavior: contain;
-      }
-      .lenis.lenis-stopped {
-        overflow: hidden;
-      }
-      .lenis.lenis-scrolling iframe {
-        pointer-events: none;
-      }
-
-      /* OPTIMIZATION: Force auto scroll behavior to allow Lenis to take full control without conflicts */
-      html {
-        scroll-behavior: auto !important;
-      }
-
-      body {
-        background-color: #F5F5F5;
-        color: #0A0A0A;
-      }
-      /* Custom selection color */
-      ::selection {
-        background-color: #D7C389;
-        color: #F5F5F5;
-      }
-      
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation-duration: 0.01ms !important;
-          transition-duration: 0.01ms !important;
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+          }
         }
       }
-    </style>
+    }
+  </script>
+
+  <!-- Styles -->
+  <style>
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto; }
+    .lenis.lenis-stopped { overflow: hidden; }
+    html { scroll-behavior: auto !important; }
+
+    body {
+      background: #F5F5F5;
+      color: #0A0A0A;
+    }
+
+    ::selection {
+      background: #D7C389;
+      color: #F5F5F5;
+    }
+  </style>
+
+  <!-- Importmap / React -->
   <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0"
+  {
+    "imports": {
+      "react/": "https://aistudiocdn.com/react@^19.2.1/",
+      "react": "https://aistudiocdn.com/react@^19.2.1",
+      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+      "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+      "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0"
+    }
   }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+  </script>
+
+  <link rel="stylesheet" href="/index.css" />
 </head>
-  <body>
-    <div id="root"></div>
+
+<body>
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
 </html>
