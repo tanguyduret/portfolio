@@ -138,13 +138,20 @@ export const Header: React.FC = () => {
       <nav className={`${baseHeaderClasses} ${stateClasses} border-b-0`}>
         {/* Logo / Back-to-top */}
         <button
-          type="button"
-          onClick={() => scrollToId('#hero')}
-          className="font-display font-semibold text-sm md:text-base tracking-[0.3em] uppercase hover:text-accent transition-colors duration-300 cursor-pointer text-ivory relative z-50"
-          aria-label="Scroll back to top"
-        >
-          Tanguy&nbsp;Duret
-        </button>
+  type="button"
+  onClick={() => scrollToId('#hero')}
+  className="flex items-center gap-3 cursor-pointer text-ivory hover:text-accent transition-colors duration-300 relative z-50"
+  aria-label="Scroll back to top"
+>
+  <img
+    src="/TD-logo-light.png.png"
+    alt="Logo Tanguy Duret"
+    className="h-6 w-auto md:h-7"
+  />
+  <span className="font-display font-semibold text-base md:text-lg tracking-tight">
+  Tanguy&nbsp;Duret
+</span>
+</button>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
