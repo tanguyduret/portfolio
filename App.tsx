@@ -1,4 +1,4 @@
-import { Analytics } from "@vercel/analytics/react";
+// App.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import { LanguageProvider } from './LanguageContext';
 
@@ -12,6 +12,7 @@ import { About } from './components/About';
 import { Footer } from './components/Footer';
 
 import { initLenis, destroyLenis } from './lenis';
+import { Analytics } from '@vercel/analytics/react';
 
 declare global {
   interface Window {
@@ -22,7 +23,7 @@ declare global {
   }
 }
 
-// 👉 Hook d’animations globales (sans fade-in)
+// Hook GSAP logic (Lenis already handled by initLenis)
 const useSmoothScrollAndAnimation = (containerRef: React.RefObject<HTMLDivElement>) => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -37,27 +38,81 @@ const useSmoothScrollAndAnimation = (containerRef: React.RefObject<HTMLDivElemen
 
     gsap.registerPlugin(ScrollTrigger, window.MotionPathPlugin);
 
-    // Lenis + ScrollTrigger synchro
+    // Lenis + ScrollTrigger sync
     if (window.lenis?.on) {
       window.lenis.on('scroll', ScrollTrigger.update);
     }
 
     const ctx = gsap.context(() => {
+      // PROJECTS PARALLAX (desktop only)
+      ScrollTrigger.matchMedia({
+        '(min-width: 768px)': function () {
+          const allWrappers = gsap.utils.toArray('.project-card-wrapper');
 
-      /* -------------------------------
-       * 2) SKILLS : FLOTTEMENT LÉGER (PAS DE PARALLAXE)
-       * ----------------------------- */
-      gsap.to('.skills-cloud', {
-        y: 10,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut',
+          const leftColumnItems = allWrappers.filter((_: any, i: number) => i % 2 === 0);
+          const rightColumnItems = allWrappers.filter((_: any, i: number) => i % 2 !== 0);
+
+          gsap.to(leftColumnItems, {
+            yPercent: -18,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '#projects',
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          });
+
+          gsap.fromTo(
+            rightColumnItems,
+            { yPercent: -30 },
+            {
+              yPercent: 30,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '#projects',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
+              },
+            }
+          );
+        },
+
+        '(max-width: 767px)': function () {
+          gsap.set('.project-card-wrapper', { clearProps: 'all' });
+        },
       });
 
-      /* -------------------------------
-       * 3) BOUTON HERO : INDICATEUR DE SCROLL
-       * ----------------------------- */
+      // SKILLS PARALLAX (texte vs nuage)
+      const skillsTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#skills',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.5,
+        },
+      });
+
+      skillsTl.to('.skills-text-content', { y: -100, ease: 'linear' }, 0);
+      skillsTl.fromTo('.skills-cloud', { y: -50 }, { y: 200, ease: 'linear' }, 0);
+
+      // REVEAL sections
+      gsap.utils.toArray('.reveal-section').forEach((section: any) => {
+        gsap.from(section, {
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+          opacity: 0,
+          y: 30,
+          duration: 0.6,
+          ease: 'power2.out',
+        });
+      });
+
+      // Scroll indicator
       gsap.to('.scroll-indicator', {
         y: 8,
         duration: 1.5,
@@ -66,15 +121,13 @@ const useSmoothScrollAndAnimation = (containerRef: React.RefObject<HTMLDivElemen
         ease: 'power1.inOut',
       });
 
-      /* -------------------------------
-       * 4) ABOUT : PARALLAXE PHOTO (on garde, tu l’aimais bien)
-       * ----------------------------- */
+      // About photo parallax
       if (document.querySelector('#about')) {
         gsap.fromTo(
           '.about-photo',
-          { y: 50 },
+          { y: 70 },
           {
-            y: -50,
+            y: -70,
             ease: 'none',
             scrollTrigger: {
               trigger: '#about',
@@ -85,9 +138,6 @@ const useSmoothScrollAndAnimation = (containerRef: React.RefObject<HTMLDivElemen
           }
         );
       }
-
-      // ❌ IMPORTANT : PAS DE "reveal-section" ICI
-      // On ne fait plus AUCUN fade-in GSAP global sur les sections ou cartes.
     }, containerRef);
 
     return () => {
@@ -101,13 +151,12 @@ const AppContent: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isReady, setIsReady] = useState(false);
 
-  // Init Lenis une fois
+  // Init Lenis once
   useEffect(() => {
     initLenis();
     return () => destroyLenis();
   }, []);
 
-  // Petit écran de chargement
   useEffect(() => {
     const timer = setTimeout(() => setIsReady(true), 150);
     return () => clearTimeout(timer);
@@ -142,18 +191,11 @@ const AppContent: React.FC = () => {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <AppContent />
-    </LanguageProvider>
-  );
-}
-function App() {
-  return (
     <>
-      {/* ton contenu actuel */}
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
       <Analytics />
     </>
   );
 }
-
-export default App;
