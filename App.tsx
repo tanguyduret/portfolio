@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import React, { useEffect, useRef, useState } from 'react';
 import { LanguageProvider } from './LanguageContext';
 
@@ -146,3 +147,13 @@ export default function App() {
     </LanguageProvider>
   );
 }
+function App() {
+  return (
+    <>
+      {/* ton contenu actuel */}
+      <Analytics />
+    </>
+  );
+}
+
+export default App;
