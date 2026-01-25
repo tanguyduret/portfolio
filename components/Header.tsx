@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
-
-const HEADER_OFFSET = -96; // Décalage pour ne pas cacher le haut des sections sous le header
 
 export const Header: React.FC = () => {
   const { language, setLanguage, content } = useLanguage();
@@ -12,6 +10,14 @@ export const Header: React.FC = () => {
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | 'none'>('none');
   const [activeSection, setActiveSection] = useState<string>('hero');
 
+  // 👉 progression “dilatation” du nom (0 = serré, 1 = très espacé)
+  const [titleSpread, setTitleSpread] = useState(1);
+
+  // ✅ déclenche l’anim d’entrée du logo une fois
+  const [logoReady, setLogoReady] = useState(false);
+
+  const navRef = useRef<HTMLElement | null>(null);
+
   const navItems = [
     { id: 'experience', label: content.nav.experience },
     { id: 'education', label: content.nav.education },
@@ -20,24 +26,54 @@ export const Header: React.FC = () => {
     { id: 'contact', label: content.nav.contact },
   ];
 
-  // ----- Smooth scroll vers une section (Lenis si dispo, sinon fallback smooth natif)
-  const scrollToId = useCallback((id: string) => {
-    const el = document.querySelector(id) as HTMLElement | null;
-    if (!el) return;
+  // ✅ Offset dynamique = header height réel (évite le décalage des ancres)
+  const getHeaderOffset = () => {
+    const header = navRef.current ?? document.querySelector('nav[data-site-header="true"]');
+    const h = header ? (header as HTMLElement).getBoundingClientRect().height : 96;
+    return -h - 8; // petit “air” sous le header
+  };
 
-    const win = window as any;
+  // ----- Smooth scroll vers une section
+  // ----- Smooth scroll vers une section
+const scrollToId = useCallback((id: string) => {
+  const win = window as any;
 
+  // ✅ Hero = vrai top de page (pas d'offset)
+  const isHero =
+    id === "#hero" ||
+    id === "hero" ||
+    id === "#top" ||
+    id === "top";
+
+  if (isHero) {
     if (win.lenis?.scrollTo) {
-      win.lenis.scrollTo(el, {
-        offset: HEADER_OFFSET,
-        duration: 1.15,
+      win.lenis.scrollTo(0, {
+        duration: 1.05,
         easing: (t: number) => 1 - Math.pow(1 - t, 3),
       });
     } else {
-      const y = el.getBoundingClientRect().top + window.scrollY + HEADER_OFFSET;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, []);
+    return;
+  }
+
+  // ✅ Autres sections = offset dynamique header
+  const el = document.querySelector(id) as HTMLElement | null;
+  if (!el) return;
+
+  const offset = getHeaderOffset();
+
+  if (win.lenis?.scrollTo) {
+    win.lenis.scrollTo(el, {
+      offset,
+      duration: 1.15,
+      easing: (t: number) => 1 - Math.pow(1 - t, 3),
+    });
+  } else {
+    const y = el.getBoundingClientRect().top + window.scrollY + offset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+}, []);
 
   const handleScrollClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -47,17 +83,19 @@ export const Header: React.FC = () => {
 
   // ----- Lock scroll quand le menu mobile est ouvert
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
   }, [isMobileMenuOpen]);
 
-  // ----- Gestion scroll : direction + header state + section active
+  // ✅ anim d’entrée logo (CSS), déclenchée après mount
+  useEffect(() => {
+    const t = window.setTimeout(() => setLogoReady(true), 60);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  // ----- Gestion du scroll : direction + header state + section active + titre
   useEffect(() => {
     let lastY = window.scrollY;
     let ticking = false;
@@ -68,21 +106,17 @@ export const Header: React.FC = () => {
       const currentY = window.scrollY;
       const delta = currentY - lastY;
 
-      // 1) Etat "scrolled"
       setIsScrolled(currentY > 40);
 
-      // 2) Direction
       if (Math.abs(delta) > 6) {
         setScrollDirection(delta > 0 ? 'down' : 'up');
         lastY = currentY;
       }
 
-      // 3) Section active
       const viewportHeight = window.innerHeight;
-      const focusLine = viewportHeight * 0.28; // ligne de "focus" (~haut de l'écran)
+      const focusLine = viewportHeight * 0.28;
 
       let currentActive = 'hero';
-
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (!el) continue;
@@ -92,8 +126,12 @@ export const Header: React.FC = () => {
           break;
         }
       }
-
       setActiveSection(currentActive);
+
+      const maxOffset = 220;
+      const clamped = 1 - Math.min(Math.max(currentY, 0), maxOffset) / maxOffset;
+      setTitleSpread(clamped);
+
       ticking = false;
     };
 
@@ -105,18 +143,46 @@ export const Header: React.FC = () => {
     };
 
     window.addEventListener('scroll', onScroll);
-    // Initial call
     updateOnScroll();
 
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
+    return () => window.removeEventListener('scroll', onScroll);
   }, [navItems]);
 
-  // ----- Switch langage
+  // ----- Switch langage (SEO-friendly via URL: / ↔ /en/)
+  const resolveLangFromPath = () => {
+    if (typeof window === 'undefined') return language;
+    return window.location.pathname.startsWith('/en') ? 'en' : 'fr';
+  };
+
+  const buildLangUrl = (nextLang: 'fr' | 'en') => {
+    const pathname = typeof window !== 'undefined' ? window.location.pathname : '/';
+    const search = typeof window !== 'undefined' ? window.location.search : '';
+
+    // base target
+    const targetBase = nextLang === 'en' ? '/en/' : '/';
+
+    // on garde un hash “propre” (section active) si tu veux
+    const hash =
+      activeSection && activeSection !== 'hero' ? `#${activeSection}` : '';
+
+    // si tu as d’autres routes plus tard, tu peux adapter ici
+    // pour l’instant, on force juste la home FR/EN (SEO clean)
+    return `${targetBase}${search}${hash}`;
+  };
+
   const toggleLanguage = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    setLanguage(language === 'fr' ? 'en' : 'fr');
+
+    const currentByUrl = resolveLangFromPath();
+    const next = currentByUrl === 'fr' ? 'en' : 'fr';
+
+    // UX: on met à jour l’état tout de suite (au cas où la nav prend 100ms)
+    setLanguage(next);
+
+    // Navigation SEO: charge la page / ou /en/
+    if (typeof window !== 'undefined') {
+      window.location.assign(buildLangUrl(next));
+    }
   };
 
   // ----- Classes header dynamiques
@@ -128,30 +194,141 @@ export const Header: React.FC = () => {
     isScrolled
       ? 'bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.6)]'
       : 'bg-gradient-to-b from-black/60 via-black/40 to-transparent border-b border-transparent',
-    scrollDirection === 'down' && isScrolled
-      ? '-translate-y-full opacity-0'
-      : 'translate-y-0 opacity-100',
+    scrollDirection === 'down' && isScrolled ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100',
   ].join(' ');
+
+  // Valeurs dérivées pour le nom
+  const baseLetterEm = 0.14;
+  const extraLetterEm = 0.26;
+  const letterSpacingEm = baseLetterEm + extraLetterEm * titleSpread;
+  const translateY = (1 - titleSpread) * 2;
 
   return (
     <>
-      <nav className={`${baseHeaderClasses} ${stateClasses} border-b-0`}>
+      {/* ✅ CSS local pour animation logo + nom (fiable, visible, sans Tailwind config) */}
+      <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          .td-logo--enter,
+          .td-logo--float,
+          .td-logoWrap::after { animation: none !important; transition: none !important; }
+        }
+
+        @keyframes tdLogoEnter {
+          0%   { opacity: 0; transform: translateY(2px) scale(0.92) rotate(-1deg); filter: blur(6px) drop-shadow(0 0 0 rgba(215,195,137,0)); }
+          70%  { opacity: 1; transform: translateY(0) scale(1.02) rotate(0deg); filter: blur(0px) drop-shadow(0 12px 22px rgba(215,195,137,0.28)); }
+          100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); filter: blur(0px) drop-shadow(0 10px 18px rgba(215,195,137,0.22)); }
+        }
+
+        @keyframes tdLogoFloat {
+          0%   { transform: translateY(0) }
+          50%  { transform: translateY(-1.5px) }
+          100% { transform: translateY(0) }
+        }
+
+        @keyframes tdShimmer {
+          0%   { transform: translateX(-140%) skewX(-18deg); opacity: 0; }
+          20%  { opacity: 0.55; }
+          55%  { opacity: 0.0; }
+          100% { transform: translateX(220%) skewX(-18deg); opacity: 0; }
+        }
+
+        @keyframes tdNameEnter {
+          0% { opacity: 0; transform: translateY(4px); letter-spacing: 0.08em; }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes tdNameBreath {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-0.6px); }
+        }
+
+        .td-logoWrap {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          isolation: isolate;
+        }
+
+        .td-logoWrap::after {
+          content: "";
+          position: absolute;
+          inset: -6px -10px;
+          border-radius: 12px;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(215,195,137,0.18),
+            transparent
+          );
+          transform: translateX(-140%) skewX(-18deg);
+          opacity: 0;
+          pointer-events: none;
+          mix-blend-mode: screen;
+        }
+
+        .group:hover .td-logoWrap::after {
+          animation: tdShimmer 1.1s cubic-bezier(.2,.8,.2,1) 1;
+        }
+
+        .td-logo {
+          display: block;
+          will-change: transform, filter, opacity;
+          transform-origin: 50% 50%;
+        }
+
+        .td-logo--enter {
+          animation: tdLogoEnter 1.05s cubic-bezier(.2,.8,.2,1) both;
+        }
+
+        .td-logo--float {
+          animation: tdLogoFloat 3.6s ease-in-out infinite;
+        }
+      `}</style>
+
+      <nav
+        ref={(el) => {
+          navRef.current = el;
+        }}
+        data-site-header="true"
+        className={`${baseHeaderClasses} ${stateClasses} border-b-0`}
+      >
         {/* Logo / Back-to-top */}
         <button
-  type="button"
-  onClick={() => scrollToId('#hero')}
-  className="flex items-center gap-3 cursor-pointer text-ivory hover:text-accent transition-colors duration-300 relative z-50"
-  aria-label="Scroll back to top"
->
-  <img
-    src="/TD-logo-light.png.png"
-    alt="Logo Tanguy Duret"
-    className="h-6 w-auto md:h-7"
-  />
-  <span className="font-display font-semibold text-base md:text-lg tracking-tight">
-  Tanguy&nbsp;Duret
-</span>
-</button>
+          type="button"
+          onClick={() => scrollToId('#hero')}
+          className="group flex items-center gap-3 cursor-pointer text-ivory hover:text-accent transition-colors duration-300 relative z-50"
+          aria-label="Scroll back to top"
+        >
+          <span className="td-logoWrap">
+            <img
+              src="/TD-logo-light.svg"
+              alt="Logo Tanguy Duret"
+              className={['td-logo h-6 w-auto md:h-7', logoReady ? 'td-logo--enter td-logo--float' : ''].join(' ')}
+              style={{
+                transform: isScrolled ? 'scale(0.96)' : 'scale(1)',
+                transition: 'transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1)',
+              }}
+            />
+          </span>
+
+          <span
+            className="
+              font-display font-semibold text-sm md:text-base uppercase
+              transform-gpu transition-all duration-500
+            "
+            style={{
+              letterSpacing: `${letterSpacingEm}em`,
+              transform: `translateY(${translateY}px)`,
+              opacity: 0.9 + 0.1 * titleSpread,
+              animation: logoReady
+                ? 'tdNameEnter 0.9s cubic-bezier(.2,.8,.2,1) both, tdNameBreath 4s ease-in-out infinite'
+                : undefined,
+            }}
+          >
+            Tanguy&nbsp;Duret
+          </span>
+        </button>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
@@ -182,10 +359,11 @@ export const Header: React.FC = () => {
             })}
           </div>
 
-          {/* Language Switcher Desktop */}
+          {/* Language Switcher Desktop (URL-based) */}
           <button
             onClick={toggleLanguage}
             className="text-[0.65rem] font-mono border border-white/20 rounded-full px-3 py-1 hover:bg-white/10 hover:border-accent/50 transition-all uppercase tracking-widest text-steel"
+            aria-label="Switch language"
           >
             <span className={language === 'fr' ? 'text-accent' : ''}>FR</span>
             <span className="mx-1 opacity-50">|</span>
@@ -198,6 +376,7 @@ export const Header: React.FC = () => {
           <button
             onClick={toggleLanguage}
             className="text-xs font-mono uppercase border border-white/20 px-2 py-1 rounded text-ivory hover:border-accent/50 transition-colors"
+            aria-label="Switch language"
           >
             {language}
           </button>
@@ -250,7 +429,10 @@ export const Header: React.FC = () => {
           />
 
           <button
-            onClick={() => scrollToId('#hero')}
+            onClick={() => {
+              if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+              scrollToId('#hero');
+            }}
             className={`
               text-sm font-mono tracking-[0.2em] text-steel/60 uppercase mt-4
               ${isMobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}

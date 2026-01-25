@@ -1,122 +1,211 @@
-import React, { useState } from 'react';
-import { Minus, Plus } from 'lucide-react';
-import { useLanguage } from '../LanguageContext';
+// components/Education.tsx
+import React, { useMemo, useState } from "react";
+import { useLanguage } from "../LanguageContext";
+
+type EduItem = {
+  id: string;
+  tag?: string;
+  degree?: string;
+  school?: string;
+  period?: string;
+  location?: string;
+  description?: string;
+};
+
+const MorphPlus: React.FC<{ open: boolean }> = ({ open }) => {
+  return (
+    <div
+      className={`
+        relative w-10 h-10 rounded-full
+        border border-black/12 bg-white/60 backdrop-blur
+        flex items-center justify-center
+        transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)]
+      `}
+      aria-hidden="true"
+    >
+      <span className="absolute w-[16px] h-[2px] rounded-full bg-black/60" />
+      <span
+        className={`
+          absolute w-[2px] h-[16px] rounded-full bg-black/60
+          origin-center transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)]
+          ${open ? "scale-y-0" : "scale-y-100"}
+        `}
+      />
+    </div>
+  );
+};
+
+function isNonEmptyString(v: unknown): v is string {
+  return typeof v === "string" && v.trim().length > 0;
+}
+
+function normalizeEduItems(input: unknown): EduItem[] {
+  if (!Array.isArray(input)) return [];
+  return input
+    .map((raw: any, idx: number) => ({
+      id: isNonEmptyString(raw?.id) ? raw.id : `edu-${idx}`,
+      tag: isNonEmptyString(raw?.tag) ? raw.tag : "",
+      degree: isNonEmptyString(raw?.degree) ? raw.degree : "",
+      school: isNonEmptyString(raw?.school) ? raw.school : "",
+      period: isNonEmptyString(raw?.period) ? raw.period : "",
+      location: isNonEmptyString(raw?.location) ? raw.location : "",
+      description: isNonEmptyString(raw?.description) ? raw.description : "",
+    }))
+    .filter((it) => isNonEmptyString(it.degree) || isNonEmptyString(it.school));
+}
 
 export const Education: React.FC = () => {
-  const [openId, setOpenId] = useState<string | null>(null);
   const { content } = useLanguage();
+  const [openId, setOpenId] = useState<string | null>(null);
 
-  const toggleOpen = (id: string) => {
-    setOpenId((current) => (current === id ? null : id));
-  };
+  const label = content.education?.subtitle || "EDUCATION";
+  const title = content.education?.title || "Education & academic foundations";
+  const description = content.education?.description || "";
+
+  const items = useMemo(() => {
+    return normalizeEduItems((content as any)?.education?.items);
+  }, [content]);
+
+  const toggle = (id: string) => setOpenId((cur) => (cur === id ? null : id));
 
   return (
     <section
       id="education"
-      className="relative bg-page-alt py-24 md:py-32 border-t border-black/5 overflow-hidden"
+      className="relative bg-page-alt text-black overflow-hidden"
+      style={{ backgroundColor: "#ECECEC" }}
     >
-      {/* Glows légers pour continuité visuelle */}
-      <div className="pointer-events-none absolute -right-16 -top-10 w-60 h-60 bg-accent/12 blur-3xl rounded-full opacity-80" />
-      <div className="pointer-events-none absolute -left-10 bottom-0 w-56 h-56 bg-black/5 blur-3xl rounded-full opacity-65" />
+      {/* ✅ Glows plus présents (répartis), mais toujours soft */}
+      <div className="pointer-events-none absolute -right-20 -top-16 w-80 h-80 bg-accent/14 blur-3xl rounded-full opacity-80" />
+      <div className="pointer-events-none absolute -left-24 top-24 w-80 h-80 bg-accent/10 blur-3xl rounded-full opacity-70" />
+      <div className="pointer-events-none absolute -bottom-28 left-1/3 w-72 h-72 bg-accent/10 blur-3xl rounded-full opacity-70" />
+      <div className="pointer-events-none absolute left-10 top-1/2 w-64 h-64 bg-black/5 blur-3xl rounded-full opacity-55" />
 
-      <div className="container mx-auto px-6 md:px-8">
-        {/* Colonne centrale alignée avec Experience */}
-        <div className="max-w-3xl md:max-w-4xl mx-auto">
-          {/* Header section */}
-          <div className="mb-14 reveal-section">
-            <span className="text-accent text-xs font-semibold tracking-[0.3em] uppercase block mb-3">
-              {content.education.subtitle}
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl tracking-[-0.06em] text-black leading-tight whitespace-pre-line">
-              {content.education.title}
+      <div className="relative mx-auto max-w-6xl px-6 md:px-10 pt-20 md:pt-24 pb-20 md:pb-24">
+        <p className="font-mono text-[11px] tracking-[0.42em] uppercase text-accent/90">
+          {label}
+        </p>
+
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-12 gap-10">
+          <div className="md:col-span-7">
+            <h2
+              className="
+                font-display
+                text-[42px] leading-[1.02]
+                md:text-[52px] md:leading-[1.02]
+                tracking-tight
+                max-w-[26ch]
+              "
+            >
+              {title}
             </h2>
           </div>
 
-          <div className="space-y-5 relative">
-            {content.education.items.map((edu, index) => {
-              const isOpen = openId === edu.id;
+          <div className="md:col-span-5 flex items-end">
+            {isNonEmptyString(description) ? (
+              <p className="text-black/60 text-[15px] md:text-base leading-relaxed max-w-xl">
+                {description}
+              </p>
+            ) : null}
+          </div>
+        </div>
 
-              return (
+        {/* Barre de séparation */}
+        <div className="mt-10 md:mt-12 h-px w-full bg-black/10" />
+
+        <div className="mt-12 md:mt-14 space-y-5">
+          {items.map((edu, index) => {
+            const isOpen = openId === edu.id;
+
+            return (
+              <div
+                key={edu.id}
+                className={`
+                  group rounded-[24px] overflow-hidden relative
+                  border border-black/10
+                  bg-white/70 backdrop-blur-xl
+                  shadow-[0_20px_80px_rgba(0,0,0,0.10)]
+                  transition-all duration-300 ease-out
+                  ${isOpen ? "ring-1 ring-accent/18 -translate-y-[2px]" : "hover:-translate-y-[2px] hover:border-black/15"}
+                `}
+                style={{ transitionDelay: `${index * 60}ms` }}
+              >
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+
                 <button
-                  key={edu.id}
                   type="button"
-                  onClick={() => toggleOpen(edu.id)}
-                  className={`
-                    education-card
-                    w-full text-left rounded-2xl border transition-all duration-300 ease-out
-                    px-6 md:px-8 py-6 md:py-7 
-                    flex flex-col gap-2 group relative
-                    ${
-                      isOpen
-                        ? 'bg-ivory border-accent/25 shadow-xl ring-1 ring-accent/25 -translate-y-1'
-                        : 'bg-ivory/95 border-black/5 shadow-md hover:shadow-xl hover:-translate-y-1 hover:border-black/10'
-                    }
-                  `}
-                  style={{ transitionDelay: `${index * 80}ms` }}
+                  onClick={() => toggle(edu.id)}
+                  aria-expanded={isOpen}
+                  className="w-full text-left px-6 md:px-8 py-5 md:py-6 flex items-start justify-between gap-6"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      {/* Tag */}
+                  <div className="min-w-0">
+                    {isNonEmptyString(edu.tag) ? (
                       <span
                         className={`
-                          inline-flex items-center px-2.5 py-1 mb-2 rounded-full 
-                          text-[0.65rem] font-mono uppercase tracking-[0.25em] 
+                          inline-flex items-center px-3 py-1 mb-3 rounded-full
+                          text-[10px] font-mono uppercase tracking-[0.28em]
                           transition-colors duration-300
-                          ${
-                            isOpen
-                              ? 'bg-accent/10 text-black'
-                              : 'bg-black/5 text-charcoal/60 group-hover:bg-black/7 group-hover:text-charcoal'
-                          }
+                          bg-black/5 text-black/55
+                          group-hover:bg-black/7
                         `}
                       >
                         {edu.tag}
                       </span>
+                    ) : null}
 
-                      <h3 className="font-display text-lg md:text-2xl tracking-[-0.03em] text-black group-hover:text-charcoal transition-colors mt-1">
-                        {edu.degree}
-                      </h3>
+                    <div className="text-[22px] md:text-[26px] font-display tracking-tight">
+                      {edu.degree}
+                    </div>
 
-                      <div className="mt-2 flex flex-col md:flex-row md:items-center gap-1 md:gap-3 text-steel">
-                        <span className="text-black font-semibold text-sm md:text-base">
-                          {edu.school}
-                        </span>
-                        <span className="hidden md:inline w-1 h-1 rounded-full bg-steel/40" />
-                        <span className="text-[0.7rem] font-medium tracking-wide">
-                          {edu.period} · {edu.location}
-                        </span>
+                    {(isNonEmptyString(edu.school) ||
+                      isNonEmptyString(edu.period) ||
+                      isNonEmptyString(edu.location)) ? (
+                      <div className="mt-2 text-black/55 text-sm md:text-[15px]">
+                        <span className="text-black font-semibold">{edu.school}</span>
+                        {(isNonEmptyString(edu.period) || isNonEmptyString(edu.location)) ? (
+                          <>
+                            <span className="text-black/30"> · </span>
+                            <span className="tracking-wide">
+                              {edu.period}
+                              {edu.location ? ` · ${edu.location}` : ""}
+                            </span>
+                          </>
+                        ) : null}
                       </div>
-                    </div>
-
-                    {/* Bouton +/- */}
-                    <div
-                      className={`
-                        mt-1 flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-300
-                        ${
-                          isOpen
-                            ? 'bg-black text-ivory border-black'
-                            : 'bg-transparent text-charcoal/40 border-charcoal/20 group-hover:border-accent group-hover:text-accent'
-                        }
-                      `}
-                    >
-                      {isOpen ? <Minus size={14} /> : <Plus size={14} />}
-                    </div>
+                    ) : null}
                   </div>
 
-                  {/* Description */}
-                  <div
-                    className={`
-                      overflow-hidden transition-all duration-300 ease-out
-                      ${isOpen ? 'max-h-80 opacity-100 mt-5' : 'max-h-0 opacity-0 mt-0'}
-                    `}
-                  >
-                    <p className="text-sm md:text-[1.05rem] text-charcoal/80 leading-relaxed max-w-[85%] border-l-2 border-accent/30 pl-4">
-                      {edu.description}
-                    </p>
+                  <div className="shrink-0 pt-0.5">
+                    <MorphPlus open={isOpen} />
                   </div>
                 </button>
-              );
-            })}
-          </div>
+
+                {/* Accordion = grid rows + opacity (smooth) */}
+                <div
+                  className={`
+                    grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(.2,.8,.2,1)]
+                    ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
+                  `}
+                >
+                  <div className="overflow-hidden">
+                    {isNonEmptyString(edu.description) ? (
+                      <div className="px-6 md:px-8 pb-6 md:pb-7">
+                        <div className="pt-4 border-t border-black/10">
+                          <p className="mt-5 text-black/70 leading-relaxed">
+                            {edu.description}
+                          </p>
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+
+                {/* micro glow on hover (soft) */}
+                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute -top-28 -right-28 w-60 h-60 bg-accent/10 blur-3xl rounded-full" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

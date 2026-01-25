@@ -1,139 +1,236 @@
-import React, { useState } from 'react';
-import { Minus, Plus } from 'lucide-react';
-import { useLanguage } from '../LanguageContext';
+// components/Experience.tsx
+import React, { useMemo, useState } from "react";
+import { useLanguage } from "../LanguageContext";
+
+type XpItem = {
+  id: string;
+  chips?: string[];
+  role?: string;
+  company?: string;
+  date?: string;
+  location?: string;
+  bullets?: string[];
+};
+
+const MorphPlus: React.FC<{ open: boolean }> = ({ open }) => {
+  return (
+    <div
+      className={`
+        relative w-10 h-10 rounded-full
+        border border-black/12 bg-white/60 backdrop-blur
+        flex items-center justify-center
+        transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)]
+      `}
+      aria-hidden="true"
+    >
+      <span className="absolute w-[16px] h-[2px] rounded-full bg-black/60" />
+      <span
+        className={`
+          absolute w-[2px] h-[16px] rounded-full bg-black/60
+          origin-center transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)]
+          ${open ? "scale-y-0" : "scale-y-100"}
+        `}
+      />
+    </div>
+  );
+};
+
+function isNonEmptyString(v: unknown): v is string {
+  return typeof v === "string" && v.trim().length > 0;
+}
+
+function normalizeXpItems(input: unknown): XpItem[] {
+  if (!Array.isArray(input)) return [];
+
+  return input
+    .map((raw: any, idx: number) => {
+      const chips = Array.isArray(raw?.chips) ? raw.chips.filter(isNonEmptyString) : [];
+      const bullets = Array.isArray(raw?.bullets) ? raw.bullets.filter(isNonEmptyString) : [];
+
+      const item: XpItem = {
+        id: isNonEmptyString(raw?.id) ? raw.id : `xp-${idx}`,
+        chips,
+        role: isNonEmptyString(raw?.role) ? raw.role : "",
+        company: isNonEmptyString(raw?.company) ? raw.company : "",
+        date: isNonEmptyString(raw?.date) ? raw.date : "",
+        location: isNonEmptyString(raw?.location) ? raw.location : "",
+        bullets,
+      };
+
+      return item;
+    })
+    .filter((it) => isNonEmptyString(it.role) || isNonEmptyString(it.company));
+}
 
 export const Experience: React.FC = () => {
-  const [openId, setOpenId] = useState<string | null>(null);
   const { content } = useLanguage();
+  const [openId, setOpenId] = useState<string | null>(null);
 
-  const toggleOpen = (id: string) => {
-    setOpenId((current) => (current === id ? null : id));
-  };
+  const items: XpItem[] = useMemo(() => {
+    const maybe = (content as any)?.experience?.items;
+    return normalizeXpItems(maybe);
+  }, [content]);
+
+  const label = content.experience?.label || "EXPERIENCE";
+  const title = content.experience?.title || "Contexts where I learned to be operational.";
+  const subtitle = content.experience?.subtitle || "";
+
+  const toggle = (id: string) => setOpenId((cur) => (cur === id ? null : id));
 
   return (
     <section
       id="experience"
-      className="relative bg-page-light py-24 md:py-32 border-t border-black/5 overflow-hidden"
+      className="relative bg-ivory text-black overflow-hidden"
+      style={{ backgroundColor: "rgb(245, 242, 233)" }}
     >
-      {/* Glows très subtils en arrière-plan */}
-      <div className="pointer-events-none absolute -left-10 -top-10 w-64 h-64 bg-accent/16 blur-3xl rounded-full opacity-80" />
-      <div className="pointer-events-none absolute right-[-4rem] top-32 w-72 h-72 bg-black/5 blur-3xl rounded-full opacity-70" />
-      <div className="pointer-events-none absolute -bottom-24 left-1/3 w-64 h-64 bg-accent/14 blur-3xl rounded-full opacity-75" />
+      {/* ✅ fond (grain + vignette) */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_center,#000_0%,transparent_60%)]" />
+        <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-multiply" />
+      </div>
 
-      <div className="container mx-auto px-6 md:px-8">
-        {/* Colonne centrale : titre + cartes alignés */}
-        <div className="max-w-3xl md:max-w-4xl mx-auto">
-          {/* Header section */}
-          <div className="mb-14 reveal-section">
-            <span className="text-accent text-xs font-semibold tracking-[0.3em] uppercase block mb-3">
-              {content.experience.subtitle}
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl tracking-[-0.06em] text-black leading-tight whitespace-pre-line">
-              {content.experience.title}
-            </h2>
-            <p className="mt-4 text-sm md:text-base text-charcoal/70 max-w-xl">
-              {content.experience.description}
-            </p>
+      {/* ✅ TRANSITION RAMP (ivoire -> #ECECEC) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 right-0 bottom-0 z-0"
+        style={{
+          height: "260px",
+          background: "linear-gradient(to bottom, rgba(245,242,233,0) 0%, rgba(236,236,236,1) 100%)",
+        }}
+      />
+
+      {/* ✅ content au-dessus */}
+      <div data-xp="content" className="relative z-10">
+        <div className="relative mx-auto max-w-6xl px-6 md:px-10 pt-20 md:pt-24 pb-20 md:pb-24">
+          <p className="font-mono text-[11px] tracking-[0.42em] uppercase text-accent/90">
+            {label}
+          </p>
+
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-12 gap-10">
+            <div className="md:col-span-7">
+              <h2
+                className="
+                  font-display
+                  text-[42px] leading-[1.02]
+                  md:text-[52px] md:leading-[1.02]
+                  tracking-tight
+                  max-w-[26ch]
+                "
+              >
+                {title}
+              </h2>
+            </div>
+
+            <div className="md:col-span-5 flex items-end">
+              {isNonEmptyString(subtitle) ? (
+                <p className="text-black/60 text-[15px] md:text-base leading-relaxed max-w-xl">
+                  {subtitle}
+                </p>
+              ) : null}
+            </div>
           </div>
 
-          {/* Timeline + cartes */}
-          <div className="relative">
-            {/* Ligne verticale alignée avec les dots (desktop only) */}
-            <div className="hidden md:block pointer-events-none absolute left-[1.05rem] top-0 bottom-0">
-              <div className="w-px h-full bg-gradient-to-b from-accent/35 via-black/5 to-transparent" />
-            </div>
+          <div className="mt-10 md:mt-12 h-px w-full bg-black/10" />
 
-            <div className="space-y-5 relative">
-              {content.experience.items.map((xp, index) => {
-                const isOpen = openId === xp.id;
+          <div className="mt-12 md:mt-14 space-y-5">
+            {items.map((xp, index) => {
+              const isOpen = openId === xp.id;
+              const chips = Array.isArray(xp.chips) ? xp.chips : [];
+              const bullets = Array.isArray(xp.bullets) ? xp.bullets : [];
 
-                return (
+              return (
+                <div
+                  key={xp.id}
+                  className={`
+                    group rounded-[24px] overflow-hidden relative
+                    border border-black/10
+                    bg-white/70 backdrop-blur-xl
+                    shadow-[0_20px_80px_rgba(0,0,0,0.10)]
+                    transition-all duration-300 ease-out
+                    ${isOpen ? "ring-1 ring-accent/18 -translate-y-[2px]" : "hover:-translate-y-[2px] hover:border-black/15"}
+                  `}
+                  style={{ transitionDelay: `${index * 60}ms` }}
+                >
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+
                   <button
-                    key={xp.id}
                     type="button"
-                    onClick={() => toggleOpen(xp.id)}
-                    className={`
-                      experience-card
-                      w-full text-left rounded-2xl border transition-all duration-300 ease-out
-                      pl-8 pr-6 md:pl-12 md:pr-8 py-6 md:py-7 
-                      flex flex-col gap-2 group relative
-                      ${
-                        isOpen
-                          ? 'bg-ivory border-accent/25 shadow-xl ring-1 ring-accent/25 -translate-y-1'
-                          : 'bg-ivory/95 border-black/5 shadow-md hover:shadow-xl hover:-translate-y-1 hover:border-black/10'
-                      }
-                    `}
-                    style={{ transitionDelay: `${index * 80}ms` }}
+                    onClick={() => toggle(xp.id)}
+                    aria-expanded={isOpen}
+                    className="w-full text-left px-6 md:px-8 py-5 md:py-6 flex items-start justify-between gap-6"
                   >
-                    {/* Dot sur la timeline (toujours visible en desktop) */}
-                    <div
-                      className={`
-                        hidden md:block absolute left-[0.45rem] top-7 w-3 h-3 rounded-full 
-                        transition-all duration-300
-                        ${
-                          isOpen
-                            ? 'bg-accent shadow-[0_0_0_6px_rgba(215,195,137,0.25)]'
-                            : 'bg-black/25 shadow-[0_0_0_4px_rgba(0,0,0,0.08)] group-hover:bg-accent/80 group-hover:shadow-[0_0_0_6px_rgba(215,195,137,0.18)]'
-                        }
-                      `}
-                    />
+                    <div className="min-w-0">
+                      {chips.length > 0 ? (
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          {chips.map((c) => (
+                            <span
+                              key={c}
+                              className="
+                                px-3 py-1 rounded-full
+                                bg-black/5 text-black/55
+                                font-mono text-[10px] tracking-[0.28em] uppercase
+                                transition-colors duration-300
+                                group-hover:bg-black/7
+                              "
+                            >
+                              {c}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
 
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        {/* Tag */}
-                        <span
-                          className={`
-                            inline-flex items-center px-2.5 py-1 mb-2 rounded-full 
-                            text-[0.65rem] font-mono uppercase tracking-[0.25em] 
-                            transition-colors duration-300
-                            ${
-                              isOpen
-                                ? 'bg-accent/10 text-black'
-                                : 'bg-black/5 text-charcoal/60 group-hover:bg-black/7 group-hover:text-charcoal'
-                            }
-                          `}
-                        >
-                          {xp.tag}
-                        </span>
-
-                        <h3 className="font-display text-lg md:text-2xl tracking-[-0.03em] text-black group-hover:text-charcoal transition-colors mt-1">
-                          {xp.title}
-                        </h3>
-                        <p className="text-[0.7rem] text-charcoal/50 mt-1 font-medium tracking-wide">
-                          {xp.period}
-                        </p>
+                      <div className="text-[22px] md:text-[26px] font-display tracking-tight">
+                        {xp.role}
+                        {xp.role && xp.company ? <span className="text-black/35"> · </span> : null}
+                        {xp.company}
                       </div>
 
-                      {/* Bouton +/- */}
-                      <div
-                        className={`
-                          mt-1 flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-300
-                          ${
-                            isOpen
-                              ? 'bg-black text-ivory border-black'
-                              : 'bg-transparent text-charcoal/40 border-charcoal/20 group-hover:border-accent group-hover:text-accent'
-                          }
-                        `}
-                      >
-                        {isOpen ? <Minus size={14} /> : <Plus size={14} />}
-                      </div>
+                      {(xp.date || xp.location) ? (
+                        <div className="mt-2 text-black/55 text-sm md:text-[15px]">
+                          {xp.date}
+                          {xp.date && xp.location ? <span className="text-black/30"> · </span> : null}
+                          {xp.location}
+                        </div>
+                      ) : null}
                     </div>
 
-                    {/* Description */}
-                    <div
-                      className={`
-                        overflow-hidden transition-all duration-300 ease-out
-                        ${isOpen ? 'max-h-80 opacity-100 mt-5' : 'max-h-0 opacity-0 mt-0'}
-                      `}
-                    >
-                      <p className="text-sm md:text-[1.05rem] text-charcoal/80 leading-relaxed max-w-[85%] border-l-2 border-accent/30 pl-4">
-                        {xp.description}
-                      </p>
+                    <div className="shrink-0 pt-0.5">
+                      <MorphPlus open={isOpen} />
                     </div>
                   </button>
-                );
-              })}
-            </div>
+
+                  <div
+                    className={`
+                      grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(.2,.8,.2,1)]
+                      ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
+                    `}
+                  >
+                    <div className="overflow-hidden">
+                      {bullets.length > 0 ? (
+                        <div className="px-6 md:px-8 pb-6 md:pb-7">
+                          <div className="pt-4 border-t border-black/10">
+                            <ul className="mt-5 space-y-3 text-black/70">
+                              {bullets.map((b, i) => (
+                                <li key={i} className="flex gap-3">
+                                  <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent/70 shrink-0" />
+                                  <span className="leading-relaxed">{b}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute -top-28 -right-28 w-60 h-60 bg-accent/10 blur-3xl rounded-full" />
+                  </div>
+                </div>
+              );
+            })}
+
+            {items.length === 0 ? <div className="text-black/50 text-sm" /> : null}
           </div>
         </div>
       </div>

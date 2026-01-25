@@ -42,8 +42,8 @@ export const Footer: React.FC = () => {
               </a>
 
               <a
-                href="/Tanguy_Duret_CV.pdf"
-                download
+                href="/CV_Tanguy_Duret.pdf"
+                download="CV_Tanguy_Duret.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1"

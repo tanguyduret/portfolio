@@ -1,29 +1,23 @@
-/* === HERO BACKGROUND ANIMATIONS === */
+@import "tailwindcss";
 
-@keyframes slow-orbit {
-  0% {
-    transform: rotate(0deg) translateY(0px);
-  }
-  50% {
-    transform: rotate(180deg) translateY(18px);
-  }
-  100% {
-    transform: rotate(360deg) translateY(0px);
-  }
+@theme {
+  --color-black: #0A0A0A;
+  --color-ivory: #F5F5F5;
+  --color-steel: #C7C7C7;
+  --color-charcoal: #2A2A2A;
+  --color-accent: #D7C389;
+
+  --color-page-dark: #0A0A0A;
+  --color-page-light: #F5F5F5;
+  --color-page-alt: #ECECEC;
+
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
 }
 
-@keyframes subtle-pulse-glow {
-  0%, 100% {
-    opacity: 0.28;
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: translateY(-12px) scale(1.06);
-  }
-}
+:root { --ivory-cine: rgb(245, 242, 233); }
 
-/* --- HERO BACKGROUND: noir dominant + halos subtils animés --- */
+/* HERO BG — perf friendly */
 .hero-bg-layer {
   position: absolute;
   inset: -15%;
@@ -32,33 +26,16 @@
     radial-gradient(circle at 80% 20%, rgba(140, 150, 170, 0.16) 0, transparent 60%),
     radial-gradient(circle at 50% 110%, rgba(215, 195, 137, 0.08) 0, transparent 60%);
   background-size: 140% 140%;
-  filter: blur(55px);
+  filter: blur(48px);           /* un poil moins */
   opacity: 0.38;
-  mix-blend-mode: screen;
   pointer-events: none;
   animation: heroBreath 26s ease-in-out infinite alternate;
-  will-change: transform, background-position, opacity;
+  will-change: transform, opacity;
 }
 
 @keyframes heroBreath {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-    background-position: 0% 0%;
-    opacity: 0.32;
-  }
-  30% {
-    transform: translate3d(-18px, -10px, 0) scale(1.03);
-    background-position: 30% 15%;
-    opacity: 0.4;
-  }
-  60% {
-    transform: translate3d(16px, 14px, 0) scale(1.05);
-    background-position: 80% 55%;
-    opacity: 0.45;
-  }
-  100% {
-    transform: translate3d(4px, -6px, 0) scale(1.02);
-    background-position: 50% 30%;
-    opacity: 0.36;
-  }
+  0%   { transform: translate3d(0, 0, 0) scale(1);    opacity: 0.32; }
+  30%  { transform: translate3d(-18px, -10px, 0) scale(1.03); opacity: 0.40; }
+  60%  { transform: translate3d(16px, 14px, 0) scale(1.05);  opacity: 0.45; }
+  100% { transform: translate3d(4px, -6px, 0) scale(1.02);   opacity: 0.36; }
 }

@@ -1,11 +1,14 @@
 export type Language = 'fr' | 'en';
 
+// types.ts
 export interface ExperienceItem {
   id: string;
-  tag: string;
-  title: string;
-  period: string;
-  description: string;
+  chips?: string[];
+  role?: string;
+  company?: string;
+  date?: string;
+  location?: string;
+  bullets?: string[];
 }
 
 export interface EducationItem {
@@ -25,10 +28,12 @@ export interface ProjectItem {
   description: string;
 }
 
-export interface SkillItem {
+export type SkillItem = {
   name: string;
   description: string;
-}
+  sentence?: string;
+  where?: string[];
+};
 
 // Global definition for GSAP on window object since we load it via CDN
 declare global {
