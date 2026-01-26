@@ -1,9 +1,70 @@
-import React from 'react';
-import { GeminiButton } from './GeminiButton';
-import { useLanguage } from '../LanguageContext';
+import React, { useMemo, useState } from "react";
+import { GeminiButton } from "./GeminiButton";
+import { useLanguage } from "../LanguageContext";
 
 export const Footer: React.FC = () => {
-  const { content } = useLanguage();
+  const { content, language } = useLanguage() as any;
+
+  const email = "tanguy.duret@kedgebs.com";
+  const isFR = (language || "en").toLowerCase().startsWith("fr");
+
+  const [copied, setCopied] = useState(false);
+
+  const mailSubject = useMemo(() => {
+    return isFR
+      ? "Prise de contact - Portfolio (Alternance Achats Sept. 2026)"
+      : "Contact - Portfolio (Purchasing Apprenticeship Sep. 2026)";
+  }, [isFR]);
+
+  const mailBody = useMemo(() => {
+    const refsLine = isFR
+      ? "PS : Vous pouvez aussi demander mes lettres de recommandation (Airbus - Purchasing Manager + Holidu - Senior Sales Advisor)."
+      : "PS: You can also request my recommendation letters (Airbus - Purchasing Manager + Holidu - Senior Sales Advisor).";
+
+    return isFR
+      ? `Bonjour Tanguy,
+
+Je vous contacte suite à votre portfolio.
+Je souhaiterais échanger avec vous au sujet d'une opportunité / de votre recherche d'alternance.
+
+— Nom :
+— Entreprise :
+— Poste :
+— Disponibilités :
+
+${refsLine}
+
+Bien cordialement,`
+      : `Hi Tanguy,
+
+I'm reaching out after reviewing your portfolio.
+I'd like to discuss an opportunity / your apprenticeship search.
+
+— Name:
+— Company:
+— Role:
+— Availability:
+
+${refsLine}
+
+Best regards,`;
+  }, [isFR]);
+
+  const mailtoHref = useMemo(() => {
+    const s = encodeURIComponent(mailSubject);
+    const b = encodeURIComponent(mailBody);
+    return `mailto:${email}?subject=${s}&body=${b}`;
+  }, [email, mailSubject, mailBody]);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1400);
+    } catch {
+      // fallback: do nothing (no visual noise)
+    }
+  };
 
   return (
     <section
@@ -14,49 +75,120 @@ export const Footer: React.FC = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-white/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="reveal-section container mx-auto px-6 md:px-8 max-w-6xl relative z-10">
+        {/* ✅ DO NOT TOUCH headline */}
         <h2 className="text-[11vw] md:text-[8vw] lg:text-[7rem] xl:text-[8rem] font-display font-bold leading-none mb-12 md:mb-16 tracking-tighter bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent break-words md:whitespace-nowrap">
           {content.footer.headline}
         </h2>
 
-        <div className="flex flex-col md:flex-row justify-between items-start gap-12 border-t border-white/10 pt-12">
-          {/* Email & Buttons Section */}
-          <div className="flex flex-col gap-8 w-full md:max-w-lg">
-            <div>
-              <p className="text-steel text-xs uppercase tracking-widest mb-4">
-                {content.footer.contact_title}
-              </p>
-              <a
-                href="mailto:tanguy.duret@kedgebs.com"
-                className="text-2xl md:text-3xl lg:text-4xl text-white hover:text-accent transition-colors font-display"
-              >
-                tanguy.duret@kedgebs.com
-              </a>
+        {/* ✅ DO NOT TOUCH divider (top) */}
+        <div className="border-t border-white/10 pt-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+            {/* LEFT */}
+            <div className="md:col-span-7 flex flex-col gap-8">
+              <div>
+                <p className="text-steel text-xs uppercase tracking-widest mb-4">
+                  {content.footer.contact_title}
+                </p>
+
+                {/* Email (copy on click + small badge "Copié/Copied") */}
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="group inline-flex items-center gap-3 text-left"
+                  aria-label={isFR ? "Copier l’email" : "Copy email"}
+                >
+                  <span className="text-2xl md:text-3xl lg:text-4xl text-white group-hover:text-accent transition-colors font-display">
+                    {email}
+                  </span>
+
+                  {/* small badge */}
+                  <span
+                    className={`
+                      rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm
+                      px-3 py-1 text-[11px] tracking-wide
+                      transition-all duration-200
+                      ${copied ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1 pointer-events-none"}
+                    `}
+                  >
+                    {isFR ? "Copié" : "Copied"}
+                  </span>
+                </button>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 w-full max-w-[520px]">
+                <a href={mailtoHref} className="flex-1">
+                  <GeminiButton
+                    icon={true}
+                    className="w-full justify-center h-12 text-xs md:text-sm whitespace-nowrap"
+                  >
+                    {isFR ? "Envoyer un email" : "Send an email"}
+                  </GeminiButton>
+                </a>
+
+                <a
+                  href="/CV_Tanguy_Duret.pdf"
+                  download="CV_Tanguy_Duret.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1"
+                >
+                  <GeminiButton
+                    icon={false}
+                    className="w-full justify-center h-12 text-xs md:text-sm whitespace-nowrap"
+                  >
+                    {isFR ? "Télécharger le CV" : "Download CV"}
+                  </GeminiButton>
+                </a>
+              </div>
             </div>
 
-            {/* Buttons Container */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
-              <a href="mailto:tanguy.duret@kedgebs.com" className="flex-1">
-                <GeminiButton icon={true} className="w-full justify-center h-12 text-xs md:text-sm">
-                  {content.footer.send_email}
-                </GeminiButton>
-              </a>
+            {/* RIGHT (Recommendations) */}
+            <div className="md:col-span-5 md:pt-2">
+              <p className="text-steel text-xs uppercase tracking-widest mb-4">
+                {isFR ? "Recommandations" : "Recommendations"}
+              </p>
 
-              <a
-                href="/CV_Tanguy_Duret.pdf"
-                download="CV_Tanguy_Duret.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1"
-              >
-                <GeminiButton icon={false} className="w-full justify-center h-12 text-xs md:text-sm">
-                  {content.footer.download_cv}
-                </GeminiButton>
-              </a>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-4">
+                {/* One-line title + ":" (as requested) */}
+                <p className="text-white/85 text-[13px] leading-none whitespace-nowrap">
+                  {isFR
+                    ? "Lettres de recommandation disponibles sur demande :"
+                    : "Recommendation letters available on request:"}
+                </p>
+
+                {/* Tight chips */}
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="px-3 py-1 rounded-full bg-white/5 text-white/80 text-[11px] leading-none">
+                    Airbus - Purchasing Manager
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-white/5 text-white/80 text-[11px] leading-none">
+                    Holidu - Senior Sales Advisor
+                  </span>
+                </div>
+
+                {/* CTA moved BELOW chips (gold) */}
+                <a
+                  href={mailtoHref}
+                  className="mt-3 inline-flex items-center gap-2 text-accent/90 hover:text-accent transition-colors text-[12px]"
+                >
+                  <span className="underline decoration-white/15 underline-offset-4">
+                    {isFR ? "Demander" : "Request"}
+                  </span>
+                  <span aria-hidden="true">→</span>
+                </a>
+
+                {/* Small grey note kept at bottom */}
+                <p className="mt-2 text-steel/50 text-[11px] leading-snug">
+                  {isFR
+                    ? "Identités et coordonnées partagées uniquement aux recruteurs."
+                    : "Names and contact details shared only with recruiters."}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar (unchanged) */}
         <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[0.7rem] text-steel/60 gap-6 md:gap-4">
           <div className="flex gap-6">
             <span>{content.footer.copyright}</span>

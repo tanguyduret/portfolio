@@ -62,6 +62,14 @@ function normalizeXpItems(input: unknown): XpItem[] {
     .filter((it) => isNonEmptyString(it.role) || isNonEmptyString(it.company));
 }
 
+const normalizeText = (s: string) =>
+  s
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ");
+
 export const Experience: React.FC = () => {
   const { content } = useLanguage();
   const [openId, setOpenId] = useState<string | null>(null);
@@ -71,9 +79,28 @@ export const Experience: React.FC = () => {
     return normalizeXpItems(maybe);
   }, [content]);
 
-  const label = content.experience?.label || "EXPERIENCE";
-  const title = content.experience?.title || "Contexts where I learned to be operational.";
-  const subtitle = content.experience?.subtitle || "";
+  const labelRaw = content.experience?.label || "EXPERIENCE";
+  const titleRaw = content.experience?.title || "Contexts where I learned to be operational.";
+  const subtitleRaw = content.experience?.subtitle || "";
+
+  // ✅ hide subtitle if redundant
+  const labelNorm = normalizeText(labelRaw);
+  const subtitleNorm = normalizeText(subtitleRaw);
+
+  const isGenericSubtitle =
+    subtitleNorm === "experience" ||
+    subtitleNorm === "experiences" ||
+    subtitleNorm === labelNorm ||
+    subtitleNorm.split(" ").length === 1;
+
+  const subtitle = subtitleRaw.trim().length > 0 && !isGenericSubtitle ? subtitleRaw : "";
+
+  // ✅ Detect your long FR title (robust, no exact match)
+  const titleNorm = normalizeText(titleRaw);
+  const isFrLongTitle =
+    titleNorm.includes("les contextes") &&
+    titleNorm.includes("grandi") &&
+    titleNorm.includes("operationnellement");
 
   const toggle = (id: string) => setOpenId((cur) => (cur === id ? null : id));
 
@@ -83,41 +110,47 @@ export const Experience: React.FC = () => {
       className="relative bg-ivory text-black overflow-hidden"
       style={{ backgroundColor: "rgb(245, 242, 233)" }}
     >
-      {/* ✅ fond (grain + vignette) */}
+      {/* fond */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_center,#000_0%,transparent_60%)]" />
         <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-multiply" />
       </div>
 
-      {/* ✅ TRANSITION RAMP (ivoire -> #ECECEC) */}
+      {/* transition ramp */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-0 right-0 bottom-0 z-0"
         style={{
           height: "260px",
-          background: "linear-gradient(to bottom, rgba(245,242,233,0) 0%, rgba(236,236,236,1) 100%)",
+          background:
+            "linear-gradient(to bottom, rgba(245,242,233,0) 0%, rgba(236,236,236,1) 100%)",
         }}
       />
 
-      {/* ✅ content au-dessus */}
       <div data-xp="content" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 md:px-10 pt-20 md:pt-24 pb-20 md:pb-24">
           <p className="font-mono text-[11px] tracking-[0.42em] uppercase text-accent/90">
-            {label}
+            {labelRaw}
           </p>
 
           <div className="mt-4 grid grid-cols-1 md:grid-cols-12 gap-10">
-            <div className="md:col-span-7">
+            {/* ✅ Give a bit more width ONLY for the problematic FR title */}
+            <div className={isFrLongTitle ? "md:col-span-8" : "md:col-span-7"}>
               <h2
-                className="
-                  font-display
+                className={`
+                  font-display tracking-tight
                   text-[42px] leading-[1.02]
                   md:text-[52px] md:leading-[1.02]
-                  tracking-tight
-                  max-w-[26ch]
-                "
+                  ${isFrLongTitle ? "md:text-[50px]" : ""}
+                `}
+                // ✅ KEY FIX: disable balance for FR title (balance is what makes 3 lines)
+                style={
+                  isFrLongTitle
+                    ? { maxWidth: "40ch" } // wider so "Les contextes où j’ai grandi" stays together
+                    : ({ maxWidth: "38ch", textWrap: "balance" as any } as any)
+                }
               >
-                {title}
+                {titleRaw}
               </h2>
             </div>
 
@@ -147,7 +180,11 @@ export const Experience: React.FC = () => {
                     bg-white/70 backdrop-blur-xl
                     shadow-[0_20px_80px_rgba(0,0,0,0.10)]
                     transition-all duration-300 ease-out
-                    ${isOpen ? "ring-1 ring-accent/18 -translate-y-[2px]" : "hover:-translate-y-[2px] hover:border-black/15"}
+                    ${
+                      isOpen
+                        ? "ring-1 ring-accent/18 -translate-y-[2px]"
+                        : "hover:-translate-y-[2px] hover:border-black/15"
+                    }
                   `}
                   style={{ transitionDelay: `${index * 60}ms` }}
                 >
@@ -185,7 +222,7 @@ export const Experience: React.FC = () => {
                         {xp.company}
                       </div>
 
-                      {(xp.date || xp.location) ? (
+                      {xp.date || xp.location ? (
                         <div className="mt-2 text-black/55 text-sm md:text-[15px]">
                           {xp.date}
                           {xp.date && xp.location ? <span className="text-black/30"> · </span> : null}
