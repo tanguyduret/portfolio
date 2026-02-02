@@ -291,7 +291,13 @@ export const Hero: React.FC = () => {
     <section ref={rootRef} id="hero" className="relative w-full text-ivory">
       <div
         ref={viewportRef}
-        className="relative w-full h-screen overflow-hidden flex items-center justify-center"
+        className="
+          relative w-screen max-w-none
+          h-[100svh] md:h-screen
+          overflow-x-clip overflow-y-hidden
+          flex items-center justify-center
+          px-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]
+        "
         style={{ backgroundColor: HERO_BG }}
       >
         {/* FX */}
@@ -313,25 +319,32 @@ export const Hero: React.FC = () => {
           <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
           {/* corners + rails */}
-          <div className="absolute inset-0 pointer-events-none px-6 py-6 md:px-12 md:py-10">
-            <div className="absolute top-10 left-10 w-4 h-4 border-t border-l border-white/20" />
-            <div className="absolute top-10 right-10 w-4 h-4 border-t border-r border-white/20" />
-            <div className="absolute bottom-10 left-10 w-4 h-4 border-b border-l border-white/20" />
-            <div className="absolute bottom-10 right-10 w-4 h-4 border-b border-r border-white/20" />
+          <div className="absolute inset-0 pointer-events-none px-5 py-5 md:px-12 md:py-10">
+            <div className="absolute top-8 left-6 md:top-10 md:left-10 w-4 h-4 border-t border-l border-white/20" />
+            <div className="absolute top-8 right-6 md:top-10 md:right-10 w-4 h-4 border-t border-r border-white/20" />
+            <div className="absolute bottom-8 left-6 md:bottom-10 md:left-10 w-4 h-4 border-b border-l border-white/20" />
+            <div className="absolute bottom-8 right-6 md:bottom-10 md:right-10 w-4 h-4 border-b border-r border-white/20" />
+
             <div className="hidden md:block absolute top-0 bottom-0 left-24 w-[1px] bg-white/[0.03]" />
             <div className="hidden md:block absolute top-0 bottom-0 right-24 w-[1px] bg-white/[0.03]" />
           </div>
         </div>
 
         {/* micro lines */}
-        <div ref={floatingRef} className="absolute inset-0 pointer-events-none z-10">
+        <div
+          ref={floatingRef}
+          className="absolute inset-0 pointer-events-none z-10 hidden md:block"
+        >
           {MICRO_DATA.map((d, i) => (
             <div
               key={i}
               className="micro-line absolute font-mono text-[9px] tracking-[0.25em] text-steel/55 whitespace-nowrap opacity-0"
               style={{ top: d.top, left: d.left, maxWidth: "min(36ch, 80vw)" }}
             >
-              <span aria-hidden="true" className="absolute -inset-x-5 -inset-y-3 rounded-full bg-black/45 blur-xl" />
+              <span
+                aria-hidden="true"
+                className="absolute -inset-x-5 -inset-y-3 rounded-full bg-black/45 blur-xl"
+              />
               <span className="relative inline-flex items-center">
                 <span className="inline-block w-1.5 h-1.5 bg-accent/45 rounded-full mr-3" />
                 {d.text}
@@ -430,8 +443,7 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* scroll hint */}
-        <div className="scroll-indicator absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 z-30">
-          <div className="w-[1px] h-10 bg-gradient-to-b from-white/0 via-white/50 to-white/0" />
+        <div className="scroll-indicator absolute bottom-[calc(env(safe-area-inset-bottom)+3rem)] md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 z-30">          <div className="w-[1px] h-10 bg-gradient-to-b from-white/0 via-white/50 to-white/0" />
           <ArrowDown className="w-4 h-4 text-white/50" />
         </div>
 

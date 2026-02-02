@@ -39,3 +39,16 @@
   60%  { transform: translate3d(16px, 14px, 0) scale(1.05);  opacity: 0.45; }
   100% { transform: translate3d(4px, -6px, 0) scale(1.02);   opacity: 0.36; }
 }
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  background: #030303; /* évite flash/bandes en rotation (hero noir) */
+}
+
+/* iOS: évite les micro overflow horizontaux liés à blur/transforms */
+@supports (overflow: clip) {
+  html, body {
+    overflow-x: clip;
+  }
+}

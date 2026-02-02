@@ -188,8 +188,7 @@ export const Projects: React.FC = () => {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative bg-page-light py-24 md:py-32 overflow-hidden"
-    >
+      className="relative bg-page-light py-24 md:py-32 overflow-x-clip overflow-y-hidden"    >
       {/* Glows */}
       <div className="pointer-events-none absolute -left-24 top-12 w-72 h-72 bg-accent/14 blur-3xl rounded-full opacity-80" />
       <div className="pointer-events-none absolute right-[-5rem] bottom-[-4rem] w-80 h-80 bg-black/8 blur-3xl rounded-full opacity-70" />

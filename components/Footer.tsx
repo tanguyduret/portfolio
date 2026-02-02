@@ -66,6 +66,10 @@ Best regards,`;
     }
   };
 
+  // ✅ ONLY CHANGE: language-based CV file
+  const cvHref = isFR ? "/FR_CV_Tanguy_Duret.pdf" : "/EN_CV_Tanguy_Duret.pdf";
+  const cvDownloadName = isFR ? "FR_CV_Tanguy_Duret.pdf" : "EN_CV_Tanguy_Duret.pdf";
+
   return (
     <section
       id="contact"
@@ -97,7 +101,7 @@ Best regards,`;
                   className="group inline-flex items-center gap-3 text-left"
                   aria-label={isFR ? "Copier l’email" : "Copy email"}
                 >
-                  <span className="text-2xl md:text-3xl lg:text-4xl text-white group-hover:text-accent transition-colors font-display">
+                  <span className="text-2xl md:text-3xl lg:text-4xl text-white group-hover:text-accent transition-colors font-display break-all leading-[1.1]">
                     {email}
                   </span>
 
@@ -126,8 +130,8 @@ Best regards,`;
                 </a>
 
                 <a
-                  href="/CV_Tanguy_Duret.pdf"
-                  download="CV_Tanguy_Duret.pdf"
+                  href={cvHref}
+                  download={cvDownloadName}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1"
@@ -150,7 +154,7 @@ Best regards,`;
 
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-4">
                 {/* One-line title + ":" (as requested) */}
-                <p className="text-white/85 text-[13px] leading-none whitespace-nowrap">
+                <p className="text-white/85 text-[13px] leading-snug md:leading-none md:whitespace-nowrap">
                   {isFR
                     ? "Lettres de recommandation disponibles sur demande :"
                     : "Recommendation letters available on request:"}

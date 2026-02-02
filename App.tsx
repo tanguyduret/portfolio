@@ -204,8 +204,7 @@ const AppContent: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="bg-ivory text-black antialiased selection:bg-accent selection:text-ivory overflow-x-hidden relative"
-    >
+      className="bg-ivory text-black antialiased selection:bg-accent selection:text-ivory overflow-x-clip relative"    >
       <Header />
       <Hero />
       <TransitionCard />
