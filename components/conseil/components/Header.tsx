@@ -8,8 +8,9 @@ export function Header() {
 
   const links = [
     { label: 'Accueil', href: '/conseil#accueil' },
-    { label: 'Comment ça marche', href: '/conseil#comment-ca-marche' },
     { label: 'Solutions', href: '/conseil#solutions' },
+    { label: 'Comment ça marche', href: '/conseil#comment-ca-marche' },
+    { label: 'Offres', href: '/conseil#offres' },
     { label: 'FAQ', href: '/conseil#faq' },
   ];
 

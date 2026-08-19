@@ -18,15 +18,15 @@ export function Home() {
       <Hero />
       <Problem />
       <Solution />
-      <About />
-      <Analysis />
       <HowItWorks />
-      <Pricing />
+      <Analysis />
       <Product />
-      <TargetAudience />
+      <Pricing />
+      <About />
       <Reassurance />
-      <Guide />
+      <TargetAudience />
       <FAQ />
+      <Guide />
       <Contact />
     </main>
   );
