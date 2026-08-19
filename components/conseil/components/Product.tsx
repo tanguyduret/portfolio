@@ -1,11 +1,12 @@
 import { SmartphoneNfc } from 'lucide-react';
+import { Reveal } from './Reveal';
 
 export function Product() {
   return (
     <section className="py-16 md:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-          <div className="flex-1 order-2 md:order-1">
+          <Reveal className="flex-1 order-2 md:order-1">
             <div className="bg-stone-100 rounded-3xl p-8 lg:p-12 aspect-[4/5] md:aspect-auto md:h-[500px] flex flex-col items-center justify-center text-center relative overflow-hidden shadow-inner border border-stone-200">
               <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.8)_0%,_transparent_100%)]" />
               
@@ -28,9 +29,9 @@ export function Product() {
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
           
-          <div className="flex-1 order-1 md:order-2">
+          <Reveal className="flex-1 order-1 md:order-2" delay={0.08}>
             <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-6">
               Un objet simple, fait pour votre commerce
             </h2>
@@ -57,7 +58,7 @@ export function Product() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

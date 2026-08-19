@@ -1,19 +1,20 @@
 import { BarChart3, QrCode } from 'lucide-react';
+import { Reveal } from './Reveal';
 
 export function Solution() {
   return (
     <section id="solutions" className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <Reveal className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl font-bold text-stone-900 mb-6">Ma démarche en deux étapes</h2>
           <p className="text-lg text-stone-600">
             Une approche saine et durable pour transformer la satisfaction de vos clients en visibilité locale.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
           {/* Solution 1 */}
-          <div className="bg-white rounded-2xl p-8 md:p-10 border border-stone-200 shadow-sm">
+          <Reveal className="bg-white rounded-2xl p-8 md:p-10 border border-stone-200 shadow-sm">
             <div className="w-10 h-10 rounded-full bg-stone-100 text-emerald-800 flex items-center justify-center mb-6 border border-stone-200">
               <span className="font-bold text-sm">01</span>
             </div>
@@ -32,10 +33,10 @@ export function Solution() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
           {/* Solution 2 */}
-          <div className="bg-white rounded-2xl p-8 md:p-10 border border-stone-200 shadow-sm">
+          <Reveal className="bg-white rounded-2xl p-8 md:p-10 border border-stone-200 shadow-sm" delay={0.1}>
             <div className="w-10 h-10 rounded-full bg-stone-100 text-emerald-800 flex items-center justify-center mb-6 border border-stone-200">
               <span className="font-bold text-sm">02</span>
             </div>
@@ -55,7 +56,7 @@ export function Solution() {
                 <div className="flex-1 text-emerald-800 font-bold">Avis<br/>Google</div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

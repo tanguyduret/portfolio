@@ -16,9 +16,9 @@ export function Home() {
   return (
     <main>
       <Hero />
-      <About />
       <Problem />
       <Solution />
+      <About />
       <Analysis />
       <HowItWorks />
       <Pricing />

@@ -1,6 +1,7 @@
 import { PricingPlan } from '../types';
 import { Check } from 'lucide-react';
 import type { MouseEvent } from 'react';
+import { Reveal } from './Reveal';
 
 export function Pricing() {
   const scrollToContact = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -57,17 +58,18 @@ export function Pricing() {
   return (
     <section className="py-16 md:py-24 bg-stone-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <Reveal className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl font-bold text-stone-900 mb-6">Des offres simples et transparentes</h2>
           <p className="text-lg text-stone-600">
             Chaque client bénéficie d'un échange personnalisé. Pas d'abonnement, pas de frais cachés.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto mb-10">
           {plans.map((plan) => (
-            <div 
+            <Reveal 
               key={plan.id}
+              delay={plan.id === 'essentiel' ? 0 : plan.id === 'visibilite' ? 0.08 : 0.16}
               className={`min-w-0 bg-white rounded-2xl p-6 lg:p-8 border ${plan.recommended ? 'border-2 border-emerald-700 shadow-lg relative transform xl:-translate-y-2' : 'border border-stone-200 shadow-sm'} flex flex-col transition-transform`}
             >
               {plan.recommended && (
@@ -96,11 +98,11 @@ export function Pricing() {
               >
                 Choisir cette offre
               </a>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="max-w-3xl mx-auto rounded-2xl bg-stone-100 border border-stone-200 p-6 md:p-8 text-center">
+        <Reveal className="max-w-3xl mx-auto rounded-2xl bg-stone-100 border border-stone-200 p-6 md:p-8 text-center" delay={0.08}>
           <h3 className="text-xl font-bold text-stone-900">Plusieurs boutiques ou plusieurs supports ?</h3>
           <p className="mt-3 text-stone-600 leading-relaxed">
             Chaque offre correspond à un établissement et à un support physique. Pour plusieurs boutiques, plusieurs supports ou un besoin spécifique, je prépare une proposition sur mesure adaptée à votre organisation.
@@ -108,7 +110,7 @@ export function Pricing() {
           <a href="#contact" onClick={scrollToContact} className="inline-block mt-5 text-emerald-800 hover:text-emerald-900 font-semibold underline underline-offset-4">
             Parlons de votre besoin
           </a>
-        </div>
+        </Reveal>
 
         <div className="text-center mt-8">
           <a href="#contact" onClick={scrollToContact} className="inline-block text-stone-600 hover:text-stone-900 font-medium underline underline-offset-4">

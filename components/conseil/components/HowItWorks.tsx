@@ -1,3 +1,5 @@
+import { Reveal } from './Reveal';
+
 export function HowItWorks() {
   const steps = [
     {
@@ -21,16 +23,16 @@ export function HowItWorks() {
   return (
     <section id="comment-ca-marche" className="py-16 md:py-24 bg-stone-900 text-stone-50 border-y border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <Reveal className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl font-bold mb-6 text-white">Comment ça marche ?</h2>
           <p className="text-lg text-stone-400">
             Un processus extrêmement simple, conçu pour ne pas vous faire perdre de temps.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {steps.map((step, index) => (
-            <div key={index} className="relative">
+            <Reveal key={index} className="relative" delay={index * 0.08}>
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-6 left-12 w-full h-px border-t border-dashed border-stone-700" />
               )}
@@ -41,7 +43,7 @@ export function HowItWorks() {
               <p className="text-stone-400 text-sm leading-relaxed">
                 {step.desc}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
