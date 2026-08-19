@@ -418,8 +418,8 @@ export const translations = {
   fr: {
     nav: { experience: 'Expérience', education: 'Formation', projects: 'Projets', skills: 'Skills', contact: 'Contact' },
     hero: {
-      role: "Recherche d’alternance de 1 an en Achats - Septembre 2026",
-      date: "Septembre 2026",
+      role: "Achats · Procurement · Opérations",
+      date: "",
       subrole: "Achats & Procurement · Business & Operations",
       cta: "Décoller"
     },
@@ -467,8 +467,8 @@ export const translations = {
   en: {
     nav: { experience: 'Experience', education: 'Education', projects: 'Projects', skills: 'Skills', contact: 'Contact' },
     hero: {
-      role: "Seeking a 1-Year Purchasing Apprenticeship in September 2026",
-      date: "September 2026",
+      role: "Purchasing · Procurement · Operations",
+      date: "",
       subrole: "Purchasing & Procurement · Business & Operations",
       cta: "Scroll to take off"
     },

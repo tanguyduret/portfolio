@@ -11,11 +11,34 @@
   --color-page-light: #F5F5F5;
   --color-page-alt: #ECECEC;
 
+  /* Palette isolée visuellement pour la section Conseil. */
+  --color-stone-50: #FCFBF9;
+  --color-stone-100: #F4F2EC;
+  --color-stone-200: #E6E2D6;
+  --color-stone-300: #D0C9B8;
+  --color-stone-400: #B3A891;
+  --color-stone-500: #8C8068;
+  --color-stone-600: #6B604C;
+  --color-stone-700: #524A3B;
+  --color-stone-800: #3D372C;
+  --color-stone-900: #29251E;
+
+  --color-emerald-50: #FBF7EC;
+  --color-emerald-100: #F2E7C8;
+  --color-emerald-200: #E3D0A1;
+  --color-emerald-700: #7D6330;
+  --color-emerald-800: #624A20;
+  --color-emerald-900: #473516;
+
   --font-sans: Inter, system-ui, sans-serif;
   --font-display: "Space Grotesk", system-ui, sans-serif;
 }
 
 :root { --ivory-cine: rgb(245, 242, 233); }
+
+.conseil-site [id] {
+  scroll-margin-top: 5.5rem;
+}
 
 /* HERO BG — perf friendly */
 .hero-bg-layer {

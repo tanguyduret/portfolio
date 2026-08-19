@@ -331,8 +331,8 @@ const scrollToId = useCallback((id: string) => {
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
-          <div className="flex gap-8 text-[0.7rem] font-medium tracking-[0.2em] uppercase">
+        <div className="hidden lg:flex items-center gap-5 xl:gap-8">
+          <div className="flex gap-5 xl:gap-8 text-[0.7rem] font-medium tracking-[0.2em] uppercase">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -372,7 +372,7 @@ const scrollToId = useCallback((id: string) => {
         </div>
 
         {/* Mobile Controls */}
-        <div className="md:hidden flex items-center gap-4 relative z-50">
+        <div className="lg:hidden flex items-center gap-4 relative z-50">
           <button
             onClick={toggleLanguage}
             className="text-xs font-mono uppercase border border-white/20 px-2 py-1 rounded text-ivory hover:border-accent/50 transition-colors"
@@ -394,7 +394,7 @@ const scrollToId = useCallback((id: string) => {
       {/* Mobile Full Screen Menu Overlay */}
       <div
         className={`
-          fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden
+          fixed inset-0 z-40 bg-black/95 backdrop-blur-xl lg:hidden
           flex flex-col items-center justify-center
           transition-all duration-500 ease-in-out
           ${isMobileMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'}

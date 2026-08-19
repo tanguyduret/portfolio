@@ -12,14 +12,14 @@ export const TransitionCard: React.FC = () => {
       ? {
           label: "CE QUE JE PEUX VOUS APPORTER",
           main: "Comprendre vite, m’adapter, aider l’équipe.",
-          metaLeft: "Candidat en alternance",
-          metaRight: "Septembre 2026",
+          metaLeft: "Achats & Procurement",
+          metaRight: "Bordeaux, France",
         }
       : {
           label: "WHAT I CAN BRING",
           main: "Supporting the team with structure and attention to detail.",
-          metaLeft: "Apprenticeship candidate",
-          metaRight: "September 2026",
+          metaLeft: "Purchasing & Procurement",
+          metaRight: "Bordeaux, France",
         };
 
   return (

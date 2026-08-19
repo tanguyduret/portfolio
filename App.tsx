@@ -1,5 +1,6 @@
 // App.tsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "./LanguageContext";
 
 import { Header } from "./components/Header";
@@ -17,6 +18,10 @@ import { Analytics } from "@vercel/analytics/react";
 
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+
+const ConseilApp = lazy(() =>
+  import("./components/conseil/ConseilApp").then(({ ConseilApp }) => ({ default: ConseilApp })),
+);
 
 declare global {
   interface Window {
@@ -221,9 +226,36 @@ const AppContent: React.FC = () => {
 const App: React.FC = () => {
   return (
     <>
-      <LanguageProvider>
-        <AppContent />
-      </LanguageProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LanguageProvider>
+                <AppContent />
+              </LanguageProvider>
+            }
+          />
+          <Route
+            path="/en/*"
+            element={
+              <LanguageProvider>
+                <AppContent />
+              </LanguageProvider>
+            }
+          />
+          <Route
+            path="/conseil/*"
+            element={
+              <Suspense
+                fallback={<div className="min-h-screen bg-stone-50" aria-label="Chargement de la page Conseil" />}
+              >
+                <ConseilApp />
+              </Suspense>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
       <Analytics />
     </>
   );

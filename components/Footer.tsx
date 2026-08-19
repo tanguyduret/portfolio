@@ -12,8 +12,8 @@ export const Footer: React.FC = () => {
 
   const mailSubject = useMemo(() => {
     return isFR
-      ? "Prise de contact - Portfolio (Alternance Achats Sept. 2026)"
-      : "Contact - Portfolio (Purchasing Apprenticeship Sep. 2026)";
+      ? "Prise de contact - Portfolio"
+      : "Contact - Portfolio";
   }, [isFR]);
 
   const mailBody = useMemo(() => {
@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
       ? `Bonjour Tanguy,
 
 Je vous contacte suite à votre portfolio.
-Je souhaiterais échanger avec vous au sujet d'une opportunité / de votre recherche d'alternance.
+Je souhaiterais échanger avec vous au sujet de votre parcours ou d'une opportunité professionnelle.
 
 — Nom :
 — Entreprise :
@@ -38,7 +38,7 @@ Bien cordialement,`
       : `Hi Tanguy,
 
 I'm reaching out after reviewing your portfolio.
-I'd like to discuss an opportunity / your apprenticeship search.
+I'd like to discuss your background or a professional opportunity.
 
 — Name:
 — Company:
@@ -86,9 +86,9 @@ Best regards,`;
 
         {/* ✅ DO NOT TOUCH divider (top) */}
         <div className="border-t border-white/10 pt-12">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* LEFT */}
-            <div className="md:col-span-7 flex flex-col gap-8">
+            <div className="lg:col-span-7 flex flex-col gap-8">
               <div>
                 <p className="text-steel text-xs uppercase tracking-widest mb-4">
                   {content.footer.contact_title}
@@ -147,7 +147,7 @@ Best regards,`;
             </div>
 
             {/* RIGHT (Recommendations) */}
-            <div className="md:col-span-5 md:pt-2">
+            <div className="lg:col-span-5 lg:pt-2">
               <p className="text-steel text-xs uppercase tracking-widest mb-4">
                 {isFR ? "Recommandations" : "Recommendations"}
               </p>
@@ -198,6 +198,10 @@ Best regards,`;
             <span>{content.footer.copyright}</span>
             <span className="hidden md:inline text-steel/20">|</span>
             <span>{content.footer.location}</span>
+            <span className="hidden md:inline text-steel/20">|</span>
+            <a href="/conseil" className="hover:text-white transition-colors">
+              {isFR ? 'Ma page de consulting' : 'My consulting page'}
+            </a>
           </div>
 
           <a

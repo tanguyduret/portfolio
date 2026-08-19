@@ -28,5 +28,15 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+
+    // Conserve les deux pages HTML existantes du portfolio : / et /en/.
+    build: {
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+          en: path.resolve(__dirname, 'en/index.html'),
+        },
+      },
+    },
   };
 });

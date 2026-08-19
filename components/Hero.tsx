@@ -377,7 +377,7 @@ export const Hero: React.FC = () => {
                 shadow-[0_18px_60px_rgba(215,195,137,0.10)]
               "
             >
-              {content.hero?.role || "Seeking a 1-year purchasing apprenticeship (Sept. 2026)"}
+              {content.hero?.role || "Purchasing · Procurement · Operations"}
             </p>
           </div>
 
