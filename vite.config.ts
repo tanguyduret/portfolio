@@ -29,12 +29,13 @@ export default defineConfig(({ mode }) => {
       },
     },
 
-    // Conserve les deux pages HTML existantes du portfolio : / et /en/.
+    // Pages HTML distinctes : portfolio FR, portfolio EN et Conseil.
     build: {
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, 'index.html'),
           en: path.resolve(__dirname, 'en/index.html'),
+          conseil: path.resolve(__dirname, 'conseil/index.html'),
         },
       },
     },

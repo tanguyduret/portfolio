@@ -15,7 +15,7 @@ function ConseilDocumentTitle() {
     const description = document.querySelector('meta[name="description"]');
     const previousDescription = description?.getAttribute('content') ?? null;
 
-    document.title = 'Tanguy Duret — Conseil en présence locale';
+    document.title = 'Conseil Google Business Profile & avis clients | Tanguy Duret';
     description?.setAttribute(
       'content',
       'Améliorez votre visibilité locale sur Google et collectez des avis authentiques avec des supports QR/NFC personnalisés.',
