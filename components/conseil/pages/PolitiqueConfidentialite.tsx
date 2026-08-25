@@ -20,7 +20,7 @@ export function PolitiqueConfidentialite() {
             {LEGAL_INFO.publisherStatus}
           </p>
           <ul className="mt-2 space-y-1">
-            <li>{LEGAL_INFO.publisherAddress}</li>
+            <li><strong>Adresse de domiciliation de l'entreprise :</strong> {LEGAL_INFO.publisherAddress}</li>
             <li>E-mail : <a href={`mailto:${LEGAL_INFO.publisherEmail}`} className="text-emerald-700 hover:underline">{LEGAL_INFO.publisherEmail}</a></li>
           </ul>
         </section>
@@ -100,7 +100,7 @@ export function PolitiqueConfidentialite() {
           </p>
           <ul className="mt-2 space-y-1">
             <li>Par e-mail : <a href={`mailto:${LEGAL_INFO.publisherEmail}`} className="text-emerald-700 hover:underline">{LEGAL_INFO.publisherEmail}</a></li>
-            <li>Par courrier : {LEGAL_INFO.publisherName}, {LEGAL_INFO.publisherAddress}</li>
+            <li>Par courrier : {LEGAL_INFO.publisherName}, à l'adresse de domiciliation de l'entreprise indiquée ci-dessus.</li>
           </ul>
           <p className="mt-4">
             Si vous estimez, après nous avoir contactés, que vos droits concernant vos données personnelles ne sont pas respectés, vous pouvez introduire une réclamation auprès de la Commission nationale de l'informatique et des libertés (CNIL). (<a href="https://www.cnil.fr/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 hover:underline">https://www.cnil.fr/</a>)

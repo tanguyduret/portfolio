@@ -20,7 +20,7 @@ export function MentionsLegales() {
             {LEGAL_INFO.publisherStatus}
           </p>
           <ul className="mt-2 space-y-1">
-            <li><strong>Adresse de domiciliation :</strong> {LEGAL_INFO.publisherAddress}</li>
+            <li><strong>Adresse de domiciliation de l'entreprise :</strong> {LEGAL_INFO.publisherAddress}</li>
             <li><strong>Téléphone :</strong> {LEGAL_INFO.publisherPhone}</li>
             <li><strong>E-mail de contact :</strong> <a href={`mailto:${LEGAL_INFO.publisherEmail}`} className="text-emerald-700 hover:underline">{LEGAL_INFO.publisherEmail}</a></li>
             <li><strong>Site internet :</strong> <a href={`https://${LEGAL_INFO.publisherWebsite}`} className="text-emerald-700 hover:underline">{LEGAL_INFO.publisherWebsite}</a></li>
@@ -33,6 +33,7 @@ export function MentionsLegales() {
             <li><strong>SIREN :</strong> {LEGAL_INFO.siren}</li>
             <li><strong>SIRET :</strong> {LEGAL_INFO.siret}</li>
             <li><strong>Code APE :</strong> {LEGAL_INFO.apeCode}</li>
+            <li className="mt-3">{LEGAL_INFO.rneRegistration}</li>
             <li className="mt-3"><strong>TVA :</strong> {LEGAL_INFO.vatStatus}</li>
           </ul>
         </section>
