@@ -61,8 +61,29 @@ export function Pricing() {
         <Reveal className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl font-bold text-stone-900 mb-6">Des offres simples et transparentes</h2>
           <p className="text-lg text-stone-600">
-            Chaque client bénéficie d'un échange personnalisé. Pas d'abonnement, pas de frais cachés.
+            Des tarifs uniques et transparents, sans abonnement ni frais récurrents.
           </p>
+        </Reveal>
+
+        <Reveal className="max-w-4xl mx-auto rounded-2xl bg-stone-100 border border-stone-200 p-6 md:p-8 mb-10" delay={0.04}>
+          <div className="text-center max-w-2xl mx-auto">
+            <h3 className="text-xl font-bold text-stone-900">Ce qui est inclus</h3>
+            <p className="mt-3 text-stone-600 leading-relaxed">
+              Chaque offre correspond à un établissement et à un support physique. Nous échangeons d'abord pour comprendre votre activité, puis je prépare un accompagnement adapté et un lien Google prêt à utiliser.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-5 mt-6 text-sm text-stone-700">
+            {[
+              'Un échange direct pour comprendre votre besoin',
+              'La configuration de votre lien vers Google',
+              'Un support QR/NFC prêt à être utilisé',
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-emerald-700 flex-shrink-0" />
+                <span className="font-medium">{item}</span>
+              </div>
+            ))}
+          </div>
         </Reveal>
 
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto mb-10">
@@ -96,7 +117,7 @@ export function Pricing() {
                 onClick={scrollToContact}
                 className={`w-full py-3 px-4 rounded-full text-center font-medium transition-colors ${plan.recommended ? 'bg-emerald-800 text-white hover:bg-emerald-900' : 'bg-stone-100 text-stone-800 hover:bg-stone-200'}`}
               >
-                Choisir cette offre
+                Parler de cette offre
               </a>
             </Reveal>
           ))}
@@ -114,7 +135,7 @@ export function Pricing() {
 
         <div className="text-center mt-8">
           <a href="#contact" onClick={scrollToContact} className="inline-block text-stone-600 hover:text-stone-900 font-medium underline underline-offset-4">
-            Je ne sais pas quelle offre choisir
+            M'aider à choisir l'offre adaptée
           </a>
         </div>
       </div>

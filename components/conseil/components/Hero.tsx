@@ -1,4 +1,4 @@
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { MouseEvent } from 'react';
 
@@ -26,7 +26,7 @@ export function Hero() {
         </h1>
         
         <p className="text-lg md:text-xl text-stone-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-          Lorsqu'un client recherche un établissement local, votre fiche Google est souvent l'un de ses premiers contacts avec votre entreprise. Transformez la satisfaction de vos vrais clients en visibilité rassurante.
+          J'aide les commerces locaux à rendre leur fiche Google plus claire et à faciliter les avis clients grâce à des conseils concrets et un support QR/NFC.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -46,6 +46,10 @@ export function Hero() {
             Découvrir comment ça marche
           </a>
         </div>
+
+        <p className="mt-6 text-sm font-medium text-stone-500">
+          Sans abonnement <span className="mx-2 text-stone-300">·</span> Un accompagnement ponctuel <span className="mx-2 text-stone-300">·</span> Échange direct avec moi
+        </p>
       </motion.div>
     </section>
   );

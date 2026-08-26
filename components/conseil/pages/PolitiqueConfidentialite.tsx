@@ -33,8 +33,11 @@ export function PolitiqueConfidentialite() {
           <ul className="list-disc pl-5 mt-2 space-y-1">
             <li>Prénom</li>
             <li>Nom</li>
-            <li>Nom de l'entreprise</li>
+            <li>Nom de l'établissement</li>
             <li>Type d'activité</li>
+            <li>Ville ou zone de l'établissement</li>
+            <li>Nombre d'établissements</li>
+            <li>Besoin principal (facultatif)</li>
             <li>Téléphone ou e-mail de contact</li>
             <li>Message (facultatif)</li>
           </ul>

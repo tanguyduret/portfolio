@@ -34,6 +34,18 @@ export function FAQ() {
     {
       question: "Combien de temps faut-il pour mettre en place la solution ?",
       answer: "C'est très rapide. Dès notre échange, j'analyse votre situation et je configure votre lien. Le support physique vous est expédié rapidement, et vous pouvez commencer immédiatement."
+    },
+    {
+      question: "Que vais-je recevoir concrètement ?",
+      answer: "Vous recevez un support physique QR/NFC configuré pour votre établissement, accompagné des conseils correspondant à l'offre choisie. Le lien vers votre fiche Google est préparé pour être simple à utiliser par vos clients."
+    },
+    {
+      question: "La livraison est-elle comprise ?",
+      answer: "Pour les établissements situés dans la région de Cherbourg, la livraison est incluse. Pour une autre zone, les modalités sont précisées avec vous avant la validation de la commande."
+    },
+    {
+      question: "Quand et comment se fait le paiement ?",
+      answer: "Pour une commande simple, le paiement intervient après validation de la commande, lors de la livraison. Pour une proposition sur mesure ou une commande importante, un paiement en amont peut être demandé : les modalités vous sont alors précisées clairement avant toute validation."
     }
   ];
 
