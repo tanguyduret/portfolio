@@ -17,7 +17,7 @@ export function Analysis() {
         <Reveal className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl font-bold text-stone-900 mb-6">Votre fiche Google mérite un vrai regard</h2>
           <p className="text-lg text-stone-600">
-            Je ne me contente pas de vous envoyer un QR code. J'analyse réellement votre vitrine numérique et je vous explique simplement ce qui peut être optimisé.
+            Je ne me contente pas de vous envoyer un QR code. J'analyse votre vitrine numérique et je vous explique simplement ce qui peut être clarifié, complété et amélioré pour mieux répondre aux recherches pertinentes.
           </p>
         </Reveal>
 

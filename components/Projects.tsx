@@ -93,7 +93,7 @@ export const Projects: React.FC = () => {
 
     const mm = ScrollTrigger.matchMedia({
       "(min-width: 768px)": () => {
-        const wrappers = gsap.utils.toArray<HTMLElement>(".project-card-wrapper");
+        const wrappers = gsap.utils.toArray(".project-card-wrapper") as HTMLElement[];
         if (!wrappers.length) return;
 
         const leftColumnItems = wrappers.filter((_, i) => i % 2 === 0);

@@ -133,6 +133,53 @@ export const conseilArticles: ConseilArticle[] = [
       { label: 'Google — Conseils pour répondre aux avis', url: 'https://support.google.com/business/answer/3474050?hl=fr' },
     ],
   },
+  {
+    slug: 'repondre-aux-avis-google',
+    title: 'Répondre à un avis Google : exemples positifs et négatifs',
+    category: 'En pratique',
+    readingTime: '3 min',
+    introduction: "Une réponse à un avis est publique. Elle s'adresse à la personne qui a écrit, mais aussi à celles qui découvrent votre établissement. L'idée n'est pas d'avoir une formule parfaite : c'est de montrer que vous écoutez et que vous agissez quand c'est utile.",
+    sections: [
+      {
+        heading: 'Avant de répondre : rester simple et personnel',
+        paragraphs: [
+          "Votre fiche doit être validée pour pouvoir répondre aux avis. Une fois publiée, votre réponse apparaît sous l'avis au nom de votre établissement : écrivez donc comme vous parleriez à un client en face de vous.",
+          "Prenez le temps de relire le commentaire, remerciez la personne et évitez les réponses copiées-collées à l'identique. Ne publiez jamais d'information personnelle, de détail de commande ou de discussion privée.",
+        ],
+      },
+      {
+        heading: 'Face à un avis positif',
+        paragraphs: [
+          "Un avis positif mérite une réponse courte et sincère. Vous pouvez remercier le client, reprendre un élément précis de son expérience et lui dire que vous serez heureux de le revoir. Inutile d'en faire trop : une réponse naturelle renforce déjà la confiance.",
+        ],
+        bullets: [
+          'Exemple : « Merci beaucoup pour votre retour. Nous sommes ravis que votre passage vous ait plu et serons heureux de vous accueillir à nouveau. »',
+          'Si un détail est cité : « Merci pour votre confiance, nous transmettrons votre retour à toute l’équipe. »',
+        ],
+      },
+      {
+        heading: 'Face à un avis négatif',
+        paragraphs: [
+          "Un avis négatif n'est pas forcément agréable, mais il peut montrer aux futurs clients que vous prenez les problèmes au sérieux. Remerciez la personne d'avoir pris le temps d'écrire, reconnaissez son ressenti sans vous justifier publiquement, puis proposez un échange direct pour comprendre ce qui s'est passé.",
+          "L'objectif est de rouvrir le dialogue, pas de gagner une discussion sous l'avis. Si le contenu enfreint les règles de Google, vous pouvez le signaler ; ne le signalez pas uniquement parce qu'il est défavorable.",
+        ],
+        bullets: [
+          'Exemple : « Bonjour, merci d’avoir pris le temps de nous faire ce retour. Nous sommes désolés que votre expérience n’ait pas été à la hauteur. Nous aimerions comprendre ce qui s’est passé et vous inviter à nous contacter directement afin d’en reparler. »',
+          'Évitez les réponses défensives, les détails personnels et les promesses impossibles à tenir.',
+        ],
+      },
+      {
+        heading: 'Faire de la réponse une habitude',
+        paragraphs: [
+          "Répondre régulièrement est plus utile qu'une grande opération ponctuelle. Vous montrez ainsi que les retours sont lus, que les bonnes expériences comptent et que les difficultés peuvent être traitées. C'est aussi une source concrète d'amélioration pour l'établissement.",
+        ],
+      },
+    ],
+    sources: [
+      { label: 'Google — Gérer les avis client', url: 'https://support.google.com/business/answer/3474050?hl=fr' },
+      { label: 'Google — Signaler des avis inappropriés', url: 'https://support.google.com/business/answer/4596773?hl=fr' },
+    ],
+  },
 ];
 
 export const conseilArticleBySlug = (slug: string | undefined) =>

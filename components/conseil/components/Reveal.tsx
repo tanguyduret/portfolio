@@ -1,7 +1,8 @@
-import type { ReactNode } from 'react';
+import type { Key, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 
 type RevealProps = {
+  key?: Key;
   children: ReactNode;
   className?: string;
   delay?: number;

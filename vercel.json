@@ -1,7 +1,12 @@
 {
   "rewrites": [
+    { "source": "/conseil/guide", "destination": "/conseil/guide/index.html" },
+    { "source": "/conseil/guide/:slug", "destination": "/conseil/guide/:slug.html" },
+    { "source": "/conseil/mentions-legales", "destination": "/conseil/mentions-legales.html" },
+    { "source": "/conseil/politique-confidentialite", "destination": "/conseil/politique-confidentialite.html" },
     { "source": "/conseil", "destination": "/conseil/index.html" },
     { "source": "/conseil/", "destination": "/conseil/index.html" },
+    { "source": "/conseil/:path*", "destination": "/conseil/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

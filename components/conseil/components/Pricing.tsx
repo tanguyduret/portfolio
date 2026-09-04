@@ -63,13 +63,14 @@ export function Pricing() {
           <p className="text-lg text-stone-600">
             Des tarifs uniques et transparents, sans abonnement ni frais récurrents.
           </p>
+          <p className="mt-3 text-sm text-stone-500">TVA non applicable, art. 293 B du CGI.</p>
         </Reveal>
 
         <Reveal className="max-w-4xl mx-auto rounded-2xl bg-stone-100 border border-stone-200 p-6 md:p-8 mb-10" delay={0.04}>
           <div className="text-center max-w-2xl mx-auto">
-            <h3 className="text-xl font-bold text-stone-900">Ce qui est inclus</h3>
+            <h3 className="text-xl font-bold text-stone-900">Ce que nous pouvons mettre en place</h3>
             <p className="mt-3 text-stone-600 leading-relaxed">
-              Chaque offre correspond à un établissement et à un support physique. Nous échangeons d'abord pour comprendre votre activité, puis je prépare un accompagnement adapté et un lien Google prêt à utiliser.
+              Chaque offre correspond à un établissement et à un support physique. Après notre échange, je prépare un lien Google prêt à utiliser et les actions adaptées à votre situation, à distance ou directement avec vous.
             </p>
           </div>
           <div className="grid sm:grid-cols-3 gap-5 mt-6 text-sm text-stone-700">
@@ -131,6 +132,10 @@ export function Pricing() {
           <a href="#contact" onClick={scrollToContact} className="inline-block mt-5 text-emerald-800 hover:text-emerald-900 font-semibold underline underline-offset-4">
             Parlons de votre besoin
           </a>
+        </Reveal>
+
+        <Reveal className="max-w-3xl mx-auto mt-6 text-center text-sm text-stone-600" delay={0.12}>
+          <p>La configuration peut se faire à distance. Si vous n’êtes pas à proximité, le support peut être envoyé par courrier et nous pouvons organiser un échange en visio.</p>
         </Reveal>
 
         <div className="text-center mt-8">

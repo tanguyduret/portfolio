@@ -19,6 +19,19 @@ const MICRO_DATA = [
   { text: "WIND_SHEAR: NEGATIVE", top: "25%", left: "65%", speed: -165 },
 ];
 
+const BOARD_WIDTH = 19;
+const BOARD_STAGES = [
+  "NEXT CHAPTER AHEAD",
+  "IDEAS INTO MOTION",
+  "READY FOR DEPARTURE",
+];
+const BOARD_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+const centerBoardText = (text: string) => text
+  .padStart(Math.floor((BOARD_WIDTH + text.length) / 2), "·")
+  .padEnd(BOARD_WIDTH, "·")
+  .slice(0, BOARD_WIDTH);
+
 export const Hero: React.FC = () => {
   const { content } = useLanguage();
 
@@ -28,17 +41,15 @@ export const Hero: React.FC = () => {
   const radarRef = useRef<HTMLDivElement>(null);
   const floatingRef = useRef<HTMLDivElement>(null);
   const throttleFillRef = useRef<HTMLDivElement>(null);
+  const flightMarkerRef = useRef<HTMLDivElement>(null);
   const uiGroupRef = useRef<HTMLDivElement>(null);
   const heroFxRef = useRef<HTMLDivElement>(null);
   const overlayIvoryRef = useRef<HTMLDivElement>(null);
 
-  const typingPlateRef = useRef<HTMLDivElement>(null);
-  const typingTextRef = useRef<HTMLSpanElement>(null);
+  const departureBoardRef = useRef<HTMLDivElement>(null);
   const tagRef = useRef<HTMLParagraphElement>(null);
 
-  const prevPRef = useRef(0);
-
-  const typingLine = useMemo(() => "ready for departure?", []);
+  const departureLine = useMemo(() => BOARD_STAGES.at(-1) ?? "READY FOR DEPARTURE", []);
 
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
@@ -48,15 +59,15 @@ export const Hero: React.FC = () => {
     const root = rootRef.current;
     const viewport = viewportRef.current;
     const ui = uiGroupRef.current;
-    const plate = typingPlateRef.current;
+    const board = departureBoardRef.current;
     const tag = tagRef.current;
     const radar = radarRef.current;
     const throttle = throttleFillRef.current;
+    const flightMarker = flightMarkerRef.current;
     const fx = heroFxRef.current;
     const ivoryOverlay = overlayIvoryRef.current;
-    const typingEl = typingTextRef.current;
 
-    if (!root || !viewport || !ui || !plate || !ivoryOverlay || !typingEl) return;
+    if (!root || !viewport || !ui || !board || !ivoryOverlay) return;
 
     const ctx = gsap.context(() => {
       const tcCard = document.querySelector('[data-tc="card"]') as HTMLDivElement | null;
@@ -68,26 +79,24 @@ export const Hero: React.FC = () => {
       gsap.set(ivoryOverlay, { opacity: 0 });
 
       gsap.set(ui, { opacity: 1, y: 0, willChange: "transform,opacity" });
-      if (tag) gsap.set(tag, { opacity: 1, y: 0, scaleX: 1, scaleY: 1 });
+      if (tag) gsap.set(tag, { opacity: 1, y: 0 });
 
-      gsap.set(plate, {
-        opacity: 0,
-        y: 10,
-        scaleX: 0.99,
-        scaleY: 0.99,
+      gsap.set(board, {
+        opacity: 1,
+        y: 0,
         willChange: "transform,opacity",
       });
 
-      // Typing init
-      typingEl.textContent = "";
-
-      const caretEl = root.querySelector(".hero-caret") as HTMLElement | null;
-      if (caretEl) caretEl.classList.add("hero-caret--hidden");
+      const departureGlyphs = Array.from(root.querySelectorAll<HTMLElement>(".departure-slot__glyph")) as HTMLElement[];
+      const boardStages = BOARD_STAGES.map(centerBoardText);
+      const currentGlyphs = Array.from({ length: BOARD_WIDTH }, () => "");
+      departureGlyphs.forEach((glyph) => gsap.set(glyph, { "--slot-progress": 0, "--slot-opacity": 0 }));
 
       if (radar) gsap.set(radar, { opacity: 1 });
       if (throttle) gsap.set(throttle, { height: "0%" });
+      if (flightMarker) gsap.set(flightMarker, { y: 0 });
 
-      const lines = Array.from(root.querySelectorAll<HTMLElement>(".micro-line"));
+      const lines = Array.from(root.querySelectorAll<HTMLElement>(".micro-line")) as HTMLElement[];
       lines.forEach((l) => gsap.set(l, { opacity: 0, y: 16, willChange: "transform,opacity" }));
 
       if (tcCard) {
@@ -100,10 +109,8 @@ export const Hero: React.FC = () => {
       const setUiOpacity = gsap.quickSetter(ui, "opacity") as (v: number) => void;
       const setUiY = gsap.quickSetter(ui, "y", "px") as (v: number) => void;
 
-      const setPlateOpacity = gsap.quickSetter(plate, "opacity") as (v: number) => void;
-      const setPlateY = gsap.quickSetter(plate, "y", "px") as (v: number) => void;
-      const setPlateScaleX = gsap.quickSetter(plate, "scaleX") as (v: number) => void;
-      const setPlateScaleY = gsap.quickSetter(plate, "scaleY") as (v: number) => void;
+      const setBoardOpacity = gsap.quickSetter(board, "opacity") as (v: number) => void;
+      const setBoardY = gsap.quickSetter(board, "y", "px") as (v: number) => void;
 
       const setIvoryOpacity = gsap.quickSetter(ivoryOverlay, "opacity") as (v: number) => void;
 
@@ -113,6 +120,10 @@ export const Hero: React.FC = () => {
       const setFxOpacity = fx
         ? (gsap.quickSetter(fx, "opacity") as (v: number) => void)
         : null;
+      const setFlightMarkerY = flightMarker
+        ? (gsap.quickSetter(flightMarker, "y", "px") as (v: number) => void)
+        : null;
+      const flightStages = Array.from(root.querySelectorAll<HTMLElement>("[data-flight-stage]")) as HTMLElement[];
 
       const setCardOpacity = tcCard
         ? (gsap.quickSetter(tcCard, "opacity") as (v: number) => void)
@@ -122,41 +133,37 @@ export const Hero: React.FC = () => {
         : null;
 
       // -----------------------
-      // Typewriter (réversible + caret robuste)
+      // Departure board — each character turns into place as the visitor scrolls.
       // -----------------------
-      const full = typingLine;
-      const N = full.length;
+      const setBoardByProgress = (p: number) => {
+        const t0 = 0.17;
+        const t1 = 0.73;
+        const progress = smoothstep(clamp01((p - t0) / (t1 - t0)));
+        const scaledProgress = progress * boardStages.length;
+        const stageIndex = Math.min(boardStages.length - 1, Math.floor(scaledProgress));
+        const stageProgress = stageIndex === boardStages.length - 1 && progress === 1
+          ? 1
+          : scaledProgress - stageIndex;
+        const target = boardStages[stageIndex];
 
-      const setTypedByProgress = (p: number) => {
-        // zone typing
-        const t0 = 0.10;
-        const t1 = 0.62;
+        departureGlyphs.forEach((glyph, index) => {
+          const revealStart = (index / Math.max(1, departureGlyphs.length - 1)) * 0.62;
+          const slotProgress = clamp01((stageProgress - revealStart) / 0.18);
+          const rollingStep = Math.min(6, Math.floor(slotProgress * 7));
+          const nextGlyph = slotProgress >= 1
+            ? target[index]
+            : BOARD_ALPHABET[(index * 7 + stageIndex * 11 + rollingStep) % BOARD_ALPHABET.length];
 
-        // progression typing réversible (dépend de p)
-        let tp = 0;
-        if (p <= t0) tp = 0;
-        else if (p < t1) tp = smoothstep(clamp01((p - t0) / (t1 - t0)));
-        else tp = 1;
+          const shouldChangeGlyph = stageIndex === 0 || slotProgress > 0;
+          if (shouldChangeGlyph && currentGlyphs[index] !== nextGlyph) {
+            glyph.textContent = nextGlyph;
+            currentGlyphs[index] = nextGlyph;
+          }
 
-        // nombre de caractères (évite les “sauts”)
-        const k = Math.max(0, Math.min(N, Math.floor(tp * (N + 0.999))));
-        const out = full.slice(0, k);
-
-        if (typingEl.textContent !== out) typingEl.textContent = out;
-
-        // direction scroll
-        const goingUp = p < prevPRef.current - 0.0005;
-        prevPRef.current = p;
-
-        // caret visible UNIQUEMENT pendant typing ET quand on descend
-        const inTypingZone = p > t0 && p < t1 && out.length > 0;
-
-        if (caretEl) {
-          const showCaret = inTypingZone && !goingUp;
-
-          caretEl.classList.toggle("hero-caret--hidden", !showCaret);
-          caretEl.classList.toggle("hero-caret--running", showCaret);
-        }
+          const flipProgress = stageIndex === 0 || slotProgress > 0 ? slotProgress : 1;
+          const glyphOpacity = stageIndex === 0 ? slotProgress : 1;
+          gsap.set(glyph, { "--slot-progress": flipProgress, "--slot-opacity": glyphOpacity });
+        });
       };
 
       // -----------------------
@@ -165,7 +172,7 @@ export const Hero: React.FC = () => {
       const st = ScrollTrigger.create({
         trigger: root,
         start: "top top",
-        end: "+=180%",
+        end: "+=230%",
         pin: true,
         pinSpacing: true,
         scrub: 0.9,
@@ -175,22 +182,17 @@ export const Hero: React.FC = () => {
         onUpdate: (self) => {
           const p = self.progress;
 
-          // (A) Typewriter
-          setTypedByProgress(p);
+          // (A) Departure board
+          setBoardByProgress(p);
 
-          // (B) UI/typing leave a bit earlier (pour éviter le moment “moche”)
+          // (B) UI/board leave a bit earlier (pour éviter le moment “moche”)
           const uiFade = 1 - clamp01((p - 0.70) / (0.84 - 0.70));
           setUiOpacity(uiFade);
           setUiY(-10 * (1 - uiFade));
 
-          // plate in (multiplied by uiFade)
-          const plateP = clamp01((p - 0.095) / (0.20 - 0.095));
-          const plateE = 1 - Math.pow(1 - plateP, 3);
-          setPlateOpacity(plateE * uiFade);
-          setPlateY(10 * (1 - plateE));
-          const s = 0.99 + 0.01 * plateE;
-          setPlateScaleX(s);
-          setPlateScaleY(s);
+          // The physical board is visible from the first frame; only its letters start later.
+          setBoardOpacity(uiFade);
+          setBoardY(0);
 
           // micro lines
           const driftP = clamp01((p - 0.22) / (0.78 - 0.22));
@@ -224,9 +226,19 @@ export const Hero: React.FC = () => {
           if (setRadarOpacity) setRadarOpacity(1 - 0.95 * fxE);
           if (setFxOpacity) setFxOpacity(1 - 0.98 * fxE);
 
-          // throttle
+          // Flight path — deliberately small and scroll-bound for smooth, high-refresh displays.
           const thr = clamp01((p - 0.10) / (0.75 - 0.10));
           if (throttle) gsap.set(throttle, { height: `${Math.round(thr * 100)}%` });
+          if (setFlightMarkerY) setFlightMarkerY(-176 * thr);
+          flightStages.forEach((stage, index) => {
+            const activePosition = (flightStages.length - 1) * (1 - thr);
+            const distance = Math.abs(index - activePosition);
+            const emphasis = 1 - smoothstep(clamp01(distance));
+            gsap.set(stage, {
+              opacity: 0.26 + 0.74 * emphasis,
+              "--flight-stage-scale": 1 + 0.18 * emphasis,
+            });
+          });
         },
 
         onLeave: () => {
@@ -236,18 +248,14 @@ export const Hero: React.FC = () => {
             setCardY(0);
           }
           // lock final state
-          typingEl.textContent = full;
-
-          const caretEl = root.querySelector(".hero-caret") as HTMLElement | null;
-          if (caretEl) {
-            caretEl.classList.add("hero-caret--hidden");
-            caretEl.classList.remove("hero-caret--running");
-          }
+          departureGlyphs.forEach((glyph, index) => {
+            glyph.textContent = boardStages.at(-1)?.[index] ?? " ";
+            currentGlyphs[index] = glyph.textContent;
+            gsap.set(glyph, { "--slot-progress": 1, "--slot-opacity": 1 });
+          });
         },
 
         onLeaveBack: () => {
-          prevPRef.current = 0;
-
           setIvoryOpacity(0);
 
           if (setCardOpacity && setCardY) {
@@ -261,23 +269,25 @@ export const Hero: React.FC = () => {
           if (setFxOpacity) setFxOpacity(1);
           if (setRadarOpacity) setRadarOpacity(1);
 
-          // reset typing
-          typingEl.textContent = "";
-          const caretEl = root.querySelector(".hero-caret") as HTMLElement | null;
-          if (caretEl) {
-            caretEl.classList.add("hero-caret--hidden");
-            caretEl.classList.remove("hero-caret--running");
-          }
+          // reset board
+          departureGlyphs.forEach((glyph, index) => {
+            glyph.textContent = "";
+            currentGlyphs[index] = "";
+            gsap.set(glyph, { "--slot-progress": 0, "--slot-opacity": 0 });
+          });
 
           lines.forEach((l) => gsap.set(l, { opacity: 0, y: 16 }));
           if (throttle) gsap.set(throttle, { height: "0%" });
+          if (setFlightMarkerY) setFlightMarkerY(0);
+          flightStages.forEach((stage, index) => gsap.set(stage, {
+            opacity: index === flightStages.length - 1 ? 1 : 0.26,
+            "--flight-stage-scale": index === flightStages.length - 1 ? 1.18 : 1,
+          }));
 
-          setPlateOpacity(0);
-          setPlateY(10);
-          setPlateScaleX(0.99);
-          setPlateScaleY(0.99);
+          setBoardOpacity(1);
+          setBoardY(0);
 
-          if (tag) gsap.set(tag, { opacity: 1, y: 0, scaleX: 1, scaleY: 1 });
+          if (tag) gsap.set(tag, { opacity: 1, y: 0 });
         },
       });
 
@@ -285,7 +295,7 @@ export const Hero: React.FC = () => {
     }, root);
 
     return () => ctx.revert();
-  }, [typingLine]);
+  }, [departureLine]);
 
   return (
     <section ref={rootRef} id="hero" className="relative w-full text-ivory">
@@ -316,7 +326,7 @@ export const Hero: React.FC = () => {
           </div>
 
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_118%)]" />
-          <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+          <div className="absolute inset-0 opacity-[0.025] bg-[radial-gradient(circle_at_20%_20%,white_0,transparent_1px)] bg-[length:5px_5px]" />
 
           {/* corners + rails */}
           <div className="absolute inset-0 pointer-events-none px-5 py-5 md:px-12 md:py-10">
@@ -391,10 +401,10 @@ export const Hero: React.FC = () => {
             {content.hero?.subrole || "Purchasing & Procurement · Business & Operations"}
           </p>
 
-          {/* typing plate */}
+          {/* Departure board */}
           <div className="relative mt-24">
             <div
-              ref={typingPlateRef}
+              ref={departureBoardRef}
               aria-hidden="true"
               className="
                 absolute -inset-x-10 -inset-y-8
@@ -408,37 +418,35 @@ export const Hero: React.FC = () => {
 
             <div className="absolute -inset-12 bg-accent/12 blur-3xl -z-10 opacity-60 rounded-full pointer-events-none" />
 
-            <h2
-              className="relative font-display text-5xl md:text-6xl pb-2 pr-5"
-              style={{
-                backgroundImage:
-                  "linear-gradient(180deg, rgba(245,245,245,1) 0%, rgba(245,245,245,0.68) 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                letterSpacing: "-0.02em",
-                textShadow: "0 18px 90px rgba(0,0,0,0.80)",
-              }}
-            >
-              <span ref={typingTextRef} />
-              <span
-                aria-hidden="true"
-                className="inline-block align-baseline ml-2 w-[2px] h-[0.95em] rounded-full hero-caret hero-caret--hidden"
-              />
-            </h2>
+            <div className="relative pt-1 text-left">
+              <div className="absolute -top-5 left-1/2 flex -translate-x-1/2 items-center justify-center whitespace-nowrap font-mono text-[8px] font-bold tracking-[0.28em] text-accent/90 sm:text-[9px]">
+                <span>DEPARTURE BOARD</span>
+              </div>
+              <h2 aria-label={departureLine} className="mx-auto grid w-[calc(100vw-5rem)] max-w-[34rem] grid-cols-[repeat(19,minmax(0,1fr))] gap-[0.08em] font-mono text-[clamp(0.6rem,2.4vw,2rem)] font-bold tracking-[0.02em] text-ivory">
+                {Array.from({ length: BOARD_WIDTH }, (_, index) => (
+                  <span key={index} aria-hidden="true" className="departure-slot inline-grid h-[1.7em] place-items-center overflow-hidden rounded-[0.12em] border border-white/10 bg-black/60 shadow-[inset_0_-0.12em_0_rgba(0,0,0,0.3),0_0.16em_0.5em_rgba(0,0,0,0.28)] lg:h-[1.5em]">
+                    <span className="departure-slot__glyph" />
+                  </span>
+                ))}
+              </h2>
+            </div>
           </div>
         </div>
 
-        {/* throttle */}
-        <div className="absolute right-8 md:right-12 top-1/2 -translate-y-1/2 h-48 w-[2px] bg-white/[0.05] rounded-full overflow-hidden hidden md:block z-30">
-          <div
-            ref={throttleFillRef}
-            className="w-full h-0 absolute bottom-0 left-0 bg-accent shadow-[0_0_12px_rgba(215,195,137,0.55)]"
-          />
-          <div className="absolute top-0 right-0 h-full flex flex-col justify-between py-1">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="w-2 h-[1px] bg-white/20 translate-x-1" />
-            ))}
+        {/* Flight path — desktop-only, intentionally quieter than a conventional progress bar. */}
+        <div className="absolute right-8 top-1/2 z-30 hidden -translate-y-1/2 lg:block">
+          <p className="mb-4 text-right font-mono text-[8px] font-bold tracking-[0.24em] text-white/35">FLIGHT PATH</p>
+          <div className="relative h-52 w-28">
+            <div className="absolute right-0 top-0 h-full w-px bg-white/10" />
+            <div ref={throttleFillRef} className="absolute bottom-0 right-0 w-px bg-gradient-to-t from-accent via-accent to-transparent shadow-[0_0_12px_rgba(215,195,137,0.65)]" />
+            <div ref={flightMarkerRef} className="absolute bottom-0 right-[-4px] flex h-2 w-2 items-center justify-center rounded-full border border-accent/70 bg-black shadow-[0_0_16px_rgba(215,195,137,0.55)]">
+              <span className="h-1 w-1 rounded-full bg-accent" />
+            </div>
+            <div className="absolute inset-y-0 left-0 flex flex-col justify-between font-mono text-[8px] font-bold tracking-[0.16em] text-white/60">
+              <span data-flight-stage className="flight-stage">TAKEOFF</span>
+              <span data-flight-stage className="flight-stage">TAXI</span>
+              <span data-flight-stage className="flight-stage">BOARDING</span>
+            </div>
           </div>
         </div>
 
@@ -448,31 +456,28 @@ export const Hero: React.FC = () => {
         </div>
 
         <style>{`
-          .hero-caret {
-            background: rgba(215,195,137,1);
-            box-shadow: 0 0 18px rgba(215,195,137,0.32);
-            animation: heroBlink 0.85s steps(1) infinite;
-            animation-play-state: paused; /* ✅ paused by default */
-            will-change: opacity;
+          .departure-slot {
+            display: inline-grid;
+            place-items: center;
           }
-
-          /* ✅ when caret is supposed to blink */
-          .hero-caret--running {
-            opacity: 1 !important;
-            visibility: visible !important;
-            animation-play-state: running !important;
+          .departure-slot__glyph {
+            display: grid;
+            place-items: center;
+            width: 100%;
+            height: 100%;
+            color: rgba(245,245,245,0.96);
+            text-shadow: 0 0.16em 0.55em rgba(0,0,0,0.75);
+            transform: perspective(4em) rotateX(calc(-90deg + 90deg * var(--slot-progress, 0))) translateY(calc(0.28em * (1 - var(--slot-progress, 0))));
+            opacity: var(--slot-opacity, 0);
+            will-change: transform, opacity;
           }
-
-          /* ✅ hard hide + stop paint issues */
-          .hero-caret--hidden {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            animation-play-state: paused !important;
-          }
-
-          @keyframes heroBlink {
-            0%,49%{opacity:1}
-            50%,100%{opacity:0}
+          .flight-stage {
+            --flight-stage-scale: 1;
+            display: inline-block;
+            transform: scale(var(--flight-stage-scale));
+            transform-origin: right center;
+            text-shadow: 0 0 0 rgba(215,195,137,0);
+            will-change: transform, opacity;
           }
         `}</style>
       </div>

@@ -23,7 +23,7 @@ export function Guide() {
           </Link>
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           {conseilArticles.map((article) => (
             <Reveal key={article.slug} delay={conseilArticles.indexOf(article) * 0.08}>
             <Link to={`/conseil/guide/${article.slug}`} className="group bg-white rounded-2xl p-6 border border-stone-200 shadow-sm hover:border-emerald-700 hover:shadow-md transition-all flex flex-col justify-between h-48">

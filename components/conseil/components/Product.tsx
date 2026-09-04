@@ -33,17 +33,17 @@ export function Product() {
           
           <Reveal className="flex-1 order-1 md:order-2" delay={0.08}>
             <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-6">
-              Un objet simple, fait pour votre commerce
+              Un support simple, quand il est pertinent
             </h2>
             <p className="text-lg text-stone-600 mb-8 leading-relaxed">
-              Vous le posez sur le comptoir, à la caisse ou sur une table. Vos clients le voient, le scannent ou approchent leur téléphone, et peuvent accéder facilement à votre espace Google.
+              Lorsqu'il est utile à votre établissement, le support se pose sur le comptoir, à la caisse ou sur une table. Vos clients le voient, le scannent ou approchent leur téléphone, et accèdent facilement à votre espace Google.
             </p>
             
             <ul className="space-y-6">
               {[
                 { title: "Élégant et discret", desc: "S'intègre parfaitement à la décoration de votre établissement." },
                 { title: "Technologie sans contact", desc: "QR Code universel et puce NFC pour un accès instantané sans application." },
-                { title: "L'outil n'est pas la finalité", desc: "La vraie finalité, c'est de faciliter le passage à l'action de vos clients." }
+                { title: "Le support n'est pas une finalité", desc: "L'objectif reste de clarifier votre présence Google et de faciliter le passage à l'action de vos clients." }
               ].map((item, i) => (
                 <li key={i} className="flex">
                   <div className="flex-shrink-0 mt-1">

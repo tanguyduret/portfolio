@@ -1,12 +1,6 @@
 // lenis.ts
 import Lenis from "lenis";
 
-declare global {
-  interface Window {
-    lenis?: Lenis;
-  }
-}
-
 export function initLenis() {
   // Evite double init en dev (HMR)
   if (window.lenis) return window.lenis;
@@ -15,7 +9,6 @@ export function initLenis() {
     duration: 1.05,
     easing: (t: number) => 1 - Math.pow(1 - t, 3),
     smoothWheel: true,
-    smoothTouch: false,
     wheelMultiplier: 1.0,
     touchMultiplier: 1.0,
   });

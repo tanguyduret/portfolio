@@ -1,5 +1,7 @@
 export type Language = 'fr' | 'en';
 
+import type Lenis from 'lenis';
+
 // types.ts
 export interface ExperienceItem {
   id: string;
@@ -35,12 +37,12 @@ export type SkillItem = {
   where?: string[];
 };
 
-// Global definition for GSAP on window object since we load it via CDN
+// Global definitions used by the portfolio animation layer.
 declare global {
   interface Window {
-    gsap: any;
-    ScrollTrigger: any;
-    MotionPathPlugin: any;
-    lenis: any;
+    gsap?: any;
+    ScrollTrigger?: any;
+    MotionPathPlugin?: any;
+    lenis?: Lenis;
   }
 }

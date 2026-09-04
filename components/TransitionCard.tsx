@@ -72,7 +72,7 @@ export const TransitionCard: React.FC = () => {
       {/* Grain léger */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"
+        className="pointer-events-none absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_20%_20%,#fff_0,transparent_1px)] bg-[length:5px_5px]"
       />
     </section>
   );

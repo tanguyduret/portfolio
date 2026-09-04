@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { GeminiButton } from "./GeminiButton";
+import { CtaButton } from "./CtaButton";
 import { useLanguage } from "../LanguageContext";
 
 export const Footer: React.FC = () => {
@@ -121,12 +121,12 @@ Best regards,`;
 
               <div className="flex flex-col sm:flex-row gap-4 w-full max-w-[520px]">
                 <a href={mailtoHref} className="flex-1">
-                  <GeminiButton
+                  <CtaButton
                     icon={true}
                     className="w-full justify-center h-12 text-xs md:text-sm whitespace-nowrap"
                   >
                     {isFR ? "Envoyer un email" : "Send an email"}
-                  </GeminiButton>
+                  </CtaButton>
                 </a>
 
                 <a
@@ -136,12 +136,12 @@ Best regards,`;
                   rel="noopener noreferrer"
                   className="flex-1"
                 >
-                  <GeminiButton
+                  <CtaButton
                     icon={false}
                     className="w-full justify-center h-12 text-xs md:text-sm whitespace-nowrap"
                   >
                     {isFR ? "Télécharger le CV" : "Download CV"}
-                  </GeminiButton>
+                  </CtaButton>
                 </a>
               </div>
             </div>

@@ -14,7 +14,7 @@ export function GuidePage() {
           <h1 className="text-3xl md:text-5xl font-bold text-stone-900 mb-5">Le guide Google du commerçant</h1>
           <p className="text-lg text-stone-600">Des repères simples, sourcés et applicables pour mieux présenter son établissement et demander des avis de manière saine.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           {conseilArticles.map((article) => (
             <Link key={article.slug} to={`/conseil/guide/${article.slug}`} className="group bg-white rounded-2xl p-6 border border-stone-200 shadow-sm hover:border-emerald-700 hover:shadow-md transition-all flex flex-col min-h-60">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 mb-4">{article.category} · {article.readingTime}</span>

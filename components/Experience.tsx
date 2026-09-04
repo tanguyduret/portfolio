@@ -113,7 +113,7 @@ export const Experience: React.FC = () => {
       {/* fond */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_center,#000_0%,transparent_60%)]" />
-        <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-multiply" />
+        <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_20%_20%,#000_0,transparent_1px)] bg-[length:5px_5px] mix-blend-multiply" />
       </div>
 
       {/* transition ramp */}

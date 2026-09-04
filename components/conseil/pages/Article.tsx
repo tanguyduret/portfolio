@@ -1,4 +1,4 @@
-import { ArrowLeft, BookOpen, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Clock } from 'lucide-react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { conseilArticleBySlug } from '../articles';
 
@@ -39,6 +39,15 @@ export function Article() {
             </section>
           ))}
         </div>
+
+        <section className="mt-14 rounded-2xl bg-emerald-800 p-6 md:p-8 text-white">
+          <p className="text-sm font-bold uppercase tracking-wider text-emerald-100 mb-3">Besoin d’un regard sur votre fiche Google&nbsp;?</p>
+          <h2 className="text-2xl font-bold mb-3">On échange simplement sur votre établissement.</h2>
+          <p className="leading-relaxed text-emerald-50 max-w-2xl mb-6">Dites-moi ce que vous faites et où se situe votre établissement&nbsp;: je vous réponds sous 48&nbsp;heures ouvrées, sans engagement.</p>
+          <Link to="/conseil#contact" className="inline-flex items-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-50">
+            Parler de mon établissement <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </section>
 
         <section className="mt-14 rounded-2xl bg-white border border-stone-200 p-6 md:p-8">
           <h2 className="text-xl font-bold text-stone-900 mb-4">Sources</h2>

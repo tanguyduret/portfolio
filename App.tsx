@@ -14,7 +14,6 @@ import { About } from "./components/About";
 import { Footer } from "./components/Footer";
 
 import { initLenis, destroyLenis } from "./lenis";
-import { Analytics } from "@vercel/analytics/react";
 
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -22,15 +21,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 const ConseilApp = lazy(() =>
   import("./components/conseil/ConseilApp").then(({ ConseilApp }) => ({ default: ConseilApp })),
 );
-
-declare global {
-  interface Window {
-    gsap?: any;
-    ScrollTrigger?: any;
-    MotionPathPlugin?: any;
-    lenis?: any;
-  }
-}
 
 const useSmoothScrollAndAnimation = (containerRef: React.RefObject<HTMLDivElement>) => {
   useEffect(() => {
@@ -256,7 +246,6 @@ const App: React.FC = () => {
           />
         </Routes>
       </BrowserRouter>
-      <Analytics />
     </>
   );
 };

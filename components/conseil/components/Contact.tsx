@@ -43,7 +43,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 bg-stone-100 border-t border-stone-200 text-stone-900">
+    <section id="contact" className="py-16 md:py-24 bg-stone-100 text-stone-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">On regarde ça ensemble ?</h2>
@@ -74,7 +74,7 @@ export function Contact() {
               </div>
               <h3 className="text-2xl font-bold text-stone-900 mb-3">Message bien envoyé !</h3>
               <p className="text-stone-600 text-lg max-w-md mx-auto">
-                Votre message a bien été envoyé.<br/>Je reviendrai vers vous dans les plus brefs délais pour prendre contact avec vous.
+                Votre message a bien été envoyé.<br/>Je reviendrai vers vous sous 48 heures ouvrées.
               </p>
             </motion.div>
           ) : (
@@ -142,10 +142,14 @@ export function Contact() {
               </div>
 
               {status === 'error' && (
-                <div className="p-4 bg-red-50 text-red-700 rounded-xl text-sm border border-red-100 font-medium">
+                <div role="alert" className="p-4 bg-red-50 text-red-700 rounded-xl text-sm border border-red-100 font-medium">
                   {message || "Impossible de contacter le serveur."}
                 </div>
               )}
+
+              <p className="text-xs leading-relaxed text-stone-500">
+                Les informations transmises servent uniquement à répondre à votre demande. <a href="/conseil/politique-confidentialite" className="underline underline-offset-2 hover:text-stone-700">Consulter la politique de confidentialité</a>.
+              </p>
 
               <div className="pt-4">
                 <button
