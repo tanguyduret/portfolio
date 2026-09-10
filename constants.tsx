@@ -130,7 +130,7 @@ const educationItemsFr: EducationItem[] = [
     period: '02/2026 – 08/2026',
     location: 'Buenos Aires, Argentine',
     description:
-      "Semestre d’échange à l’Université de Buenos Aires, où je développe actuellement mes compétences en stratégie, gestion des organisations et analyse économique à travers des cours ancrés dans les réalités du marché latino-américain. Cette expérience me permet également de renforcer mon adaptabilité et ma communication interculturelle au contact quotidien d’étudiants et d’enseignants internationaux.",
+      "Semestre d’échange à l’UBA — classée 1ère en Amérique latine. Cours suivis en Intelligence Artificielle, Gestion des environnements digitaux, Négociation et Innovation, entièrement en espagnol. Une expérience clé d’adaptabilité interculturelle et d’immersion académique internationale.",
   },
   {
     id: 'prepa',
@@ -163,7 +163,7 @@ const educationItemsEn: EducationItem[] = [
     period: '02/2026 – 08/2026',
     location: 'Buenos Aires, Argentina',
     description:
-      "Exchange semester at the University of Buenos Aires, where I am currently developing skills in strategy, organizational management and economic analysis through coursework rooted in real Latin American market conditions. This experience is also strengthening my adaptability and cross-cultural communication through daily collaboration with international students and professors.",
+      "Exchange semester at UBA — ranked #1 in Latin America. Coursework in Artificial Intelligence, Digital Environment Management, Negotiation and Innovation, conducted entirely in Spanish. A key experience in cross-cultural adaptability and international academic immersion.",
   },
   {
     id: 'prepa',
@@ -179,63 +179,85 @@ const educationItemsEn: EducationItem[] = [
 
 const projectsDataFr: ProjectItem[] = [
   {
-    id: 'photo',
-    tag: 'Photo · Création',
-    title: 'Photographie',
+    id: 'entrepreneurship',
+    tag: 'Entrepreneuriat',
+    title: 'D’une idée à une offre locale concrète',
     description:
-      "Explorer la lumière, le cadrage et la narration visuelle à travers la photo de paysages, d’aviation et de voyage. Pratique régulière de la prise de vue et de la retouche (Lightroom, presets personnalisés), avec une attention constante portée à la cohérence et à la qualité.",
+      "Création d’une activité indépendante dédiée à la visibilité Google des commerces locaux. J’ai identifié un besoin concret auprès d’établissements parfois peu accompagnés dans leur présence digitale, notamment hors des grands centres urbains.",
+    bullets: [
+      "Construction de l’offre : positionnement, identité, site web, parcours de prise de contact et supports physiques.",
+      "Prospection ciblée : recherche et qualification d’établissements, préparation de séquences de contact et suivi commercial.",
+      "Une approche B2B de proximité : comprendre le contexte des commerçants et proposer une réponse simple, utile et humaine.",
+    ],
+    stack: ["Positionnement", "Prospection ciblée", "Funnel", "Relation client"],
   },
   {
-    id: 'notion',
-    tag: 'Organisation · Systèmes',
-    title: 'Organisation personnelle',
+    id: 'automation',
+    tag: 'Automatisation · IA · Opérations',
+    title: 'Fiabiliser le suivi, sans alourdir la relation',
     description:
-      "J’aime structurer mon quotidien pour éviter de perdre de l’énergie sur le superflu. Création de tableaux de bord Notion pour organiser objectifs, finances et projets, afin de garder l’esprit clair et me concentrer sur ce qui compte vraiment.",
+      "Mise en place de flux simples pour organiser le suivi client de l’activité : déclenchement d’actions après certains échanges, préparation de relances et centralisation des informations utiles.",
+    bullets: [
+      "Utilisation de n8n, ChatGPT et Gemini pour structurer des routines commerciales et administratives ciblées.",
+      "Réduire les oublis, garder une vision claire des échanges et préserver du temps pour les conversations qui comptent.",
+      "Une démarche autonome, technique et pragmatique, pensée pour des usages concrets plutôt que pour l’outil lui-même.",
+    ],
+    stack: ["n8n", "ChatGPT", "Gemini", "Suivi client"],
   },
   {
     id: 'portfolio',
-    tag: 'Web · Design',
-    title: 'Portfolio & Identité Visuelle',
+    tag: 'Produit digital · Branding · UX',
+    title: 'Concevoir une présence digitale cohérente',
     description:
-      "Traiter son identité personnelle comme un produit. Un travail de précision sur la typographie, la hiérarchie de l'information et l'expérience utilisateur pour refléter une rigueur professionnelle.",
-  },
-  {
-    id: 'habits',
-    tag: 'Projet perso · Discipline',
-    title: 'Gamification - progression',
-    description:
-      "Transformer les objectifs en système de progression : points, niveaux, visualisation des efforts. Une approche ludique pour rendre la discipline plus motivante et plus durable au quotidien.",
+      "Conception et développement intégral de mon portfolio : identité visuelle, logo, charte graphique, architecture de l’information, parcours de navigation et micro-interactions.",
+    bullets: [
+      "Chaque choix répond à un objectif : présenter un profil lisible, fluide et cohérent avec mon positionnement.",
+      "Une approche de personal branding pensée comme un produit : structure, performance, expérience et évolutivité.",
+      "Un projet mené de bout en bout, de la direction artistique au développement et à l’optimisation du site.",
+    ],
+    stack: ["React", "UX/UI", "Identité visuelle", "SEO"],
   },
 ];
 
 const projectsDataEn: ProjectItem[] = [
   {
-    id: 'photo',
-    tag: 'Photo · Creative',
-    title: 'Photography',
+    id: 'entrepreneurship',
+    tag: 'Entrepreneurship',
+    title: 'From an idea to a tangible local offer',
     description:
-      "Exploring light, framing, and visual storytelling through landscape, aviation, and travel photography. Regular shooting and editing practice (Lightroom, custom presets), with a constant focus on consistency and quality.",
+      "Creation of an independent activity focused on improving local businesses’ Google visibility. I identified a concrete need among establishments that are sometimes under-supported in their digital presence, especially outside large urban areas.",
+    bullets: [
+      "Built the offer end to end: positioning, identity, website, contact journey, and physical materials.",
+      "Structured targeted outreach: business research and qualification, contact sequences, and commercial follow-up.",
+      "A local B2B approach: understand each merchant’s context and offer a simple, useful, human response.",
+    ],
+    stack: ["Positioning", "Targeted outreach", "Funnel", "Client relations"],
   },
   {
-    id: 'notion',
-    tag: 'Organization · Systems',
-    title: 'Personal Organization',
+    id: 'automation',
+    tag: 'Automation · AI · Operations',
+    title: 'Making follow-up reliable, without making it impersonal',
     description:
-      "I like structuring my daily life to avoid wasting energy on non-essential things. I build Notion dashboards to organize goals, finances, and projects, helping me stay focused on what really matters.",
+      "Built simple workflows to organize the activity’s client follow-up: triggering actions after key exchanges, preparing follow-ups, and centralizing useful information.",
+    bullets: [
+      "Used n8n, ChatGPT, and Gemini to structure targeted commercial and administrative routines.",
+      "Reduce missed follow-ups, retain a clear view of conversations, and preserve time for the interactions that matter.",
+      "An autonomous, technical, and pragmatic approach built around real use cases rather than tools for their own sake.",
+    ],
+    stack: ["n8n", "ChatGPT", "Gemini", "Client follow-up"],
   },
   {
     id: 'portfolio',
-    tag: 'Web · Design',
-    title: 'Portfolio - Visual Identity',
+    tag: 'Digital product · Branding · UX',
+    title: 'Designing a coherent digital presence',
     description:
-      "Treating personal branding as a product. A deep dive into typography, information hierarchy, and micro-interactions to create a digital experience that reflects precision and modern design standards.",
-  },
-  {
-    id: 'habits',
-    tag: 'Side Project · Discipline',
-    title: 'Gamification & Progress',
-    description:
-      "Turning goals into a progression system: points, levels, and progress visualization. A playful approach to make discipline more motivating and more sustainable over time.",
+      "End-to-end design and development of my portfolio: visual identity, logo, brand guidelines, information architecture, navigation journey, and micro-interactions.",
+    bullets: [
+      "Every choice serves a purpose: presenting a profile that is clear, fluid, and consistent with my positioning.",
+      "A personal branding approach treated like a product: structure, performance, experience, and room to evolve.",
+      "A project delivered end to end, from art direction to development and site optimization.",
+    ],
+    stack: ["React", "UX/UI", "Visual identity", "SEO"],
   },
 ];
 
@@ -270,9 +292,9 @@ const skillsDataFr: SkillItem[] = [
   },
   {
     name: "Notion Architecture",
-    description: "Création de systèmes et tableaux de bord.",
+    description: "Systèmes de suivi, centralisation et tableaux de bord.",
     sentence:
-      "Je conçois des espaces Notion propres et scalables pour piloter des projets perso : structuration, automatisation légère, et une organisation qui tient dans le temps.",
+      "Je conçois des espaces Notion pour centraliser l’information, piloter les tâches et fiabiliser les routines simples. L’objectif : moins d’éparpillement, un suivi plus clair et du temps rendu aux sujets à valeur.",
     where: ["Projets perso · Notion systems"],
   },
   {
@@ -319,7 +341,7 @@ const skillsDataFr: SkillItem[] = [
   },
   {
     name: "Langues (FR, EN, ES)",
-    description: "Français natif, Anglais C1, Espagnol B1.",
+    description: "Français natif, Anglais C1, Espagnol C1.",
     sentence:
       "Français natif, anglais C1 (très utilisé en contexte pro), et espagnol C1 grâce à une pratique régulière et une vraie immersion en Amérique du Sud.",
     where: ["Projets internationaux", "Airbus · daily English", "Expériences Amérique du Sud"],
@@ -357,9 +379,9 @@ const skillsDataEn: SkillItem[] = [
   },
   {
     name: "Notion Architecture",
-    description: "System design and dashboard creation.",
+    description: "Tracking systems, information centralization, and dashboards.",
     sentence:
-      "I design clean, scalable Notion workspaces for personal projects: structure, light automation, and systems that stay reliable over time.",
+      "I design Notion workspaces to centralize information, track tasks, and make simple routines more reliable. The goal: less fragmentation, clearer follow-up, and more time for value-creating work.",
     where: ["Personal projects · Notion systems"],
   },
   {
@@ -406,7 +428,7 @@ const skillsDataEn: SkillItem[] = [
   },
   {
     name: "Languages (FR, EN, ES)",
-    description: "French Native, English C1, Spanish B1.",
+    description: "French Native, English C1, Spanish C1.",
     sentence:
       "Native French, C1 English (used heavily in professional settings), and C1 Spanish thanks to consistent practice and real immersion in South America.",
     where: ["International exposure", "Airbus · daily English", "South America experience"],
@@ -436,14 +458,14 @@ export const translations = {
     },
     projects: {
       subtitle: "Projets",
-      title: "Des projets perso pour\ntester, créer, ajuster.",
-      description: "Photo, systèmes Notion, side projects : tout ce qui me permet d’expérimenter sans attendre un cadre “officiel”.",
+      title: "Des projets pour\nconcevoir, tester, structurer.",
+      description: "Trois initiatives concrètes à la croisée du business, des systèmes, de l’IA et de l’expérience digitale.",
       items: projectsDataFr
     },
     skills: {
       subtitle: "Skills",
       title: "Ce que je sais vraiment\nmettre en mouvement.",
-      description: "Un mélange de \"Hard Skills\" analytiques et de \"Soft Skills\" relationnels.",
+      description: "Des compétences développées sur le terrain, complétées par des systèmes, l’IA et un vrai sens du détail.",
       cta: "Cliquez pour explorer",
       key_skill: "Compétence Clé",
       items: skillsDataFr
@@ -485,14 +507,14 @@ export const translations = {
     },
     projects: {
       subtitle: "Projects",
-      title: "Personal projects to\ntest, create and adjust.",
-      description: "Photography, Notion systems, side projects: everything that allows me to experiment without an “official” framework.",
+      title: "Projects to\ndesign, test, and structure.",
+      description: "Three concrete initiatives at the intersection of business, systems, AI, and digital experience.",
       items: projectsDataEn
     },
     skills: {
       subtitle: "Skills",
       title: "What I know how\nto set in motion.",
-      description: "A mix of analytical \"Hard Skills\" and relational \"Soft Skills\".",
+      description: "Skills developed in the field, complemented by systems thinking, AI, and a genuine eye for detail.",
       cta: "Click to explore",
       key_skill: "Key Skill",
       items: skillsDataEn

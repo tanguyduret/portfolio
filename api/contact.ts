@@ -7,7 +7,6 @@ type ContactPayload = {
   activity?: string;
   location?: string;
   locationCount?: string;
-  supportNeed?: string;
   contactMethod?: string;
   message?: string;
   website?: string;
@@ -19,7 +18,6 @@ const requiredFields = [
   'company',
   'activity',
   'location',
-  'locationCount',
   'contactMethod',
 ] as const;
 
@@ -80,7 +78,6 @@ export default async function handler(req: any, res: any) {
     activity: clean(body.activity, 200),
     location: clean(body.location, 200),
     locationCount: clean(body.locationCount, 100),
-    supportNeed: clean(body.supportNeed, 200),
     contactMethod: clean(body.contactMethod, 200),
     message: clean(body.message, 2_000),
   };
@@ -113,7 +110,6 @@ export default async function handler(req: any, res: any) {
         `Activité : ${payload.activity}`,
         `Ville ou zone : ${payload.location}`,
         `Nombre d'établissements : ${payload.locationCount}`,
-        `Besoin principal : ${payload.supportNeed || 'Non précisé'}`,
         `Téléphone ou e-mail : ${payload.contactMethod}`,
         '',
         'Message :',

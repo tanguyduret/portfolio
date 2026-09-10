@@ -8,10 +8,10 @@ export function About() {
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           
           <Reveal className="w-full md:w-2/5 order-2 md:order-1">
-            <div className="aspect-[4/5] bg-stone-100 border border-stone-200 rounded-2xl relative overflow-hidden">
+            <div className="aspect-[4/3] bg-stone-100 border border-stone-200 rounded-2xl relative overflow-hidden">
               <img
-                src="https://i.ibb.co/mCfV80Jh/ed61771a-0676-4dfe-88ad-ae83a0e92391.jpg"
-                alt="Tanguy Duret"
+                src="/tanguy-conseil-boulangerie.png"
+                alt="Tanguy échange avec une commerçante dans sa boulangerie"
                 className="w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-900/20 via-transparent to-transparent" />

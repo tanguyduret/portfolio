@@ -37,7 +37,6 @@ export function PolitiqueConfidentialite() {
             <li>Type d'activité</li>
             <li>Ville ou zone de l'établissement</li>
             <li>Nombre d'établissements</li>
-            <li>Besoin principal (facultatif)</li>
             <li>Téléphone ou e-mail de contact</li>
             <li>Message (facultatif)</li>
           </ul>
@@ -65,7 +64,7 @@ export function PolitiqueConfidentialite() {
             Les données collectées sont principalement destinées à <strong>{LEGAL_INFO.publisherName}</strong> et aux prestataires techniques strictement nécessaires au fonctionnement du site et à la transmission des messages.
           </p>
           <p className="mt-4">
-            Les demandes envoyées par le formulaire sont reçues à l'adresse interne {LEGAL_INFO.internalContactEmail}. L'adresse publique de contact reste <a href={`mailto:${LEGAL_INFO.publisherEmail}`} className="text-emerald-700 hover:underline">{LEGAL_INFO.publisherEmail}</a>. Les données peuvent transiter par les services techniques nécessaires à l'acheminement des messages électroniques. Le site est hébergé par {LEGAL_INFO.hostName}.
+            Les demandes envoyées par le formulaire sont destinées à <strong>{LEGAL_INFO.publisherName}</strong>. Pour toute question, vous pouvez écrire à <a href={`mailto:${LEGAL_INFO.publisherEmail}`} className="text-emerald-700 hover:underline">{LEGAL_INFO.publisherEmail}</a>. Les données peuvent transiter par les services techniques nécessaires à l'acheminement des messages électroniques. Le site est hébergé par {LEGAL_INFO.hostName}.
           </p>
         </section>
 

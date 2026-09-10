@@ -1,4 +1,3 @@
-import { SmartphoneNfc } from 'lucide-react';
 import { Reveal } from './Reveal';
 
 export function Product() {
@@ -7,36 +6,39 @@ export function Product() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           <Reveal className="flex-1 order-2 md:order-1">
-            <div className="bg-stone-100 rounded-3xl p-8 lg:p-12 aspect-[4/5] md:aspect-auto md:h-[500px] flex flex-col items-center justify-center text-center relative overflow-hidden shadow-inner border border-stone-200">
+            <div className="bg-[#f6f1e6] rounded-3xl p-4 sm:p-6 lg:p-8 aspect-[4/5] md:aspect-auto md:h-[500px] relative overflow-hidden shadow-inner border border-stone-200">
               <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.8)_0%,_transparent_100%)]" />
-              
-              <div className="relative z-10 w-48 h-64 bg-white rounded-2xl shadow-lg border border-stone-200 flex flex-col items-center justify-between p-6 transform -rotate-6 transition-transform hover:rotate-0">
-                <div className="w-16 h-16 bg-stone-50 border border-stone-100 rounded-full flex items-center justify-center">
-                  <SmartphoneNfc className="w-8 h-8 text-emerald-800" />
-                </div>
-                <div className="text-center">
-                  <div className="text-sm font-bold text-stone-800 mb-1">Laissez un avis</div>
-                  <div className="w-24 h-24 bg-stone-50 border border-stone-100 rounded-lg mx-auto mb-2 flex items-center justify-center">
-                    {/* Placeholder for QR Code */}
-                    <div className="grid grid-cols-2 gap-1 w-16 h-16 opacity-30">
-                      <div className="bg-stone-800 rounded-tl-sm"/>
-                      <div className="bg-stone-800 rounded-tr-sm"/>
-                      <div className="bg-stone-800 rounded-bl-sm"/>
-                      <div className="bg-stone-800 rounded-br-sm"/>
-                    </div>
-                  </div>
-                  <div className="text-xs text-stone-500 font-medium">Scannez ou approchez votre téléphone</div>
-                </div>
+              <div className="relative z-10 grid h-full grid-cols-[1.15fr_0.85fr] items-center gap-1 sm:gap-4">
+                <figure className="flex h-full min-w-0 flex-col items-center justify-center py-4 sm:py-6">
+                  <img
+                    src="/plaque-google-avis.png"
+                    alt="Plaque Google avec QR code et technologie NFC pour faciliter les avis clients"
+                    className="min-h-0 w-full max-h-[82%] flex-1 object-contain drop-shadow-[0_18px_20px_rgba(41,37,30,0.14)]"
+                  />
+                  <figcaption className="mt-3 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-600 sm:text-xs">
+                    Plaque à fixer
+                  </figcaption>
+                </figure>
+                <figure className="flex h-full min-w-0 flex-col items-center justify-center py-4 sm:py-6">
+                  <img
+                    src="/support-google-avis.png"
+                    alt="Support Google à poser avec QR code et technologie NFC"
+                    className="min-h-0 w-full max-h-[88%] flex-1 object-contain drop-shadow-[0_18px_20px_rgba(41,37,30,0.14)]"
+                  />
+                  <figcaption className="mt-3 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-600 sm:text-xs">
+                    Support à poser
+                  </figcaption>
+                </figure>
               </div>
             </div>
           </Reveal>
           
           <Reveal className="flex-1 order-1 md:order-2" delay={0.08}>
             <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-6">
-              Un support simple, quand il est pertinent
+              Un support simple, inclus dans votre accompagnement
             </h2>
             <p className="text-lg text-stone-600 mb-8 leading-relaxed">
-              Lorsqu'il est utile à votre établissement, le support se pose sur le comptoir, à la caisse ou sur une table. Vos clients le voient, le scannent ou approchent leur téléphone, et accèdent facilement à votre espace Google.
+              Un support est inclus dans votre accompagnement, à choisir selon votre établissement : plaque compacte à fixer ou support à poser sur le comptoir, à la caisse ou sur une table. Vos clients le voient, le scannent ou approchent leur téléphone, et accèdent facilement à votre espace Google.
             </p>
             
             <ul className="space-y-6">
@@ -47,8 +49,8 @@ export function Product() {
               ].map((item, i) => (
                 <li key={i} className="flex">
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-emerald-700" />
+                    <div className="w-6 h-6 rounded-full bg-[#f4e8ce] flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-[#a07d3d]" />
                     </div>
                   </div>
                   <div className="ml-4">

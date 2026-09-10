@@ -28,6 +28,10 @@ export interface ProjectItem {
   tag: string;
   title: string;
   description: string;
+  impact?: string;
+  bullets?: string[];
+  stack?: string[];
+  links?: { live?: string; repo?: string };
 }
 
 export type SkillItem = {

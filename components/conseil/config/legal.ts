@@ -23,7 +23,6 @@ export const LEGAL_INFO = {
   hostAddress: "440 N Barranca Avenue #4133, Covina, CA 91723, United States",
   hostWebsite: "vercel.com",
 
-  // Dates et e-mails spécifiques
-  lastUpdated: "25 août 2026",
-  internalContactEmail: "tanguy.duret.pro@gmail.com"
+  // Date de dernière mise à jour
+  lastUpdated: "25 août 2026"
 };

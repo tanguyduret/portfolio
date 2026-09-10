@@ -4,7 +4,7 @@ import { Plus, Minus } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqs: FAQItem[] = [
     {
@@ -41,7 +41,7 @@ export function FAQ() {
     },
     {
       question: "La livraison est-elle comprise ?",
-      answer: "Pour les établissements situés dans la région de Cherbourg, la livraison est incluse. Pour une autre zone, les modalités sont précisées avec vous avant la validation de la commande."
+      answer: "Les modalités de livraison sont précisées avec vous avant la validation de la commande, selon votre établissement et le format choisi."
     },
     {
       question: "Quand et comment se fait le paiement ?",

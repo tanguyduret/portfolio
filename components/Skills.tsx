@@ -17,6 +17,23 @@ const DEFAULT_SENTENCE_FR =
 const DEFAULT_SENTENCE_EN =
   "I’ve practiced it on real, concrete topics with a simple approach: be useful, be clear, and deliver clean work.";
 
+const SKILL_ORDER = [
+  "Procurement & Négotiation",
+  "Procurement & Negotiation",
+  "Supplier Management",
+  "Data & Analytics",
+  "CRM Ecosystems",
+  "AI & Prompting",
+  "Notion Architecture",
+  "Problem Solving",
+  "Communication",
+  "Leadership & Teamwork",
+  "Adaptability",
+  "Langues (FR, EN, ES)",
+  "Languages (FR, EN, ES)",
+  "Photography & Creative",
+];
+
 export const Skills: React.FC = () => {
   const { content, language } = useLanguage();
 
@@ -41,6 +58,14 @@ export const Skills: React.FC = () => {
       (language === "fr" ? DEFAULT_WHERE_FR : DEFAULT_WHERE_EN)
     );
   }, [activeSkillData, language]);
+
+  const orderedSkills = useMemo(
+    () =>
+      [...content.skills.items].sort(
+        (a: any, b: any) => SKILL_ORDER.indexOf(a.name) - SKILL_ORDER.indexOf(b.name),
+      ),
+    [content.skills.items],
+  );
 
   // ✅ float classes (inchangé)
   const getFloatClass = (index: number) => {
@@ -122,7 +147,7 @@ export const Skills: React.FC = () => {
       {/* Cloud */}
       <div className="relative max-w-[1400px] mx-auto px-4 md:px-8 pb-12 z-30">
         <div className="reveal-section skills-cloud relative flex flex-wrap gap-4 md:gap-6 justify-center will-change-transform transform-gpu">
-          {content.skills.items.map((skill: any, index: number) => {
+          {orderedSkills.map((skill: any, index: number) => {
             const isActive = skill.name === activeSkillName;
 
             return (

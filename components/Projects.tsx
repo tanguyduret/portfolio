@@ -1,19 +1,7 @@
 // components/Projects.tsx
 import React, { useEffect, useRef } from "react";
-import { ArrowUpRight, Github } from "lucide-react";
 import { useLanguage } from "../LanguageContext";
-
-type ProjectItem = {
-  id: string;
-  tag: string;
-  title: string;
-  description: string;
-
-  impact?: string;
-  bullets?: string[];
-  stack?: string[];
-  links?: { live?: string; repo?: string };
-};
+import type { ProjectItem } from "../types";
 
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 
@@ -83,58 +71,7 @@ export const Projects: React.FC = () => {
     };
   }, []);
 
-  // 2) Parallax columns (desktop only)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const gsap = (window as any).gsap;
-    const ScrollTrigger = (window as any).ScrollTrigger;
-    if (!gsap || !ScrollTrigger) return;
-
-    const mm = ScrollTrigger.matchMedia({
-      "(min-width: 768px)": () => {
-        const wrappers = gsap.utils.toArray(".project-card-wrapper") as HTMLElement[];
-        if (!wrappers.length) return;
-
-        const leftColumnItems = wrappers.filter((_, i) => i % 2 === 0);
-        const rightColumnItems = wrappers.filter((_, i) => i % 2 !== 0);
-
-        gsap.to(leftColumnItems, {
-          yPercent: -18,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#projects",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-
-        gsap.fromTo(
-          rightColumnItems,
-          { yPercent: -30 },
-          {
-            yPercent: 30,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#projects",
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      },
-
-      "(max-width: 767px)": () => {
-        gsap.set(".project-card-wrapper", { clearProps: "transform" });
-      },
-    });
-
-    return () => mm.revert();
-  }, []);
-
-  // 3) Progress Rail (scroll-driven, reversible, no “stuck” states)
+  // 2) Progress Rail (scroll-driven, reversible, no “stuck” states)
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -225,7 +162,7 @@ export const Projects: React.FC = () => {
           style={{ boxShadow: "0 0 16px rgba(215,195,137,0.25)" }}
         />
         <div className="absolute inset-0 flex flex-col justify-between py-2">
-          {Array.from({ length: 7 }).map((_, i) => (
+          {Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="w-3 h-[1px] bg-black/12 translate-x-2" />
           ))}
         </div>
@@ -261,20 +198,20 @@ export const Projects: React.FC = () => {
             ) : null}
           </div>
 
-          <div className="grid gap-6 md:gap-8 md:grid-cols-2">
-            {items.map((project) => {
-              const hasLinks = Boolean(project.links?.live || project.links?.repo);
+          <div className="space-y-6 md:space-y-8">
+            {items.map((project, index) => {
+              const alignment = ["md:mr-auto", "md:ml-auto", "md:mr-auto md:translate-x-10"][index] ?? "md:mx-auto";
 
               return (
                 <div
                   key={project.id}
-                  className="project-card-wrapper perspective-[1200px] will-change-transform"
+                  className={`project-card-wrapper perspective-[1200px] will-change-transform w-full md:w-[92%] ${alignment}`}
                 >
                   <article
                     className="
-                      project-card relative h-full
+                      project-card relative h-full md:min-h-[350px]
                       rounded-2xl bg-ivory/95 border border-black/5
-                      shadow-md p-6 md:p-7
+                      shadow-md p-7 md:p-9
                       flex flex-col gap-4
                       transition-all duration-300 ease-out
                       hover:-translate-y-1 hover:shadow-xl
@@ -340,49 +277,7 @@ export const Projects: React.FC = () => {
                       </div>
                     ) : null}
 
-                    {/* Links row or clean spacer (no repeated "case study" per card) */}
-                    {hasLinks ? (
-                      <div className="mt-auto pt-4 border-t border-black/5 flex items-center justify-between">
-                        <span className="text-[0.7rem] font-mono tracking-[0.2em] uppercase text-steel/70">
-                          View
-                        </span>
-                        <div className="flex items-center gap-3">
-                          {project.links?.repo ? (
-                            <a
-                              href={project.links.repo}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="
-                                inline-flex items-center gap-2
-                                text-[0.7rem] font-mono tracking-[0.2em] uppercase
-                                text-charcoal/70 hover:text-accent transition-colors
-                              "
-                            >
-                              <Github className="w-4 h-4" />
-                              Repo
-                            </a>
-                          ) : null}
-
-                          {project.links?.live ? (
-                            <a
-                              href={project.links.live}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="
-                                inline-flex items-center gap-2
-                                text-[0.7rem] font-mono tracking-[0.2em] uppercase
-                                text-charcoal/70 hover:text-accent transition-colors
-                              "
-                            >
-                              <ArrowUpRight className="w-4 h-4" />
-                              Live
-                            </a>
-                          ) : null}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="mt-auto pt-4 border-t border-black/5" />
-                    )}
+                    <div className="mt-auto pt-4 border-t border-black/5" />
 
                     {/* micro glow on hover (soft) */}
                     <div className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500">
@@ -394,10 +289,6 @@ export const Projects: React.FC = () => {
             })}
           </div>
 
-          {/* ✅ Single, discreet note (instead of Tip + repeated per card) */}
-          <div className="mt-10 text-[0.7rem] font-mono tracking-[0.25em] uppercase text-steel/55">
-            Case studies available on request
-          </div>
         </div>
       </div>
     </section>

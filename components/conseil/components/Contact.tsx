@@ -108,27 +108,12 @@ export function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="location" className="block text-sm font-bold text-stone-800 mb-2">Ville ou zone de l'établissement</label>
-                  <input required type="text" id="location" name="location" placeholder="Cherbourg, Valognes…" className="w-full rounded-xl border border-stone-300 px-4 py-3.5 focus:ring-2 focus:ring-emerald-700 focus:border-emerald-700 outline-none transition-shadow text-base placeholder-stone-400 bg-stone-50 hover:bg-white" />
+                  <input required type="text" id="location" name="location" className="w-full rounded-xl border border-stone-300 px-4 py-3.5 focus:ring-2 focus:ring-emerald-700 focus:border-emerald-700 outline-none transition-shadow text-base bg-stone-50 hover:bg-white" />
                 </div>
                 <div>
-                  <label htmlFor="locationCount" className="block text-sm font-bold text-stone-800 mb-2">Nombre d'établissements</label>
-                  <select required id="locationCount" name="locationCount" defaultValue="" className="w-full rounded-xl border border-stone-300 px-4 py-3.5 focus:ring-2 focus:ring-emerald-700 focus:border-emerald-700 outline-none transition-shadow text-base bg-stone-50 hover:bg-white">
-                    <option value="" disabled>Sélectionnez</option>
-                    <option value="1">1 établissement</option>
-                    <option value="2 à 5">2 à 5 établissements</option>
-                    <option value="6 ou plus">6 établissements ou plus</option>
-                  </select>
+                  <label htmlFor="locationCount" className="block text-sm font-bold text-stone-800 mb-2">Nombre d'établissements <span className="text-stone-400 font-normal">(facultatif)</span></label>
+                  <input type="text" id="locationCount" name="locationCount" placeholder="Ex. 1, 2 ou 5+" className="w-full rounded-xl border border-stone-300 px-4 py-3.5 focus:ring-2 focus:ring-emerald-700 focus:border-emerald-700 outline-none transition-shadow text-base placeholder-stone-400 bg-stone-50 hover:bg-white" />
                 </div>
-              </div>
-
-              <div>
-                <label htmlFor="supportNeed" className="block text-sm font-bold text-stone-800 mb-2">Besoin principal <span className="text-stone-400 font-normal">(facultatif)</span></label>
-                <select id="supportNeed" name="supportNeed" defaultValue="" className="w-full rounded-xl border border-stone-300 px-4 py-3.5 focus:ring-2 focus:ring-emerald-700 focus:border-emerald-700 outline-none transition-shadow text-base bg-stone-50 hover:bg-white">
-                  <option value="">Je ne sais pas encore</option>
-                  <option value="Un support QR/NFC">Un support QR/NFC</option>
-                  <option value="Plusieurs supports">Plusieurs supports</option>
-                  <option value="Une offre sur mesure">Une offre sur mesure</option>
-                </select>
               </div>
               
               <div>

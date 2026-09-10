@@ -22,79 +22,18 @@ const ConseilApp = lazy(() =>
   import("./components/conseil/ConseilApp").then(({ ConseilApp }) => ({ default: ConseilApp })),
 );
 
-const useSmoothScrollAndAnimation = (containerRef: React.RefObject<HTMLDivElement>) => {
+const useSmoothScrollAndAnimation = (
+  containerRef: React.RefObject<HTMLDivElement>,
+  isReady: boolean,
+) => {
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !isReady || !containerRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
       /* --------------------------------
-       * 1) PROJECTS : parallaxe colonnes
-       * -------------------------------- */
-      const projectsSection = document.querySelector("#projects");
-      if (projectsSection) {
-        ScrollTrigger.matchMedia({
-          "(min-width: 768px)": () => {
-            const allWrappers = gsap.utils.toArray<HTMLElement>(".project-card-wrapper");
-            if (!allWrappers.length) return;
-
-            const leftColumnItems = allWrappers.filter((_: any, i: number) => i % 2 === 0);
-            const rightColumnItems = allWrappers.filter((_: any, i: number) => i % 2 !== 0);
-
-            gsap.to(leftColumnItems, {
-              yPercent: -18,
-              ease: "none",
-              scrollTrigger: {
-                trigger: projectsSection,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            });
-
-            gsap.fromTo(
-              rightColumnItems,
-              { yPercent: -30 },
-              {
-                yPercent: 30,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: projectsSection,
-                  start: "top bottom",
-                  end: "bottom top",
-                  scrub: true,
-                },
-              }
-            );
-          },
-
-          "(max-width: 767px)": () => {
-            gsap.set(".project-card-wrapper", { clearProps: "all" });
-          },
-        });
-      }
-
-      /* --------------------------------
-       * 2) SKILLS : flottement texte / nuage
-       * -------------------------------- */
-      const skillsSection = document.querySelector("#skills");
-      if (skillsSection) {
-        const skillsTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: skillsSection,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.5,
-          },
-        });
-
-        skillsTl.to(".skills-text-content", { y: -100, ease: "linear" }, 0);
-        skillsTl.fromTo(".skills-cloud", { y: -50 }, { y: 200, ease: "linear" }, 0);
-      }
-
-      /* --------------------------------
-       * 3) REVEAL générique (ignore experience + transition)
+       * 1) REVEAL générique (ignore experience + transition)
        * -------------------------------- */
       gsap.utils.toArray<HTMLElement>(".reveal-section").forEach((section) => {
         if (section.closest("#experience")) return;
@@ -114,7 +53,7 @@ const useSmoothScrollAndAnimation = (containerRef: React.RefObject<HTMLDivElemen
       });
 
       /* --------------------------------
-       * 4) Scroll indicator (Hero)
+       * 2) Scroll indicator (Hero)
        * -------------------------------- */
       const scrollIndicator = document.querySelector(".scroll-indicator");
       if (scrollIndicator) {
@@ -127,30 +66,10 @@ const useSmoothScrollAndAnimation = (containerRef: React.RefObject<HTMLDivElemen
         });
       }
 
-      /* --------------------------------
-       * 5) ABOUT : parallaxe photo
-       * -------------------------------- */
-      const aboutSection = document.querySelector("#about");
-      if (aboutSection) {
-        gsap.fromTo(
-          ".about-photo",
-          { y: 70 },
-          {
-            y: -70,
-            ease: "none",
-            scrollTrigger: {
-              trigger: aboutSection,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      }
-    }, containerRef);
+    }, containerRef.current);
 
     return () => ctx.revert();
-  }, [containerRef]);
+  }, [containerRef, isReady]);
 };
 
 const AppContent: React.FC = () => {
@@ -186,7 +105,7 @@ const AppContent: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  useSmoothScrollAndAnimation(containerRef);
+  useSmoothScrollAndAnimation(containerRef, isReady);
 
   if (!isReady) {
     return (
