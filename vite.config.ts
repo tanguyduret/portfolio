@@ -5,8 +5,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
     server: {
-      port: 3000,
-      host: '0.0.0.0',
+      port: 3011,
+      host: '127.0.0.1',
+      strictPort: true,
+      headers: { 'X-Robots-Tag': 'noindex, nofollow', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin' },
     },
 
     // 👇 IMPORTANT : Tailwind DOIT être avant React
@@ -26,6 +28,7 @@ export default defineConfig({
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, 'index.html'),
+          es: path.resolve(__dirname, 'es/index.html'),
           en: path.resolve(__dirname, 'en/index.html'),
           conseil: path.resolve(__dirname, 'conseil/index.html'),
           conseilMentionsLegales: path.resolve(__dirname, 'conseil/mentions-legales.html'),

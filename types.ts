@@ -1,10 +1,11 @@
-export type Language = 'fr' | 'en';
+export type Language = 'fr' | 'en' | 'es';
 
 import type Lenis from 'lenis';
 
 // types.ts
 export interface ExperienceItem {
   id: string;
+  contribution?: string;
   chips?: string[];
   role?: string;
   company?: string;
@@ -21,6 +22,7 @@ export interface EducationItem {
   period: string;
   location: string;
   description: string;
+  ranking?: { label: string; source: string; url: string };
 }
 
 export interface ProjectItem {

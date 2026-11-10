@@ -21,6 +21,7 @@ function detectInitialLanguage(): Language {
 
   // 1) URL (SEO-first)
   const path = window.location.pathname || '/';
+  if (/^\/es(?:\/|$)/.test(path)) return 'es';
   if (path.startsWith('/en')) return 'en';
 
   // 2) fallback: window.__APP_LANG__ si tu le gardes dans index.html
