@@ -13,7 +13,7 @@ const experienceItemsFr: ExperienceItem[] = [
     "date": "08/2025 - 02/2026",
     "location": "Bordeaux",
     "bullets": [
-      "Analyse des performances commerciales, fidélisation et réactivation des comptes.",
+      "Analyse des performances, négociation avec les propriétaires, fidélisation et réactivation des comptes.",
       "Pilotage du projet Google Business Profile : plus de 200 fiches créées ou configurées directement.",
       "Traitement de plus de 500 dossiers de vérification d’identité (KYC) avec les équipes internes et les prestataires de paiement."
     ],
@@ -31,10 +31,10 @@ const experienceItemsFr: ExperienceItem[] = [
     "location": "Toulouse",
     "bullets": [
       "Relations fournisseurs en France, en Italie et en Chine : suivi des performances et des livraisons.",
-      "Calcul, rédaction et suivi des réclamations fournisseurs. Préparation des revues de performance et des réunions avec les fournisseurs et la direction Airbus.",
-      "Consolidation des indicateurs, ateliers et visites de lignes d’assemblage."
+      "Calcul, rédaction et suivi des réclamations. Préparation des revues de performance et des réunions entre fournisseurs et direction Airbus.",
+      "Sur les dossiers que je gérais en autonomie, je travaillais avec les équipes achats et contrats. Pour les négociations complexes, je préparais et défendais nos arguments, puis expliquais les résultats aux équipes programmes. Consolidation des indicateurs, ateliers et visites de lignes d’assemblage."
     ],
-    "contribution": "J’ai rédigé des amendements contractuels, préparé les négociations et y ai participé avec l’équipe de gestion des contrats."
+    "contribution": "J’ai rédigé des avenants, négocié en binôme avec un acheteur expérimenté et géré des réclamations fournisseurs. J’ai présenté les résultats aux équipes programmes."
   },
   {
     "id": "ams",
@@ -82,7 +82,7 @@ const experienceItemsEn: ExperienceItem[] = [
     "date": "08/2025 - 02/2026",
     "location": "Bordeaux",
     "bullets": [
-      "Tracked commercial performance, retention and account reactivation.",
+      "Analysed account performance, negotiated with property owners and worked to retain partners and reactivate accounts.",
       "Led the Google Business Profile project and personally created or configured over 200 profiles.",
       "Processed over 500 identity verification (KYC) cases with internal teams and payment providers."
     ],
@@ -100,10 +100,10 @@ const experienceItemsEn: ExperienceItem[] = [
     "location": "Toulouse",
     "bullets": [
       "Managed supplier relationships in France, Italy and China, tracking performance and deliveries.",
-      "Calculated, drafted and tracked supplier claims. Prepared performance reviews and executive meetings with suppliers and Airbus management.",
-      "Consolidated indicators and joined workshops and assembly-line visits."
+      "Calculated, drafted and followed up supplier claims. Prepared supplier performance reviews and executive meetings with Airbus management.",
+      "I handled selected supplier files independently, working with procurement and contract management. In complex negotiations, I developed and defended our position and explained the outcome to programme teams. Consolidated indicators and joined workshops and assembly-line visits."
     ],
-    "contribution": "I drafted contract amendments and helped prepare and conduct supplier negotiations with the contract management team."
+    "contribution": "I drafted contract amendments, negotiated alongside an experienced buyer and handled supplier claims. I presented the outcomes to the programme teams."
   },
   {
     "id": "ams",
@@ -533,7 +533,7 @@ export const translations = {
         "date": "08/2025 - 02/2026",
         "location": "Burdeos",
         "bullets": [
-          "Analicé indicadores comerciales y trabajé en la fidelización y reactivación de cuentas.",
+          "Analicé el desempeño de las cuentas, negocié con los propietarios y trabajé en la fidelización y reactivación de cuentas.",
           "Creé o configuré directamente más de 200 perfiles de empresa en Google.",
           "Tramité más de 500 expedientes de verificación de identidad (KYC) con equipos internos y proveedores de servicios de pago."
         ],
@@ -551,10 +551,10 @@ export const translations = {
         "location": "Toulouse",
         "bullets": [
           "Gestioné relaciones con proveedores de Francia, Italia y China y di seguimiento al desempeño y a las entregas.",
-          "Calculé los importes de los reclamos, los redacté y les di seguimiento. Preparé evaluaciones de desempeño y reuniones entre los proveedores y la dirección de Airbus.",
-          "Consolidé indicadores y participé en talleres y visitas a líneas de ensamblaje."
+          "Calculé, redacté y di seguimiento a reclamos. Preparé revisiones del desempeño de los proveedores y reuniones con la dirección de Airbus.",
+          "Gestioné algunos casos de forma autónoma con apoyo de compras y contratos. En negociaciones complejas, preparé y defendí nuestra posición y expliqué los resultados a los equipos de programas. Consolidé indicadores y participé en talleres y visitas a líneas de ensamblaje."
         ],
-        "contribution": "Redacté modificaciones contractuales y participé tanto en la preparación como en las negociaciones con proveedores junto con el equipo de contratos."
+        "contribution": "Redacté modificaciones contractuales, negocié junto con un comprador experimentado y gestioné reclamos a proveedores. Presenté los resultados a los equipos de programas."
       },
       {
         "id": "ams",
