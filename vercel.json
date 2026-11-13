@@ -60,7 +60,7 @@
       "destination": "/conseil/guide/index.html"
     },
     {
-      "source": "/conseil/guide/:slug",
+      "source": "/conseil/guide/:slug(ce-qu-il-ne-faut-pas-faire|demander-un-avis-correctement|pourquoi-les-avis-comptent|repondre-aux-avis-google)",
       "destination": "/conseil/guide/:slug.html"
     },
     {
@@ -77,10 +77,6 @@
     },
     {
       "source": "/conseil/",
-      "destination": "/conseil/index.html"
-    },
-    {
-      "source": "/conseil/:path*",
       "destination": "/conseil/index.html"
     }
   ]

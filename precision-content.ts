@@ -26,16 +26,16 @@ export const precisionContent = {
     "dates": "Sept. 2026 - 30 sept. 2027 · Alternance",
     "missions": [
       [
-        "Réparation sur site · On-Site Services",
-        "Je pilote le volet achats d’un projet de réparation de composants sur site pour éviter les envois à l’étranger et réduire les délais et les coûts logistiques. J’anime les réunions avec le fournisseur américain et coordonne les échanges entre ingénierie, analyse des coûts et opérations. Leurs estimations alimentent mon analyse du business case."
+        "Projet international de réparation sur site",
+        "Je pilote le volet achats d’un projet international visant à réparer des composants sur site pour réduire les délais et les coûts logistiques. J’anime les réunions avec un fournisseur international et les équipes techniques. J’analyse leurs estimations pour contribuer à l’évaluation économique du projet."
       ],
       [
         "Approvisionnements & contrats",
-        "Je suis les livraisons et les risques avec les équipes qualité et logistique. À partir des contrats et des données opérationnelles, je chiffre, rédige et suis les réclamations, les transmets selon le dossier et examine celles reçues. J’en rends compte à la direction. Je prépare les avenants tarifaires, les Contract Validation Forms (CVF) et les stratégies de négociation, puis participe aux négociations."
+        "Je suis les livraisons et les risques d’approvisionnement. J’analyse les contrats et les données opérationnelles pour chiffrer, rédiger et suivre les réclamations fournisseurs. J’examine aussi les réclamations reçues et rends compte des dossiers à la direction. Je prépare des avenants sur les prix ou d’autres clauses, leurs dossiers de validation et nos positions de négociation. Je participe ensuite aux négociations."
       ],
       [
-        "Exigences fournisseurs · ASR",
-        "Je pilote le suivi des Airbus Supplier Requirements (ASR) auprès de deux fournisseurs. J’anime les réunions hebdomadaires et coordonne les actions de conformité."
+        "Coordination des exigences fournisseurs",
+        "J’anime les réunions hebdomadaires avec deux fournisseurs pour suivre le respect des exigences Airbus et coordonner les actions à mener avec les équipes internes."
       ]
     ],
     "earlier": "Mes expériences précédentes",
@@ -159,16 +159,16 @@ export const precisionContent = {
     "dates": "Sept. 2026 - 30 Sept. 2027 · Apprenticeship",
     "missions": [
       [
-        "On-site repairs · On-Site Services",
-        "I lead procurement on a project to repair components on site instead of shipping them abroad. The aim is to shorten turnaround times and reduce logistics costs. I chair meetings with our US supplier, coordinate engineering, costing and operations, and interpret their estimates to help build the business case."
+        "International on-site repair project",
+        "I lead procurement on an international project to repair components on site. The aim is to shorten turnaround times and reduce logistics costs. I chair meetings with an international supplier and our technical teams, and interpret their estimates to help assess the business case."
       ],
       [
         "Supply operations & contracts",
-        "I track deliveries and supply risks with quality and logistics. I use contract and operating data to calculate, draft and follow up supplier claims, submit them when required, review incoming claims and brief management. I prepare pricing amendments, Contract Validation Forms (CVF) and negotiation strategies, and take part in commercial negotiations."
+        "I monitor deliveries and supply risks. I use contract and operational data to calculate, draft and follow up supplier claims. I also review incoming claims and brief management. I draft amendments covering prices or other contract terms, prepare the approval documents and develop our negotiating positions. I take part in the negotiations."
       ],
       [
-        "Supplier requirements · ASR",
-        "I oversee follow-up on Airbus Supplier Requirements (ASR) with two suppliers, chair weekly meetings and coordinate actions to meet the requirements."
+        "Coordinating supplier requirements",
+        "I chair weekly meetings with two suppliers to review how they are meeting Airbus requirements and coordinate follow-up actions with our internal teams."
       ]
     ],
     "earlier": "Previous experience",
@@ -292,16 +292,16 @@ export const precisionContent = {
     "dates": "Sept. 2026 - 30 sept. 2027 · Formación dual",
     "missions": [
       [
-        "Reparación en planta · On-Site Services",
-        "Estoy a cargo de las compras en un proyecto para reparar componentes en planta y evitar su envío al extranjero. El objetivo es reducir plazos y costos logísticos. Dirijo las reuniones con el proveedor estadounidense, coordino a los equipos de ingeniería, costos y operaciones e interpreto sus estimaciones para evaluar la viabilidad económica del proyecto."
+        "Proyecto internacional de reparación en planta",
+        "Lidero las compras de un proyecto internacional que busca reparar componentes en planta para reducir los plazos y los costos logísticos. Dirijo reuniones con un proveedor internacional y los equipos técnicos. Analizo sus estimaciones para contribuir a la evaluación económica del proyecto."
       ],
       [
         "Abastecimiento y contratos",
-        "Doy seguimiento a las entregas y a los riesgos con calidad y logística. Analizo contratos y datos operativos para calcular, redactar y dar seguimiento a los reclamos. Los envío cuando corresponde, evalúo los que recibimos e informo a la dirección. Preparo modificaciones de precios, Contract Validation Forms (CVF) y estrategias de negociación, y participo en las negociaciones comerciales."
+        "Doy seguimiento a las entregas y a los riesgos de abastecimiento. Analizo contratos y datos operativos para calcular, redactar y dar seguimiento a los reclamos a proveedores. También reviso los reclamos recibidos e informo a la dirección. Preparo modificaciones de precios u otras cláusulas, la documentación para su aprobación y nuestra posición para negociar. Participo en las negociaciones."
       ],
       [
-        "Requisitos de proveedores · ASR",
-        "Estoy a cargo del seguimiento de los Airbus Supplier Requirements (ASR) con dos proveedores. Dirijo las reuniones semanales y coordino las acciones de cumplimiento."
+        "Coordinación de requisitos con proveedores",
+        "Dirijo reuniones semanales con dos proveedores para revisar el cumplimiento de los requisitos de Airbus y coordinar las acciones pendientes con los equipos internos."
       ]
     ],
     "earlier": "Experiencias anteriores",

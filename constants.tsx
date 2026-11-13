@@ -30,7 +30,7 @@ const experienceItemsFr: ExperienceItem[] = [
     "date": "01/2025 - 08/2025",
     "location": "Toulouse",
     "bullets": [
-      "Relations fournisseurs en France, en Italie et en Chine : suivi des performances et des livraisons.",
+      "Suivi des livraisons et de la performance de fournisseurs internationaux.",
       "Calcul, rédaction et suivi des réclamations. Préparation des revues de performance et des réunions entre fournisseurs et direction Airbus.",
       "Sur les dossiers que je gérais en autonomie, je travaillais avec les équipes achats et contrats. Pour les négociations complexes, je préparais et défendais nos arguments, puis expliquais les résultats aux équipes programmes. Consolidation des indicateurs, ateliers et visites de lignes d’assemblage."
     ],
@@ -99,7 +99,7 @@ const experienceItemsEn: ExperienceItem[] = [
     "date": "01/2025 - 08/2025",
     "location": "Toulouse",
     "bullets": [
-      "Managed supplier relationships in France, Italy and China, tracking performance and deliveries.",
+      "Managed relationships with international suppliers and tracked their deliveries and performance.",
       "Calculated, drafted and followed up supplier claims. Prepared supplier performance reviews and executive meetings with Airbus management.",
       "I handled selected supplier files independently, working with procurement and contract management. In complex negotiations, I developed and defended our position and explained the outcome to programme teams. Consolidated indicators and joined workshops and assembly-line visits."
     ],
@@ -550,7 +550,7 @@ export const translations = {
         "date": "01/2025 - 08/2025",
         "location": "Toulouse",
         "bullets": [
-          "Gestioné relaciones con proveedores de Francia, Italia y China y di seguimiento al desempeño y a las entregas.",
+          "Gestioné la relación con proveedores internacionales y di seguimiento a sus entregas y desempeño.",
           "Calculé, redacté y di seguimiento a reclamos. Preparé revisiones del desempeño de los proveedores y reuniones con la dirección de Airbus.",
           "Gestioné algunos casos de forma autónoma con apoyo de compras y contratos. En negociaciones complejas, preparé y defendí nuestra posición y expliqué los resultados a los equipos de programas. Consolidé indicadores y participé en talleres y visitas a líneas de ensamblaje."
         ],
