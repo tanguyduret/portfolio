@@ -69,23 +69,23 @@ export const precisionContent = {
     "groups": [
       [
         "Achats & fournisseurs",
-        "Suivi opérationnel · Contrats · Coordination",
-        "Airbus Seats → Cockpit Systems"
+        "Contrats · Négociation · Gestion fournisseurs",
+        "Chez Airbus, j’ai travaillé sur les contrats, les réclamations et les négociations fournisseurs, avec aujourd’hui le pilotage du volet achats d’un projet industriel international."
       ],
       [
         "Analyse & systèmes",
-        "Excel · Power BI · n8n · IA générative",
-        "Chez Holidu, je m’appuyais sur les indicateurs de visibilité et de conversion pour préparer mes échanges avec les propriétaires."
+        "Excel · Analyse de données · Automatisation",
+        "Des analyses contractuelles chez Airbus aux indicateurs commerciaux chez Holidu, j’utilise la donnée pour éclairer les décisions et structurer le suivi opérationnel."
       ],
       [
         "Relation & projets",
-        "Écoute · Suivi commercial · Gestion de projet",
-        "Chez AMS Conseil, j’ai coordonné des équipes allant jusqu’à 18 personnes, du budget à la restitution client."
+        "Relation client · Coordination · Gestion de projet",
+        "80 partenaires suivis chez Holidu, un projet Google à plus grande échelle et des équipes allant jusqu’à 18 personnes encadrées chez AMS Conseil."
       ],
       [
         "Langues & international",
         "Français natif · Anglais C1 · Espagnol C1",
-        "Immersion académique à Buenos Aires"
+        "Chez Airbus, je travaille chaque jour en anglais avec des équipes et fournisseurs en Europe, en Asie et en Amérique du Nord. Mon échange universitaire à Buenos Aires m’a appris à m’adapter à d’autres façons de travailler."
       ]
     ],
     "education": "Une base solide. Un regard ouvert.",
@@ -202,23 +202,23 @@ export const precisionContent = {
     "groups": [
       [
         "Procurement & suppliers",
-        "Operational follow-up · Contracts · Coordination",
-        "Airbus Seats → Cockpit Systems"
+        "Contracts · Negotiation · Supplier management",
+        "At Airbus, I’ve worked on contracts, claims and supplier negotiations. I now lead procurement for an international industrial project."
       ],
       [
         "Analysis & systems",
-        "Excel · Power BI · n8n · Generative AI",
-        "At Holidu I used visibility and conversion data to prepare conversations with property owners."
+        "Excel · Data analysis · Automation",
+        "I use data to guide decisions and track operations, drawing on experience analysing contracts at Airbus and commercial performance at Holidu."
       ],
       [
-        "Relationships & projects",
-        "Listening · Commercial follow-up · Project management",
-        "At AMS Conseil I coordinated teams of up to 18, from budgeting through to the client presentation."
+        "Client relations & projects",
+        "Client relations · Coordination · Project management",
+        "At Holidu, I managed 80 partner accounts and led a wider Google visibility project. At AMS Conseil, I led teams of up to 18 people."
       ],
       [
-        "Languages & international",
+        "Languages & international experience",
         "Native French · C1 English · C1 Spanish",
-        "Academic immersion in Buenos Aires"
+        "At Airbus, I use English daily with teams and suppliers across Europe, Asia and North America. My university exchange in Buenos Aires helped me adapt with confidence to different ways of working."
       ]
     ],
     "education": "A solid foundation. An open mind.",
@@ -335,23 +335,23 @@ export const precisionContent = {
     "groups": [
       [
         "Compras y proveedores",
-        "Abastecimiento · Contratos · Coordinación",
-        "De los asientos de aeronaves a los sistemas de cabina de mando en Airbus."
+        "Contratos · Negociación · Gestión de proveedores",
+        "En Airbus he trabajado en contratos, reclamos y negociaciones con proveedores. Hoy lidero las compras de un proyecto industrial internacional."
       ],
       [
         "Análisis y sistemas",
-        "Excel · Looker · n8n · IA generativa",
-        "En Holidu analizaba los indicadores de visibilidad y conversión antes de hablar con los propietarios."
+        "Excel · Análisis de datos · Automatización",
+        "Tanto al analizar contratos en Airbus como al evaluar indicadores comerciales en Holidu, uso datos para orientar decisiones y dar seguimiento a las operaciones."
       ],
       [
-        "Desarrollo comercial y proyectos",
-        "Cuentas · Prospección · Gestión de proyectos",
-        "En AMS Conseil coordiné equipos de hasta 18 personas, desde el presupuesto hasta la presentación de resultados."
+        "Relación con clientes y proyectos",
+        "Relación con clientes · Coordinación · Gestión de proyectos",
+        "En Holidu gestioné una cartera de 80 socios y lideré un proyecto de visibilidad en Google de mayor alcance. En AMS Conseil dirigí equipos de hasta 18 personas."
       ],
       [
         "Idiomas y experiencia internacional",
         "Francés nativo · Inglés C1 · Español C1",
-        "Intercambio académico en Buenos Aires."
+        "En Airbus trabajo a diario en inglés con equipos y proveedores de Europa, Asia y América del Norte. Mi intercambio universitario en Buenos Aires me ayudó a adaptarme con confianza a otras formas de trabajar."
       ]
     ],
     "education": "Formación y perspectiva internacional.",
