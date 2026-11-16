@@ -112,10 +112,6 @@ export function PrecisionPortfolio() {
       </header>
       <main id="main">
         <section id="top" className="pr-hero pr-wrap">
-          <div className="pr-status">
-            <i />
-            {t.current}
-          </div>
           <p className="pr-eyebrow">{t.role}</p>
           <h1>
             <span className="pr-name">{t.title[0]}</span>
@@ -399,7 +395,6 @@ export function PrecisionPortfolio() {
               </div>
             </div>
             <div className="pr-contact-note">
-              <p>{t.recommendations}</p>
               <a href={"mailto:tanguy.duret@kedgebs.com?subject="+encodeURIComponent(t.labels[5])}>
                 {t.references}
                 <ArrowUpRight size={14} />

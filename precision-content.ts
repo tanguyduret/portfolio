@@ -7,7 +7,6 @@ export const precisionContent = {
       "Contact"
     ],
     "role": "Achats · Opérations · Data & IA",
-    "current": "Disponible pour un V.I.E. dès octobre 2027",
     "title": [
       "Tanguy Duret.",
       "Business.",
@@ -26,16 +25,16 @@ export const precisionContent = {
     "dates": "Sept. 2026 - 30 sept. 2027 · Alternance",
     "missions": [
       [
-        "Projet international de réparation sur site",
-        "Je pilote le volet achats d’un projet international visant à réparer des composants sur site pour réduire les délais et les coûts logistiques. J’anime les réunions avec un fournisseur international et les équipes techniques. J’analyse leurs estimations pour contribuer à l’évaluation économique du projet."
+        "Achats & gestion fournisseurs",
+        "Participation aux activités achats d’un périmètre industriel international, en lien avec les fournisseurs et différentes fonctions internes."
       ],
       [
-        "Approvisionnements & contrats",
-        "Je suis les livraisons et les risques d’approvisionnement. J’analyse les contrats et les données opérationnelles pour chiffrer, rédiger et suivre les réclamations fournisseurs. J’examine aussi les réclamations reçues et rends compte des dossiers à la direction. Je prépare des avenants sur les prix ou d’autres clauses, leurs dossiers de validation et nos positions de négociation. Je participe ensuite aux négociations."
+        "Contrats & négociations",
+        "Contribution au suivi des contrats, à la préparation de dossiers contractuels et aux échanges commerciaux avec les fournisseurs."
       ],
       [
-        "Coordination des exigences fournisseurs",
-        "J’anime les réunions hebdomadaires avec deux fournisseurs pour suivre le respect des exigences Airbus et coordonner les actions à mener avec les équipes internes."
+        "Coordination transverse",
+        "Participation à des projets transverses et au suivi d’exigences fournisseurs, dans un environnement industriel exigeant et multiculturel."
       ]
     ],
     "earlier": "Mes expériences précédentes",
@@ -70,7 +69,7 @@ export const precisionContent = {
       [
         "Achats & fournisseurs",
         "Contrats · Négociation · Gestion fournisseurs",
-        "Chez Airbus, j’ai travaillé sur les contrats, les réclamations et les négociations fournisseurs, avec aujourd’hui le pilotage du volet achats d’un projet industriel international."
+        "Chez Airbus, j’ai travaillé sur les contrats, les réclamations et les négociations fournisseurs. Aujourd’hui, je contribue aux achats dans un environnement industriel international."
       ],
       [
         "Analyse & systèmes",
@@ -85,7 +84,7 @@ export const precisionContent = {
       [
         "Langues & international",
         "Français natif · Anglais C1 · Espagnol C1",
-        "Chez Airbus, je travaille chaque jour en anglais avec des équipes et fournisseurs en Europe, en Asie et en Amérique du Nord. Mon échange universitaire à Buenos Aires m’a appris à m’adapter à d’autres façons de travailler."
+        "Chez Airbus, je travaille chaque jour en anglais avec des équipes et fournisseurs internationaux. Mon échange universitaire à Buenos Aires m’a appris à m’adapter à d’autres façons de travailler."
       ]
     ],
     "education": "Une base solide. Un regard ouvert.",
@@ -116,7 +115,6 @@ export const precisionContent = {
     "portrait": "Tanguy Duret dans une cabine d’avion",
     "contact": "La suite commence par une conversation.",
     "references": "Une lettre de recommandation sur demande",
-    "recommendations": "Disponible dès octobre 2027 pour un V.I.E. en développement commercial, achats, opérations ou gestion de projet.",
     "access": "Réduire les animations",
     "restore": "Activer les animations",
     "labels": [
@@ -140,7 +138,6 @@ export const precisionContent = {
       "Contact"
     ],
     "role": "Procurement · Operations · Data & AI",
-    "current": "Available for a V.I.E. assignment from October 2027",
     "title": [
       "Tanguy Duret.",
       "Business.",
@@ -159,16 +156,16 @@ export const precisionContent = {
     "dates": "Sept. 2026 - 30 Sept. 2027 · Apprenticeship",
     "missions": [
       [
-        "International on-site repair project",
-        "I lead procurement on an international project to repair components on site. The aim is to shorten turnaround times and reduce logistics costs. I chair meetings with an international supplier and our technical teams, and interpret their estimates to help assess the business case."
+        "Procurement & Supplier Management",
+        "I contribute to industrial procurement in an international setting, working with suppliers and colleagues across functions."
       ],
       [
-        "Supply operations & contracts",
-        "I monitor deliveries and supply risks. I use contract and operational data to calculate, draft and follow up supplier claims. I also review incoming claims and brief management. I draft amendments covering prices or other contract terms, prepare the approval documents and develop our negotiating positions. I take part in the negotiations."
+        "Contracts & Negotiations",
+        "I help manage contracts, prepare contract documentation and take part in commercial discussions with suppliers."
       ],
       [
-        "Coordinating supplier requirements",
-        "I chair weekly meetings with two suppliers to review how they are meeting Airbus requirements and coordinate follow-up actions with our internal teams."
+        "Cross-functional Coordination",
+        "I support projects across teams and help track supplier requirements in a demanding, multicultural industrial setting."
       ]
     ],
     "earlier": "Previous experience",
@@ -203,7 +200,7 @@ export const precisionContent = {
       [
         "Procurement & suppliers",
         "Contracts · Negotiation · Supplier management",
-        "At Airbus, I’ve worked on contracts, claims and supplier negotiations. I now lead procurement for an international industrial project."
+        "At Airbus, I’ve worked on contracts, claims and supplier negotiations. I now contribute to procurement in an international industrial setting."
       ],
       [
         "Analysis & systems",
@@ -218,7 +215,7 @@ export const precisionContent = {
       [
         "Languages & international experience",
         "Native French · C1 English · C1 Spanish",
-        "At Airbus, I use English daily with teams and suppliers across Europe, Asia and North America. My university exchange in Buenos Aires helped me adapt with confidence to different ways of working."
+        "At Airbus, I use English daily with international teams and suppliers. My university exchange in Buenos Aires helped me adapt with confidence to different ways of working."
       ]
     ],
     "education": "A solid foundation. An open mind.",
@@ -249,7 +246,6 @@ export const precisionContent = {
     "portrait": "Tanguy Duret inside an aircraft cabin",
     "contact": "The next chapter starts with a conversation.",
     "references": "Request a professional reference letter",
-    "recommendations": "Available from October 2027 for a V.I.E. assignment in business development, procurement, operations or project management.",
     "access": "Reduce motion",
     "restore": "Enable motion",
     "labels": [
@@ -278,7 +274,6 @@ export const precisionContent = {
       "Negocios.",
       "Internacionales."
     ],
-    "current": "Disponible para una misión V.I.E. a partir de octubre de 2027",
     "intro": "Después de unas prácticas en compras en Airbus y de gestionar cuentas en Holidu, volví a Airbus en Toulouse. Trabajo en compras de sistemas de cabina de mando mientras termino mis estudios en KEDGE.",
     "sub": "En Holidu gestioné una cartera de 80 propietarios y lideré un proyecto de visibilidad en Google para unos 1.500 socios. Creé o configuré más de 200 perfiles de empresa.",
     "explore": "Conoce mi trayectoria",
@@ -292,16 +287,16 @@ export const precisionContent = {
     "dates": "Sept. 2026 - 30 sept. 2027 · Formación dual",
     "missions": [
       [
-        "Proyecto internacional de reparación en planta",
-        "Lidero las compras de un proyecto internacional que busca reparar componentes en planta para reducir los plazos y los costos logísticos. Dirijo reuniones con un proveedor internacional y los equipos técnicos. Analizo sus estimaciones para contribuir a la evaluación económica del proyecto."
+        "Compras y gestión de proveedores",
+        "Participo en actividades de compras en un entorno industrial internacional, en colaboración con proveedores y equipos de distintas áreas."
       ],
       [
-        "Abastecimiento y contratos",
-        "Doy seguimiento a las entregas y a los riesgos de abastecimiento. Analizo contratos y datos operativos para calcular, redactar y dar seguimiento a los reclamos a proveedores. También reviso los reclamos recibidos e informo a la dirección. Preparo modificaciones de precios u otras cláusulas, la documentación para su aprobación y nuestra posición para negociar. Participo en las negociaciones."
+        "Contratos y negociaciones",
+        "Contribuyo a la gestión de contratos, preparo documentación contractual y participo en conversaciones comerciales con proveedores."
       ],
       [
-        "Coordinación de requisitos con proveedores",
-        "Dirijo reuniones semanales con dos proveedores para revisar el cumplimiento de los requisitos de Airbus y coordinar las acciones pendientes con los equipos internos."
+        "Coordinación entre áreas",
+        "Participo en proyectos transversales y en el seguimiento de requisitos de proveedores en un entorno industrial multicultural."
       ]
     ],
     "earlier": "Experiencias anteriores",
@@ -336,7 +331,7 @@ export const precisionContent = {
       [
         "Compras y proveedores",
         "Contratos · Negociación · Gestión de proveedores",
-        "En Airbus he trabajado en contratos, reclamos y negociaciones con proveedores. Hoy lidero las compras de un proyecto industrial internacional."
+        "En Airbus he trabajado en contratos, reclamos y negociaciones con proveedores. Actualmente participo en compras en un entorno industrial internacional."
       ],
       [
         "Análisis y sistemas",
@@ -351,7 +346,7 @@ export const precisionContent = {
       [
         "Idiomas y experiencia internacional",
         "Francés nativo · Inglés C1 · Español C1",
-        "En Airbus trabajo a diario en inglés con equipos y proveedores de Europa, Asia y América del Norte. Mi intercambio universitario en Buenos Aires me ayudó a adaptarme con confianza a otras formas de trabajar."
+        "En Airbus trabajo a diario en inglés con equipos y proveedores internacionales. Mi intercambio universitario en Buenos Aires me ayudó a adaptarme con confianza a otras formas de trabajar."
       ]
     ],
     "education": "Formación y perspectiva internacional.",
@@ -382,7 +377,6 @@ export const precisionContent = {
     "portrait": "Tanguy Duret en la cabina de pasajeros de un avión",
     "contact": "El siguiente paso empieza con una conversación.",
     "references": "Solicitar una carta de recomendación profesional",
-    "recommendations": "Disponible a partir de octubre de 2027 para una misión V.I.E. en desarrollo comercial, compras, operaciones o gestión de proyectos.",
     "access": "Reducir las animaciones",
     "restore": "Activar las animaciones",
     "labels": [

@@ -8,8 +8,6 @@ A multilingual portfolio about my work in business, procurement and internationa
 
 I am completing the Programme Grande École at KEDGE Business School, specialising in Operations Management, Supply Chain and Innovation. My experience spans aerospace procurement at Airbus, account management at Holidu and project management at AMS Conseil. An exchange semester in Buenos Aires gave me the opportunity to study and work with classmates in Spanish.
 
-**Available for an international V.I.E. assignment from October 2027.**
-
 ## Explore the portfolio
 
 The professional timeline brings together my current and previous roles. Three personal projects show another side of my work: helping local businesses improve their Google presence, automating parts of client follow-up and designing this portfolio. The site also covers my education, languages and interests in aviation, photography and travel.
