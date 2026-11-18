@@ -1,7 +1,21 @@
 import path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+
+const studioPreviewRoutes: Plugin = {
+  name: 'studio-preview-routes',
+  configureServer(server) { server.middlewares.use(rewriteStudioRoute); },
+  configurePreviewServer(server) { server.middlewares.use(rewriteStudioRoute); },
+};
+
+function rewriteStudioRoute(req: import('node:http').IncomingMessage, _res: import('node:http').ServerResponse, next: () => void) {
+  const [pathname, query] = (req.url ?? '').split(/\?(.*)/s);
+  const suffix = query === undefined ? '' : `?${query}`;
+  if (pathname === '/web') req.url = `/web/index.html${suffix}`;
+  if (pathname === '/web/confidentialite') req.url = `/web/confidentialite.html${suffix}`;
+  next();
+}
 
 export default defineConfig({
     server: {
@@ -11,10 +25,13 @@ export default defineConfig({
       headers: { 'X-Robots-Tag': 'noindex, nofollow', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin' },
     },
 
+    preview: { headers: { 'X-Robots-Tag': 'noindex, nofollow' } },
+
     // 👇 IMPORTANT : Tailwind DOIT être avant React
     plugins: [
       tailwindcss(),
       react(),
+      studioPreviewRoutes,
     ],
 
     resolve: {
@@ -31,6 +48,8 @@ export default defineConfig({
           es: path.resolve(__dirname, 'es/index.html'),
           en: path.resolve(__dirname, 'en/index.html'),
           conseil: path.resolve(__dirname, 'conseil/index.html'),
+          webStudio: path.resolve(__dirname, 'web/index.html'),
+          webStudioPrivacy: path.resolve(__dirname, 'web/confidentialite.html'),
           conseilMentionsLegales: path.resolve(__dirname, 'conseil/mentions-legales.html'),
           conseilPolitiqueConfidentialite: path.resolve(__dirname, 'conseil/politique-confidentialite.html'),
           conseilGuide: path.resolve(__dirname, 'conseil/guide/index.html'),
