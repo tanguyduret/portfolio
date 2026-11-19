@@ -3,6 +3,10 @@ const status = document.querySelector<HTMLParagraphElement>('#quote-status');
 const submit = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
 
 if (form && status && submit) {
+  const showStatus = (state: 'pending' | 'error' | 'success', message: string) => {
+    status.dataset.state = state;
+    status.textContent = message;
+  };
   submit.disabled = false;
   for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-offer]')) {
     link.addEventListener('click', () => {
@@ -16,8 +20,7 @@ if (form && status && submit) {
     if (submit.disabled) return;
     const data = Object.fromEntries(new FormData(form));
     submit.disabled = true;
-    status.hidden = false;
-    status.textContent = 'Envoi en cours…';
+    showStatus('pending', 'Envoi de votre demande…');
     try {
       const response = await fetch(form.action, {
         method: 'POST',
@@ -27,17 +30,17 @@ if (form && status && submit) {
       });
       const result = await response.json().catch(() => null);
       if (!response.ok || result?.ok !== true) {
-        status.textContent = response.status === 429
+        showStatus('error', response.status === 429
           ? 'Trop de tentatives. Réessayez dans quelques minutes ou contactez-moi par e-mail.'
           : response.status === 400
             ? 'Vérifiez les champs, notamment l’adresse e-mail et la description du projet.'
-            : 'La demande n’a pas pu être envoyée. Vous pouvez me contacter par e-mail.';
+            : 'La demande n’a pas pu être envoyée. Vous pouvez me contacter par e-mail.');
         return;
       }
       form.reset();
-      status.textContent = 'Votre demande a bien été envoyée. Merci, je vous répondrai par e-mail.';
+      showStatus('success', 'Votre demande a bien été envoyée. Merci, je vous répondrai par e-mail.');
     } catch {
-      status.textContent = 'L’envoi n’a pas pu être confirmé. Vous pouvez me contacter par e-mail.';
+      showStatus('error', 'L’envoi n’a pas pu être confirmé. Vous pouvez me contacter par e-mail.');
     } finally {
       submit.disabled = false;
     }

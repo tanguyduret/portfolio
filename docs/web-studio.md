@@ -10,6 +10,16 @@ Prévisualisation locale : `npm ci`, `npm run check`, puis `npm run preview -- -
 
 Une page principale cible la création et la refonte de sites vitrines. Les usages s’organisent autour des réalisations, du tarif, de la méthode et des questions d’achat. La lecture de concurrents est qualitative : l’objectif est de rendre comparables les offres et de montrer le travail plutôt que de répéter des promesses. Aucun volume de recherche n’est avancé.
 
+### Crédits photo V2
+
+Les images sont hébergées localement et utilisées sous la [licence Unsplash](https://unsplash.com/license). Elles illustrent la page et les concepts et ne représentent ni un local du studio ni des clients.
+
+- Ouverture : [Sébastien Lavalaye, escalier du musée Lugdunum](https://unsplash.com/photos/gNY6RsMIsPo).
+- Atelier Épure : [Chris Linnett, établi de menuiserie](https://unsplash.com/photos/2a_V6F_LDgc).
+- Café Sillon : [Esra Afşar, cappuccino et croissant](https://unsplash.com/photos/3FziX7DFVJY).
+
+Les polices existantes Manrope et Instrument Serif Italic sont servies localement pour le studio. Les licences SIL Open Font License accompagnent les fichiers dans `public/studio`.
+
 Le contenu, les titres, le canonical, les métadonnées sociales et le JSON-LD `Service` sont dans le HTML. `/web` est présent dans le sitemap existant ; la prévisualisation est exclue de l’indexation. Les projets présentés sont des concepts, sans clients ni résultats fictifs.
 
 | Adresse envisagée | Condition pour la créer |
@@ -35,7 +45,7 @@ Protections : JSON borné et validé, méthode et origine contrôlées, honeypot
 ## Points légaux et commerciaux à valider
 
 - Confirmer identité/statut de l’éditeur, immatriculation, coordonnées, hébergeur et applicabilité des mentions existantes de Conseil au Studio. Ne pas publier d’informations d’identification supplémentaires sans validation.
-- Compléter la page de confidentialité : durée de conservation des devis et échanges, destinataires, droits applicables, sous-traitants et éventuels transferts hors EEE. Aucun traceur non essentiel activé ; les polices sont actuellement externes.
+- Compléter la page de confidentialité : durée de conservation des devis et échanges, destinataires, droits applicables, sous-traitants et éventuels transferts hors EEE. Aucun traceur non essentiel activé.
 - Confirmer la présentation des prix (TTC et/ou régime de TVA applicable), le périmètre du devis, les frais récurrents et les CGV. Pour les contrats avec des particuliers, vérifier notamment les mentions précontractuelles, les règles de rétractation et la médiation lorsqu’elles s’appliquent.
 - Vérifier les coûts et limites du plan commercial Vercel, de Resend et d’Upstash ; aucune souscription n’est effectuée par cette branche. Pas de promesse de classement ou de résultat commercial.
 
@@ -46,12 +56,16 @@ Protections : JSON borné et validé, méthode et origine contrôlées, honeypot
 - `npm audit --omit=dev --audit-level=high` : dépendances de production au moment du contrôle.
 - Prévisualisation : contrôle des routes du portefeuille, de Conseil, du Studio et des ressources. Contrôle navigateur à 390, 784 et 1440 px : largeur, chargement du visuel, FAQ et présélection de l’offre.
 
-Mesures Lighthouse sur Chrome et le build local, après correction des contrastes et ajout d’une image mobile d’environ 116 Kio :
+Mesures Lighthouse sur Chrome et le build local. La V2 sert les mêmes polices localement et utilise une image d’ouverture mobile d’environ 63 Kio.
 
 | Profil | Performance | Accessibilité | Bonnes pratiques | LCP | CLS | TBT |
 |---|---:|---:|---:|---:|---:|---:|
 | Mobile | 91 | 100 | 100 | 2,4 s | 0,001 | 0 ms |
 | Bureau | 96 | 100 | 100 | 1,0 s | 0,002 | 0 ms |
+| Mobile · V2 | 100 | 100 | 100 | 1,9 s | 0 | 0 ms |
+| Bureau · V2 | 100 | 100 | 100 | 0,6 s | 0 | 0 ms |
+
+V2 : vérification de la validation native du formulaire, de la présélection Business+, de la conservation de la saisie en cas d’échec local et de l’ouverture de la FAQ au clavier. Les tests serveur restent simulés : pas d’e-mail réellement envoyé.
 
 Le score SEO local est de 69 sur les deux profils : le contrôle d’indexabilité échoue volontairement avec l’en-tête `noindex` de prévisualisation. Ces scores sont automatisés et ne remplacent pas une vérification manuelle. Le serveur Vite peut renvoyer le portfolio pour une URL inconnue ; vérifier le statut 404 sur le déploiement Vercel.
 

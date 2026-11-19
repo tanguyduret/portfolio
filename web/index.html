@@ -25,19 +25,27 @@
     <meta property="og:url" content="https://tanguyduret.com/web" />
     <meta
       property="og:image"
-      content="https://tanguyduret.com/studio/atelier.webp"
+      content="https://tanguyduret.com/studio/studio-lugdunum.webp"
     />
     <meta
       property="og:image:alt"
-      content="Intérieur d’un atelier lumineux, entre bois et verrière"
+      content="Escalier sculptural en béton, éclairé par une ouverture circulaire"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+      rel="preload"
+      href="/studio/manrope-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/studio/instrument-serif-italic-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <link rel="stylesheet" href="./studio.css" />
     <script type="application/ld+json">
@@ -78,11 +86,11 @@
           <picture
             ><source
               media="(max-width: 650px)"
-              srcset="/studio/atelier-mobile.jpg" />
+              srcset="/studio/studio-lugdunum-mobile.webp" />
             <img
-              src="/studio/atelier.webp"
-              width="1800"
-              height="1202"
+              src="/studio/studio-lugdunum.webp"
+              width="1450"
+              height="1200"
               alt=""
               fetchpriority="high"
           /></picture>
@@ -107,9 +115,7 @@
               >
             </div>
           </div>
-          <p class="hero-index" aria-hidden="true">
-            FIG. 01 <span></span> L’ATELIER
-          </p>
+          <p class="hero-index" aria-hidden="true">LUMIÈRE &amp; MATIÈRE</p>
         </div>
       </section>
 
@@ -149,13 +155,32 @@
               <div class="showcase forge" aria-hidden="true">
                 <div class="mini-browser">
                   <div class="mini-nav">
-                    ÉPURE <span>ATELIER &nbsp; / &nbsp; CONTACT</span>
+                    <strong>Atelier Épure</strong>
+                    <span class="mini-links"
+                      ><span>Accueil</span><span>Savoir-faire</span
+                      ><span>Réalisations</span><span>Contact</span></span
+                    >
                   </div>
                   <div class="mini-copy">
-                    L’art du<br /><i>sur-mesure.</i
-                    ><span>MENUISERIE & MOBILIER</span>
+                    <span class="mini-kicker">Menuiserie &amp; mobilier</span>
+                    <p class="mini-title">
+                      Du bois, de belles lignes et du sur-mesure.
+                    </p>
+                    <p class="mini-blurb">
+                      Des meubles et des agencements conçus pour votre intérieur
+                      et votre quotidien.
+                    </p>
+                    <span class="mini-cta">Demander un devis</span>
                   </div>
-                  <div class="mini-image"></div>
+                  <img
+                    class="mini-image"
+                    src="/studio/concept-epure.webp"
+                    alt=""
+                    width="900"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               </div>
               <div class="project-label">
@@ -173,12 +198,32 @@
               <div class="showcase cafe" aria-hidden="true">
                 <div class="mini-browser">
                   <div class="mini-nav">
-                    SILLON <span>MENU &nbsp; / &nbsp; VISITE</span>
+                    <strong>Café Sillon</strong>
+                    <span class="mini-links"
+                      ><span>Le café</span><span>La carte</span
+                      ><span>Infos</span></span
+                    >
                   </div>
                   <div class="mini-copy">
-                    Les bonnes<br /><i>choses.</i><span>CAFÉ DE QUARTIER</span>
+                    <span class="mini-kicker">Café de quartier</span>
+                    <p class="mini-title">Un bon café, à deux pas.</p>
+                    <p class="mini-blurb">
+                      Cafés de spécialité et viennoiseries du matin.
+                    </p>
+                    <span class="mini-cta">Découvrir la carte</span>
+                    <p class="mini-hours">
+                      Mar.–dim. · 8 h–17 h <span>(horaires fictifs)</span>
+                    </p>
                   </div>
-                  <div class="mini-circle">S.</div>
+                  <img
+                    class="mini-image"
+                    src="/studio/concept-sillon.webp"
+                    alt=""
+                    width="680"
+                    height="760"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               </div>
               <div class="project-label">
@@ -196,13 +241,29 @@
               <div class="showcase bureau" aria-hidden="true">
                 <div class="mini-browser">
                   <div class="mini-nav">
-                    LIGNE CLAIRE <span>APPROCHE &nbsp; / &nbsp; CONTACT</span>
+                    <strong>Bureau Ligne Claire</strong>
+                    <span class="mini-links"
+                      ><span>Expertises</span><span>Approche</span
+                      ><span>Contact</span></span
+                    >
                   </div>
                   <div class="mini-copy">
-                    Voir les choses<br /><i>autrement.</i
-                    ><span>CONSEIL INDÉPENDANT</span>
+                    <span class="mini-kicker">Conseil indépendant</span>
+                    <p class="mini-title">
+                      Clarifier vos priorités. Structurer vos projets.
+                    </p>
+                    <p class="mini-blurb">
+                      Un appui aux dirigeants de petites équipes, du diagnostic
+                      au plan d’action.
+                    </p>
+                    <span class="mini-cta">Prendre contact</span>
                   </div>
-                  <div class="mini-lines"></div>
+                  <div class="mini-expertise">
+                    <span>Domaines d’intervention</span>
+                    <p>01 <strong>Organisation</strong></p>
+                    <p>02 <strong>Stratégie</strong></p>
+                    <p>03 <strong>Gestion de projet</strong></p>
+                  </div>
                 </div>
               </div>
               <div class="project-label">
@@ -369,10 +430,29 @@
         </ol>
         <aside class="assurance">
           <p class="eyebrow signal">La collaboration</p>
-          <p>
-            Un interlocuteur direct. Un devis écrit.
-            <em>Votre validation avant publication.</em>
-          </p>
+          <div class="assurance-grid">
+            <div>
+              <h3>Un interlocuteur unique</h3>
+              <p>
+                Vous échangez directement avec moi, de la conception à la
+                livraison.
+              </p>
+            </div>
+            <div>
+              <h3>Un devis clair</h3>
+              <p>
+                Le périmètre, les livrables et le prix sont définis avant le
+                lancement.
+              </p>
+            </div>
+            <div>
+              <h3>Une mise en ligne accompagnée</h3>
+              <p>
+                On convient à l’avance de la livraison, de l’hébergement et de
+                la gestion du site.
+              </p>
+            </div>
+          </div>
         </aside>
       </section>
 
@@ -388,8 +468,15 @@
               <p>
                 Le tarif indicatif commence à 690 € pour un site sur une page.
                 Le nombre de pages, les contenus et les fonctionnalités
-                déterminent le devis final. Les frais éventuels de domaine,
-                d’hébergement et de maintenance sont précisés séparément.
+                déterminent le devis final.
+              </p>
+            </details>
+            <details>
+              <summary>Quels frais prévoir après la livraison ?</summary>
+              <p>
+                Les frais éventuels d’hébergement, de nom de domaine, de
+                maintenance et de services tiers sont détaillés au devis. La
+                maintenance est facultative et chiffrée séparément.
               </p>
             </details>
             <details>
@@ -422,6 +509,14 @@
                 Pas nécessairement. On fait le point sur ce qui existe et sur ce
                 qu’il reste à préparer. La rédaction ou la recherche d’images,
                 si nécessaire, peut être chiffrée au devis.
+              </p>
+            </details>
+            <details>
+              <summary>Pourrai-je modifier mon site moi-même ?</summary>
+              <p>
+                Cela dépend de la solution retenue. Si vous souhaitez modifier
+                certains contenus vous-même, une interface d’administration peut
+                être prévue au devis.
               </p>
             </details>
             <details>
@@ -459,6 +554,35 @@
           id="quote-form"
           aria-describedby="form-privacy"
         >
+          <fieldset class="project-picker">
+            <legend>Quel type de projet avez-vous en tête ?</legend>
+            <div class="project-options">
+              <label
+                ><input
+                  type="radio"
+                  name="project"
+                  value="creation"
+                  required
+                /><span>Création de site</span></label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="project"
+                  value="refonte"
+                  required
+                /><span>Refonte de site</span></label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="project"
+                  value="autre"
+                  required
+                /><span>Autre projet</span></label
+              >
+            </div>
+          </fieldset>
           <div class="form-grid">
             <label
               >Nom
@@ -481,14 +605,6 @@
                 name="company"
                 autocomplete="organization"
                 maxlength="110" /></label
-            ><label
-              >Type de projet
-              <select name="project" required>
-                <option value="">Sélectionnez</option>
-                <option value="creation">Création de site</option>
-                <option value="refonte">Refonte de site</option>
-                <option value="autre">Autre projet</option>
-              </select></label
             ><label
               >Budget indicatif <small>(facultatif)</small
               ><select name="budget">
@@ -537,11 +653,10 @@
             class="status"
             role="status"
             aria-live="polite"
-            hidden
           ></p>
           <div class="actions">
             <button class="button primary" type="submit" disabled>
-              Envoyer ma demande <span aria-hidden="true">↗</span>
+              Envoyer ma demande
             </button>
           </div>
           <noscript
@@ -558,12 +673,8 @@
       <section class="closing" aria-label="Contacter le studio">
         <div class="shell">
           <p class="eyebrow signal">Tanguy Duret Web Studio</p>
-          <h2>
-            Faisons de votre site<br /><em>une bonne première impression.</em>
-          </h2>
-          <a class="button primary" href="#devis"
-            >Décrire mon projet <span aria-hidden="true">↑</span></a
-          >
+          <h2>Donnons à votre projet<br /><em>l’allure qu’il mérite.</em></h2>
+          <a class="button primary" href="#devis">Décrire mon projet</a>
         </div>
       </section>
     </main>
@@ -574,8 +685,7 @@
         ></a
       >
       <nav aria-label="Liens de pied de page">
-        <a href="/">Portfolio personnel</a
-        ><a href="/conseil/mentions-legales">Mentions légales</a
+        <a href="/conseil/mentions-legales">Mentions légales</a
         ><a href="/web/confidentialite">Données et cookies</a>
       </nav>
       <a href="mailto:contact@tanguyduret.com">contact@tanguyduret.com</a>
