@@ -99,7 +99,8 @@
           <div class="hero-text">
             <p class="eyebrow signal">Studio web indépendant · France</p>
             <h1 id="titre">
-              Votre activité<br />mérite un site<br /><em>remarquable.</em>
+              <span>Votre activité</span> <span>mérite un site</span>
+              <em>remarquable.</em>
             </h1>
             <p>
               Je conçois des sites internet sur mesure pour mettre en valeur
@@ -107,7 +108,7 @@
               échangez directement avec moi et savez ce qui est compris avant de
               vous engager.
             </p>
-            <div class="actions reveal">
+            <div class="actions">
               <a class="button primary" href="#devis"
                 >Parlons de votre projet <span aria-hidden="true">↗</span></a
               ><a class="text-link" href="#realisations"
@@ -115,7 +116,6 @@
               >
             </div>
           </div>
-          <p class="hero-index" aria-hidden="true">LUMIÈRE &amp; MATIÈRE</p>
         </div>
       </section>
 
@@ -211,9 +211,7 @@
                       Cafés de spécialité et viennoiseries du matin.
                     </p>
                     <span class="mini-cta">Découvrir la carte</span>
-                    <p class="mini-hours">
-                      Mar.–dim. · 8 h–17 h <span>(horaires fictifs)</span>
-                    </p>
+                    <p class="mini-hours">Mar.–dim. · 8 h–17 h</p>
                   </div>
                   <img
                     class="mini-image"
@@ -554,86 +552,100 @@
           id="quote-form"
           aria-describedby="form-privacy"
         >
-          <fieldset class="project-picker">
-            <legend>Quel type de projet avez-vous en tête ?</legend>
-            <div class="project-options">
+          <div class="form-progress" hidden>
+            <p id="step-heading" tabindex="-1">Étape 1 sur 2 · Votre projet</p>
+            <span aria-hidden="true"></span>
+          </div>
+          <div class="quote-step" id="project-step">
+            <fieldset class="project-picker">
+              <legend>Quel type de projet avez-vous en tête ?</legend>
+              <div class="project-options">
+                <label
+                  ><input
+                    type="radio"
+                    name="project"
+                    value="creation"
+                    required
+                  /><span>Création de site</span></label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    name="project"
+                    value="refonte"
+                    required
+                  /><span>Refonte de site</span></label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    name="project"
+                    value="autre"
+                    required
+                  /><span>Autre projet</span></label
+                >
+              </div>
+            </fieldset>
+            <div class="form-grid">
               <label
-                ><input
-                  type="radio"
-                  name="project"
-                  value="creation"
-                  required
-                /><span>Création de site</span></label
-              >
-              <label
-                ><input
-                  type="radio"
-                  name="project"
-                  value="refonte"
-                  required
-                /><span>Refonte de site</span></label
-              >
-              <label
-                ><input
-                  type="radio"
-                  name="project"
-                  value="autre"
-                  required
-                /><span>Autre projet</span></label
+                >Budget indicatif <small>(facultatif)</small
+                ><select name="budget">
+                  <option value="">À définir</option>
+                  <option value="under-1000">Moins de 1 000 €</option>
+                  <option value="1000-2000">1 000 à 2 000 €</option>
+                  <option value="over-2000">Plus de 2 000 €</option>
+                </select></label
+              ><label
+                >Offre envisagée <small>(facultatif)</small
+                ><select name="offer">
+                  <option value="">À définir</option>
+                  <option value="essentiel">Essentiel</option>
+                  <option value="professionnel">Professionnel</option>
+                  <option value="business">Business+</option>
+                </select></label
               >
             </div>
-          </fieldset>
-          <div class="form-grid">
             <label
-              >Nom
-              <input
-                name="name"
-                autocomplete="name"
-                maxlength="90"
-                required /></label
-            ><label
-              >E-mail
-              <input
-                name="email"
-                type="email"
-                autocomplete="email"
-                maxlength="254"
-                required /></label
-            ><label
-              >Entreprise <small>(facultatif)</small
-              ><input
-                name="company"
-                autocomplete="organization"
-                maxlength="110" /></label
-            ><label
-              >Budget indicatif <small>(facultatif)</small
-              ><select name="budget">
-                <option value="">À définir</option>
-                <option value="under-1000">Moins de 1 000 €</option>
-                <option value="1000-2000">1 000 à 2 000 €</option>
-                <option value="over-2000">Plus de 2 000 €</option>
-              </select></label
-            ><label
-              >Offre envisagée <small>(facultatif)</small
-              ><select name="offer">
-                <option value="">À définir</option>
-                <option value="essentiel">Essentiel</option>
-                <option value="professionnel">Professionnel</option>
-                <option value="business">Business+</option>
-              </select></label
-            >
+              >Votre projet
+              <textarea
+                name="message"
+                rows="5"
+                minlength="20"
+                maxlength="2500"
+                required
+                placeholder="Que souhaitez-vous présenter ou améliorer ?"
+              ></textarea>
+            </label>
+            <button class="button primary" type="button" id="quote-next" hidden>
+              Continuer
+            </button>
           </div>
-          <label
-            >Votre projet
-            <textarea
-              name="message"
-              rows="5"
-              minlength="20"
-              maxlength="2500"
-              required
-              placeholder="Que souhaitez-vous présenter ou améliorer ?"
-            ></textarea>
-          </label>
+          <div class="quote-step" id="contact-step">
+            <div class="form-grid">
+              <label
+                >Nom
+                <input
+                  name="name"
+                  autocomplete="name"
+                  maxlength="90"
+                  required /></label
+              ><label
+                >E-mail
+                <input
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  maxlength="254"
+                  required /></label
+              ><label
+                >Entreprise <small>(facultatif)</small
+                ><input
+                  name="company"
+                  autocomplete="organization"
+                  maxlength="110"
+              /></label>
+            </div>
+          </div>
           <div hidden>
             <label
               >Ne pas remplir
@@ -655,6 +667,9 @@
             aria-live="polite"
           ></p>
           <div class="actions">
+            <button class="step-back" type="button" id="quote-back" hidden>
+              Retour
+            </button>
             <button class="button primary" type="submit" disabled>
               Envoyer ma demande
             </button>
@@ -673,7 +688,7 @@
       <section class="closing" aria-label="Contacter le studio">
         <div class="shell">
           <p class="eyebrow signal">Tanguy Duret Web Studio</p>
-          <h2>Donnons à votre projet<br /><em>l’allure qu’il mérite.</em></h2>
+          <h2>Votre savoir-faire<br /><em>mérite d’être vu.</em></h2>
           <a class="button primary" href="#devis">Décrire mon projet</a>
         </div>
       </section>

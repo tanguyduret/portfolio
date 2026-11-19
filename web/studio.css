@@ -198,7 +198,7 @@ body:has(.hero) {
   isolation: isolate;
   display: flex;
   align-items: end;
-  padding: clamp(2rem, 7vw, 6.25rem) 0;
+  padding: clamp(1.75rem, 6svh, 4.5rem) 0;
   overflow: hidden;
 }
 .hero-media {
@@ -212,8 +212,8 @@ body:has(.hero) {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 56% 52%;
-  filter: brightness(0.87) saturate(0.79);
+  object-position: 62% 40%;
+  filter: brightness(0.94) saturate(0.84);
 }
 .hero-media::after {
   content: "";
@@ -235,13 +235,13 @@ body:has(.hero) {
   align-items: end;
   gap: 2rem;
   width: 100%;
-  padding-top: 4rem;
+  padding-top: 1rem;
 }
 .hero-text {
   max-width: 53rem;
 }
 .hero h1 {
-  font-size: clamp(3.6rem, 8.1vw, 8.9rem);
+  font-size: clamp(3.6rem, min(8.1vw, 14svh), 8.9rem);
   font-weight: 700;
   line-height: 0.9;
   margin: 0.32em 0 0.23em;
@@ -256,14 +256,8 @@ body:has(.hero) {
   max-width: 33rem;
   font-size: clamp(0.97rem, 1.4vw, 1.13rem);
 }
-.hero-index {
-  text-align: right;
-  white-space: nowrap;
-  flex: none;
-  font-size: 0.68rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: #f5eadb;
+.hero h1 > * {
+  display: block;
 }
 .actions {
   display: flex;
@@ -395,7 +389,12 @@ body:has(.hero) {
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .showcase:hover .mini-browser {
-    transform: translateY(-0.35rem);
+    transform: translateY(-0.25rem) scale(1.012);
+  }
+  .price:hover,
+  .price:focus-within {
+    transform: translateY(-3px);
+    border-color: #997d54;
   }
 }
 .cafe .mini-browser {
@@ -562,6 +561,9 @@ body:has(.hero) {
   gap: 1rem;
 }
 .price {
+  transition:
+    transform 220ms ease,
+    border-color 180ms ease;
   border: 1px solid var(--line);
   padding: clamp(1.25rem, 3vw, 2.4rem);
   display: flex;
@@ -821,6 +823,48 @@ body:has(.hero) {
 .quote .actions {
   margin-top: 0;
 }
+.quote-step {
+  display: grid;
+  gap: 1.15rem;
+}
+.form-progress {
+  display: grid;
+  gap: 0.55rem;
+  color: #654f32;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.form-progress > span {
+  height: 2px;
+  background: var(--line);
+}
+.form-progress > span::after {
+  content: "";
+  display: block;
+  height: 100%;
+  background: #8c704c;
+  transform-origin: left;
+  transform: scaleX(0.5);
+  transition: transform 200ms ease;
+}
+.form-progress[data-step="2"] > span::after {
+  transform: scaleX(1);
+}
+.step-back {
+  background: transparent;
+  border: 1px solid #938471;
+  color: var(--midnight);
+  cursor: pointer;
+}
+.step-back:hover {
+  background: #e9dfce;
+}
+.quote .actions:has(#quote-back[hidden]) {
+  display: none;
+}
+.quote .status:empty {
+  margin-block: -0.6rem;
+}
 .quote button {
   min-height: 3.25rem;
   border-radius: 0.38rem;
@@ -903,11 +947,42 @@ body:has(.hero) {
   font-size: 0.74rem;
   color: #ddd2c2;
 }
-.reveal {
-  animation: studio-enter 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-.hero-media img {
-  animation: studio-image 1.15s ease-out both;
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 > *,
+  .hero-text > p:not(.eyebrow),
+  .hero-text .actions {
+    animation: studio-enter 480ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero h1 > :nth-child(2) {
+    animation-delay: 55ms;
+  }
+  .hero h1 > em {
+    animation-delay: 105ms;
+  }
+  .hero-text > p:not(.eyebrow) {
+    animation-delay: 140ms;
+  }
+  .hero-text .actions {
+    animation-delay: 175ms;
+  }
+  .hero-media img {
+    animation: studio-image 950ms ease-out both;
+  }
+  .in-view {
+    animation: studio-enter 440ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .showcase.in-view .mini-browser {
+    animation: studio-enter 560ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .form-progress:not([hidden]) ~ .quote-step:not([hidden]) {
+    animation: studio-enter 190ms ease-out;
+  }
+  .text-link {
+    transition: text-underline-offset 180ms ease;
+  }
+  .text-link:is(:hover, :focus-visible) {
+    text-underline-offset: 0.43em;
+  }
 }
 @keyframes studio-enter {
   from {
@@ -948,9 +1023,6 @@ body:has(.hero) {
   }
   .hero h1 {
     font-size: clamp(3.4rem, 10vw, 7rem);
-  }
-  .hero-index {
-    display: none;
   }
   .intro,
   .section-heading,
