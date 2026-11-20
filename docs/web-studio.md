@@ -10,13 +10,13 @@ Prévisualisation locale : `npm ci`, `npm run check`, puis `npm run preview -- -
 
 Une page principale cible la création et la refonte de sites vitrines. Les usages s’organisent autour des réalisations, du tarif, de la méthode et des questions d’achat. La lecture de concurrents est qualitative : l’objectif est de rendre comparables les offres et de montrer le travail plutôt que de répéter des promesses. Aucun volume de recherche n’est avancé.
 
-### Crédits photo V2
+### Photographies
 
-Les images sont hébergées localement et utilisées sous la [licence Unsplash](https://unsplash.com/license). Elles illustrent la page et les concepts et ne représentent ni un local du studio ni des clients.
+Les photographies sont servies localement. Les trois projets présentés sont des concepts de démonstration.
 
-- Ouverture : [Sébastien Lavalaye, escalier du musée Lugdunum](https://unsplash.com/photos/gNY6RsMIsPo).
-- Atelier Épure : [Chris Linnett, établi de menuiserie](https://unsplash.com/photos/2a_V6F_LDgc).
-- Café Sillon : [Esra Afşar, cappuccino et croissant](https://unsplash.com/photos/3FziX7DFVJY).
+- Ouverture et aperçu social, [escalier sculptural](https://www.pexels.com/photo/elegant-curved-staircase-in-modern-architecture-34482407/), [licence Pexels](https://www.pexels.com/license/).
+- Atelier Épure, [travail au rabot en lumière naturelle](https://www.pexels.com/photo/man-working-with-wooden-plank-and-planer-5974241/), [licence Pexels](https://www.pexels.com/license/).
+- Café Sillon, [Esra Afşar, cappuccino et croissant](https://unsplash.com/photos/3FziX7DFVJY), [licence Unsplash](https://unsplash.com/license).
 
 Les polices existantes Manrope et Instrument Serif Italic sont servies localement pour le studio. Les licences SIL Open Font License accompagnent les fichiers dans `public/studio`.
 

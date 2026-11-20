@@ -89,7 +89,24 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
       observer.unobserve(entry.target);
     }
   }, { threshold: 0.12 });
-  for (const item of document.querySelectorAll('.intro, .section-heading, .showcase, .assurance')) {
+  for (const item of document.querySelectorAll('.intro, .section-heading')) {
     observer.observe(item);
   }
+}
+
+// Keep the static reading order on small screens and for reduced motion.
+// Load the scroll engine only when there is room for the pinned compositions.
+const immersive = window.matchMedia('(min-width: 1080px) and (min-height: 680px) and (prefers-reduced-motion: no-preference)');
+async function enableStudioMotion() {
+  if (!immersive.matches) return;
+  const { installStudioMotion } = await import('./studio-motion');
+  installStudioMotion(immersive);
+}
+if (document.querySelector('.portfolio-stage')) {
+  if (immersive.matches) void enableStudioMotion();
+  else immersive.addEventListener('change', function onChange() {
+    if (!immersive.matches) return;
+    immersive.removeEventListener('change', onChange);
+    void enableStudioMotion();
+  });
 }
